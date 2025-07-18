@@ -1,0 +1,64 @@
+/*Begin TopMenu style*/
+.topMenuBar {
+    position: fixed;
+    top: 0;
+    width: 100% !important;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding-bottom: 1px;
+}
+
+.topMenuBar a {
+    font-size: 1.1rem;
+    font-weight: 1000;
+    color: #333;
+    text-decoration: none;
+    padding: 4px 10px;
+    transition: all 0.2s ease-in-out;
+}
+.topMenuBar font {
+    font-size: 1.1rem;
+    font-weight: 1000;
+    color: #333;
+    text-decoration: none;
+    padding: 4px 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.topMenuBar a:hover {
+    color: #007bff;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+}
+/*End TopMenu style*/
+
+/*-----------------------*/
+
+/*Begin GNB style*/
+.GNB {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+    padding: 10px 0;
+    z-index: 999;
+}
+
+
+.GNB a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    /*padding: 6px 14px;*/
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.GNB a:hover {
+    background-color: #e6f0ff;
+    color: #007bff;
+}
+/*End GNB style*/

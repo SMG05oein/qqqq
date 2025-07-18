@@ -2,17 +2,19 @@ import logo from './logo.svg';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import GNB from "./NB/GNB";
-import BottomBar from "./NB/BottomBar";
-import KakaoMap from "./component/KakaoMap";
+import TopMenu from "./NB/TopMenu";
+import HomePage from "./component/HomePage/HomePage";
 
 function App() {
-  return (
-    <Routes>
-        <Route path="/" element={<GNB/>}>
-            <Route index element={<><KakaoMap/><BottomBar/></>}/>
-        </Route>
-    </Routes>
-  );
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<><TopMenu/></>}>
+                    <Route index element={<><HomePage/><GNB/></>}/>
+                </Route>
+            </Routes>
+        </div>
+);
 }
 
 export default App;
