@@ -14,7 +14,7 @@ const ProfilePage = ({setIsProfile}) => {
     return (
         <div className="ProfilePage">
             <Container className="profile-container profile-card text-center">
-                <Image src="/img.png" roundedCircle className="profile-image" />
+                <Image src="/profile.png" roundedCircle className="profile-image" />
                 <h5 className="profile-name">이름</h5>
 
                 <div className="button-section">
