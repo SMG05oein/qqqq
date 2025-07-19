@@ -4,6 +4,7 @@ import {Route, Routes} from "react-router-dom";
 import GNB from "./NB/GNB";
 import TopMenu from "./NB/TopMenu";
 import HomePage from "./component/HomePage/HomePage";
+import NotFound from "./404NotFound/NotFound";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/" element={<><TopMenu/><GNB/></>}>
                     <Route index element={<div className={"CONTENTS"}><HomePage/></div>}/>
                 </Route>
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
         </div>
 );
