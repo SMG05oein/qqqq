@@ -13,32 +13,10 @@ function App() {
         <div>
             <Routes>
                 {/* 홈 */}
-                <Route
-                    path="/"
-                    element={
-                        <>
-                            <TopMenu />
-                            <GNB />
-                            <div className="CONTENTS">
-                                <HomePage />
-                            </div>
-                        </>
-                    }
-                />
-
-                {/* 프로필 */}
-                <Route
-                    path="/profile"
-                    element={
-                        <>
-                            <TopMenu />
-                            <GNB />
-                            <div className="CONTENTS">
-                                <ProfilePage />
-                            </div>
-                        </>
-                    }
-                />
+                <Route path="/" element={<><TopMenu /><GNB /></>}>
+                    <Route index element={<div className={"CONTENTS"}><HomePage/></div>} />
+                    <Route path="/profile" element={<div className={"CONTENTS"}><ProfilePage/></div>} />
+                </Route>
 
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />

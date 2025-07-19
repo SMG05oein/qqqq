@@ -1,11 +1,26 @@
 .ProfilePage {
+    margin-top: 12px;
     background-color: white;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #d13030;
+    border-radius: 16px;
+    /*padding: 30px 20px;*/
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    font-family: 'Segoe UI', 'Pretendard', sans-serif;
 }
 
 .profile-container {
     padding-top: 30px;
-    padding-bottom: 80px; /* 하단 GNB 공간 확보 */
+    padding-bottom: 80px;
+    /*display: flex;*/
+    justify-content: center;
+
 }
 
 .profile-image {

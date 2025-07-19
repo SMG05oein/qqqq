@@ -9,6 +9,9 @@ const Gnb = () => {
     return (
         <div className="NB">
             <Container fluid  className="GNB justify-content-center">
+                <div style={{cursor:"pointer"}} onClick={()=>{alert("기능 미구현")}} className="PayingBar">
+                    <div className={"Paying"}>결제하기</div>
+                </div>
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-center">
                         <Link to="/">천안사랑카드</Link>

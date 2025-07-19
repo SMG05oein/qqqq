@@ -8,15 +8,15 @@ import {IoIosNotificationsOutline} from "react-icons/io";
 const TopMenu = () => {
     return (
         <div className="TopMenu">
-            <Container fluid  className="topMenuBar justify-content-center">
+            <Container fluid  className="topMenuBar justify-content-center NoPadding">
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-left">
                         <Link className={"NoPadding"} to="/"><Image style={{height: '40px'}} src={"CheonanLogo.png"} alt={"천안시 로고"}/></Link>
                         <font>홍길동님</font>
                     </Col>
-                    <Col className="d-flex justify-content-end">
-                        <Link to="/"><IoIosNotificationsOutline /></Link>
-                        <Link to="/"><IoReorderThreeOutline /></Link>
+                    <Col className="d-flex justify-content-end NoPadding">
+                        <Link to="/"><IoIosNotificationsOutline size={"25"}/></Link>
+                        <Link to="/"><IoReorderThreeOutline size={"25"} /></Link>
                     </Col>
                 </Row>
             </Container>

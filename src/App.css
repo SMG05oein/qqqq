@@ -7,7 +7,7 @@
 }
 
 .CONTENTS {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 102px);
     padding: 20px 8px 0 8px;
     overflow-y: auto;
     box-sizing: border-box;
@@ -15,12 +15,12 @@
 
 @media (max-width: 619px) {
     .CONTENTS {
-        height: calc(100vh - 88px);
+        height: calc(100vh - 126px);
     }
 }
 
-@media (max-width: 393px) {
+@media (max-width: 392px) {
     .CONTENTS {
-        height: calc(100vh - 112px);
+        height: calc(100vh - 150px);
     }
 }
