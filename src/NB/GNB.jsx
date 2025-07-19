@@ -14,7 +14,7 @@ const Gnb = () => {
                 </div>
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-center">
-                        <Link to="/">천안사랑카드</Link>
+                        <Link to="/cheonancard">천안사랑카드</Link>
                     </Col>
                     <Col className="d-flex justify-content-center">
                         <Link to="/"><CiMap />가맹정 지도</Link>

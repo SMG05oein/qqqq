@@ -6,6 +6,8 @@ import TopMenu from "./NB/TopMenu";
 import HomePage from "./component/HomePage/HomePage";
 import NotFound from "./404NotFound/NotFound";
 import ProfilePage from './component/ProfilePage/ProfilePage';
+import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
+
 
 
 function App() {
@@ -15,7 +17,8 @@ function App() {
                 {/* 홈 */}
                 <Route path="/" element={<><TopMenu /><GNB /></>}>
                     <Route index element={<div className={"CONTENTS"}><HomePage/></div>} />
-                    <Route path="/profile" element={<div className={"CONTENTS"}><ProfilePage/></div>} />
+                    <Route path="profile" element={<div className={"CONTENTS"}><ProfilePage/></div>} />
+                    <Route path="cheonancard" element={<div className={"CONTENTS"}><CheonanCardPage/></div>} />
                 </Route>
 
                 {/* 404 */}
