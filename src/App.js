@@ -9,8 +9,8 @@ function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<><TopMenu/></>}>
-                    <Route index element={<><HomePage/><GNB/></>}/>
+                <Route path="/" element={<><TopMenu/><GNB/></>}>
+                    <Route index element={<div className={"CONTENTS"}><HomePage/></div>}/>
                 </Route>
             </Routes>
         </div>
