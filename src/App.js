@@ -19,7 +19,7 @@ function App() {
                 {/* 홈 */}
                 <Route path="/" element={<><TopMenu /><GNB isProfile={isProfile} setIsProfile={setIsProfile}/></>}>
                     <Route index element={<div className={"CONTENTS"}><HomePage/></div>} />
-                    <Route path="profile" element={<div className={"CONTENTS"}><ProfilePage setIsProfile={setIsProfile}/></div>} />
+                    <Route path="profile" element={<div className={"CONTENTSP"}><ProfilePage setIsProfile={setIsProfile}/></div>} />
                     <Route path="cheonancard" element={<div className={"CONTENTS"}><CheonanCardPage/></div>} />
                 </Route>
 

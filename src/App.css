@@ -12,15 +12,27 @@
     overflow-y: auto;
     box-sizing: border-box;
 }
+.CONTENTSP {
+    height: calc(100vh - 54px);
+    padding: 20px 8px 0 8px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
 
 @media (max-width: 619px) {
     .CONTENTS {
         height: calc(100vh - 126px);
+    }
+    .CONTENTSP {
+        height: calc(100vh - 78px);
     }
 }
 
 @media (max-width: 392px) {
     .CONTENTS {
         height: calc(100vh - 150px);
+    }
+    .CONTENTSP {
+        height: calc(100vh - 102px);
     }
 }

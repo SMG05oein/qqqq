@@ -7,6 +7,9 @@ import TopMenu from '../../NB/TopMenu';
 const ProfilePage = ({setIsProfile}) => {
     useEffect(()=>{
         setIsProfile(true);
+        return () => {
+            setIsProfile(false);
+        };
     })
     return (
         <div className="ProfilePage">
