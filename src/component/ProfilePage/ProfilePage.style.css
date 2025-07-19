@@ -1,0 +1,28 @@
+.ProfilePage {
+    background-color: white;
+    min-height: 100vh;
+}
+
+.profile-container {
+    padding-top: 30px;
+    padding-bottom: 80px; /* 하단 GNB 공간 확보 */
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-name {
+    margin-bottom: 30px;
+}
+
+.profile-button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    font-weight: bold;
+}

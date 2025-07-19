@@ -23,7 +23,7 @@ const Gnb = () => {
                         <Link to="/">소식</Link>
                     </Col>
                     <Col className="d-flex justify-content-center">
-                        <Link to="/"><IoPersonOutline />프로필</Link>
+                        <Link to="/profile"><IoPersonOutline />프로필</Link>
                     </Col>
                 </Row>
             </Container>
