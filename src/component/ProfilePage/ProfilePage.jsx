@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './ProfilePage.style.css';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import GNB from '../../NB/GNB';
 import TopMenu from '../../NB/TopMenu';
 
-const ProfilePage = () => {
+const ProfilePage = ({setIsProfile}) => {
+    useEffect(()=>{
+        setIsProfile(true);
+    })
     return (
         <div className="ProfilePage">
             <Container className="profile-container profile-card text-center">

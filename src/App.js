@@ -7,17 +7,19 @@ import HomePage from "./component/HomePage/HomePage";
 import NotFound from "./404NotFound/NotFound";
 import ProfilePage from './component/ProfilePage/ProfilePage';
 import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
+import {useState} from "react";
 
 
 
 function App() {
+    const [isProfile, setIsProfile] = useState(false);
     return (
         <div>
             <Routes>
                 {/* 홈 */}
-                <Route path="/" element={<><TopMenu /><GNB /></>}>
+                <Route path="/" element={<><TopMenu /><GNB isProfile={isProfile} setIsProfile={setIsProfile}/></>}>
                     <Route index element={<div className={"CONTENTS"}><HomePage/></div>} />
-                    <Route path="profile" element={<div className={"CONTENTS"}><ProfilePage/></div>} />
+                    <Route path="profile" element={<div className={"CONTENTS"}><ProfilePage setIsProfile={setIsProfile}/></div>} />
                     <Route path="cheonancard" element={<div className={"CONTENTS"}><CheonanCardPage/></div>} />
                 </Route>
 
