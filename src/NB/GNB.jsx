@@ -18,10 +18,10 @@ const Gnb = ({isProfile}) => {
                 }
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-center align-items-center">
-                        <Link to="/cheonancard"><GoCreditCard /><br/>천안사랑카드</Link>
+                        <Link to="/cheonancard"><GoCreditCard /><br/>천안<br/>사랑카드</Link>
                     </Col>
                     <Col className="d-flex justify-content-center align-items-center">
-                        <Link to="map"><CiMap /><br/>가맹정 지도</Link>
+                        <Link to="map"><CiMap /><br/>가맹점<br/> 지도</Link>
                     </Col>
                     <Col className="d-flex justify-content-center align-items-center">
                         <Link to="/"><CiHome/><br/>홈</Link>

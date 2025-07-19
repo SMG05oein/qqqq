@@ -63,9 +63,15 @@
 }
 @media screen and (max-width: 619px) {
     .GNB a{
-        /*font-size: 10px;*/
+        font-size: 14px;
     }
 }
+@media (max-width: 392px) {
+    .GNB a{
+        font-size: 12px;
+    }
+}
+
 
 
 .GNB a:hover {
