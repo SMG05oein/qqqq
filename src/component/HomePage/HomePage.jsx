@@ -58,6 +58,89 @@ const HomePage = () => {
                         </Row>
                     </div>
                 </Row>
+
+
+                <Row className={"NotFlex"}>
+                    <div className={"HomeBox"}>
+                        <Row>
+                            <Col>잔액: 1000원</Col>
+                        </Row>
+                        <Row>
+                            <Col><Link to={"/"}>이용내역</Link></Col>
+                            <Col><Link to={"/"}>충전</Link></Col>
+                        </Row>
+                    </div>
+                </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row><Row className={"NotFlex"}>
+                <div className={"HomeBox"}>
+                    <Row>
+                        <Col>잔액: 1000원</Col>
+                    </Row>
+                    <Row>
+                        <Col><Link to={"/"}>이용내역</Link></Col>
+                        <Col><Link to={"/"}>충전</Link></Col>
+                    </Row>
+                </div>
+            </Row>
             </Container>
         </div>
     );

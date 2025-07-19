@@ -3,8 +3,20 @@
 }
 
 .CONTENTS {
-    height: calc(100vh - 45px);
-    padding: 16px 16px 60px;
+    height: calc(100vh - 64px);
+    padding: 20px 8px 0 8px;
     overflow-y: auto;
     box-sizing: border-box;
+}
+
+@media (max-width: 619px) {
+    .CONTENTS {
+        height: calc(100vh - 88px);
+    }
+}
+
+@media (max-width: 393px) {
+    .CONTENTS {
+        height: calc(100vh - 112px);
+    }
 }
