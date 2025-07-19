@@ -3,5 +3,8 @@
 }
 
 .CONTENTS {
-    margin: 16px 0 16px 0;
+    height: calc(100vh - 45px);
+    padding: 16px 16px 64px;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
