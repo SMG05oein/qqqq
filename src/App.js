@@ -8,6 +8,7 @@ import NotFound from "./404NotFound/NotFound";
 import ProfilePage from './component/ProfilePage/ProfilePage';
 import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
 import {useState} from "react";
+import KakaoMap from "./component/KakaoMap/KakaoMap";
 
 
 
@@ -21,6 +22,7 @@ function App() {
                     <Route index element={<div className={"CONTENTS scroll-hidden"}><HomePage/></div>} />
                     <Route path="profile" element={<div className={"CONTENTSP scroll-hidden"}><ProfilePage setIsProfile={setIsProfile}/></div>} />
                     <Route path="cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage/></div>} />
+                    <Route path="map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap/></div>} />
                 </Route>
 
                 {/* 404 */}

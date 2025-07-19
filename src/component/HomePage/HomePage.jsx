@@ -7,6 +7,12 @@ const HomePage = () => {
     return (
         <div className="HomePage justify-content-center">
             <Container>
+                <Row>
+                    <div className={"Banner"}>
+                        <Col xs={8}><span>사용이 처음이신가요?</span></Col>
+                        <Col xs={4}><div onClick={()=>{alert("기능 미구현")}} className={"GuideBox"}>가이드 <br/>보러가기</div></Col>
+                    </div>
+                </Row>
                 {/*관리*/}
                 <Row className={"NotFlex"}>
                     <div className={"HomeBox"}>

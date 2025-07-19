@@ -21,7 +21,7 @@ const Gnb = ({isProfile}) => {
                         <Link to="/cheonancard"><GoCreditCard /><br/>천안사랑카드</Link>
                     </Col>
                     <Col className="d-flex justify-content-center align-items-center">
-                        <Link to="/"><CiMap /><br/>가맹정 지도</Link>
+                        <Link to="map"><CiMap /><br/>가맹정 지도</Link>
                     </Col>
                     <Col className="d-flex justify-content-center align-items-center">
                         <Link to="/"><CiHome/><br/>홈</Link>
