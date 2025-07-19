@@ -14,18 +14,24 @@ const ProfilePage = ({setIsProfile}) => {
     return (
         <div className="ProfilePage">
             <Container className="profile-container profile-card text-center">
-                <Image src="/profile.png" roundedCircle className="profile-image" />
-                <h5 className="profile-name">이름</h5>
-
-                <div className="button-section">
-                    <h6>계정찾기</h6>
-                    <Button variant="light" className="profile-button">아이디 찾기</Button>
-                    <Button variant="light" className="profile-button">비밀번호 찾기</Button>
-
-                    <h6 className="mt-4">서비스</h6>
-                    <Button variant="secondary" className="profile-button">계정 삭제</Button>
-                    <Button variant="secondary" className="profile-button">로그아웃</Button>
-                </div>
+                <Row className="NotFlex NoMargin">
+                    <Col>
+                        <Image src="/profile.png" roundedCircle className="profile-image" />
+                        <h5 className="profile-name">이름</h5>
+                    </Col>
+                    <Col>
+                        <Row className="NotFlex NoMargin">
+                            <h6>계정찾기</h6>
+                            <Button variant="light" className="profile-button">아이디 찾기</Button>
+                            <Button variant="light" className="profile-button">비밀번호 찾기</Button>
+                        </Row>
+                        <Row className="NotFlex NoMargin">
+                            <h6 className="mt-4">서비스</h6>
+                            <Button variant="secondary" className="profile-button">계정 삭제</Button>
+                            <Button variant="secondary" className="profile-button">로그아웃</Button>
+                        </Row>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );

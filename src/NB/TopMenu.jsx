@@ -15,8 +15,8 @@ const TopMenu = () => {
                         <font>홍길동님</font>
                     </Col>
                     <Col className="d-flex justify-content-end NoPadding">
-                        <Link to="/"><IoIosNotificationsOutline size={"25"}/></Link>
-                        <Link to="/"><IoReorderThreeOutline size={"25"} /></Link>
+                        <Link to="#"><IoIosNotificationsOutline size={"25"}/></Link>
+                        <Link to="#"><IoReorderThreeOutline size={"25"} /></Link>
                     </Col>
                 </Row>
             </Container>

@@ -6,6 +6,10 @@
     padding: 0 !important;
 }
 
+.NoMargin{
+    margin: 0 !important;
+}
+
 .CONTENTS {
     height: calc(100vh - 102px);
     padding: 20px 8px 0 8px;

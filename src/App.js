@@ -18,9 +18,9 @@ function App() {
             <Routes>
                 {/* 홈 */}
                 <Route path="/" element={<><TopMenu /><GNB isProfile={isProfile} setIsProfile={setIsProfile}/></>}>
-                    <Route index element={<div className={"CONTENTS"}><HomePage/></div>} />
-                    <Route path="profile" element={<div className={"CONTENTSP"}><ProfilePage setIsProfile={setIsProfile}/></div>} />
-                    <Route path="cheonancard" element={<div className={"CONTENTS"}><CheonanCardPage/></div>} />
+                    <Route index element={<div className={"CONTENTS scroll-hidden"}><HomePage/></div>} />
+                    <Route path="profile" element={<div className={"CONTENTSP scroll-hidden"}><ProfilePage setIsProfile={setIsProfile}/></div>} />
+                    <Route path="cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage/></div>} />
                 </Route>
 
                 {/* 404 */}
