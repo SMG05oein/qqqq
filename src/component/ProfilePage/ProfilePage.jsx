@@ -2,9 +2,11 @@ import React, {useContext, useEffect} from 'react';
 import './ProfilePage.style.css';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import {LoginContext} from "../../Hooks/LoginState";
+import {useUser} from "../../Hooks/useUser";
 
 const ProfilePage = ({setIsProfile}) => {
     const { login ,setLogin } = useContext(LoginContext);
+    const user = useUser();
 
     useEffect(()=>{
         setIsProfile(true);
@@ -18,7 +20,7 @@ const ProfilePage = ({setIsProfile}) => {
                 <Row className="NotFlex NoMargin">
                     <Col>
                         <Image src="/profile.png" roundedCircle className="profile-image" />
-                        <h5 className="profile-name">이름</h5>
+                        <h5 className="profile-name">{user[login.idx-1]?.name}님</h5>
                     </Col>
                     <Col>
                         <Row className="NotFlex NoMargin">
