@@ -3,10 +3,12 @@ import './ProfilePage.style.css';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import {LoginContext} from "../../Hooks/LoginState";
 import {useUser} from "../../Hooks/useUser";
+import Loading from "../../Loding/Loading";
 
 const ProfilePage = ({setIsProfile}) => {
     const { login ,setLogin } = useContext(LoginContext);
     const user = useUser();
+    console.log(user);
 
     useEffect(()=>{
         setIsProfile(true);
@@ -14,7 +16,8 @@ const ProfilePage = ({setIsProfile}) => {
             setIsProfile(false);
         };
     })
-    return (
+    return ( !user || user.length === 0 ? <Loading/>
+        :
         <div className="ProfilePage">
             <Container className="profile-container profile-card text-center">
                 <Row className="NotFlex NoMargin">
