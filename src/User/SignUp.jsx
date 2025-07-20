@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {useUser} from "../Hooks/useUser";
 import {LoginContext} from "../Hooks/LoginState";
@@ -68,16 +68,23 @@ const SignUp = ({setIsProfile}) => {
     return (
         <Container className="Login">
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicId">
-                    <Form.Label>아이디</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="아이디을 입력하세요"
-                        value={studentId}
-                        onChange={(e) => setStudentId(e.target.value)}
-                        ref={studentIdRef}
-                    />
-                </Form.Group>
+                <Row>
+                    <Col xs={8}>
+                        <Form.Group className="mb-3" controlId="formBasicId">
+                            <Form.Label>아이디</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="아이디을 입력하세요"
+                                value={studentId}
+                                onChange={(e) => setStudentId(e.target.value)}
+                                ref={studentIdRef}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col xs={3} className={"justify-content-center align-content-center"}>
+                        <Button variant={"primary"}>중복 확인</Button>
+                    </Col>
+                </Row>
                 <Form.Group className="mb-3" controlId="formBasicName">
                 <Form.Label>이름</Form.Label>
                     <Form.Control

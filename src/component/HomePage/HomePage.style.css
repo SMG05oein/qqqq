@@ -62,7 +62,7 @@
     transform: scale(1.05);
 }
 .HomeCardBanner {
-    background-color: #81c784;
+    background-color: #53b855;
     border-radius: 10px;
     /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);*/
     padding: 12px;
@@ -80,6 +80,19 @@
     /*border-radius: 12px 12px 0 0;*/
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     font-family: 'Segoe UI', 'Pretendard', sans-serif;
+}
+
+.Money{
+    font-size: 1.2rem;
+}
+.SeeMoney{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+    white-space: normal;
+    text-align: center;
 }
 
 .MoreBtn{

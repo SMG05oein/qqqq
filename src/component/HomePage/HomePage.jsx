@@ -2,7 +2,7 @@ import React from 'react';
 import {Col, Container, Image, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./HomePage.style.css"
-import {FaCreditCard, FaWonSign} from "react-icons/fa";
+import {FaCreditCard, FaPlus, FaWonSign} from "react-icons/fa";
 
 const HomePage = () => {
     return (
@@ -24,10 +24,14 @@ const HomePage = () => {
                             <Col xs={7} className={"d-block justify-content-center align-content-center"}>
                                 <div className={"MyCheonanCard"}>나의 천안 사랑카드</div>
                                 <div className={"CardInfo"}>
-                                    <div>잔액: 1000원</div>
-                                    <div>정책지원금: 1000원</div>
+                                    <div className={"Money"}>
+                                        <div className={"SeeMoney"}>
+                                            <div>잔액</div>
+                                            <div>{Number(1000000000000000000000000000000).toLocaleString()}원</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className={"MoreBtn"}>+더보기</div>
+                                <div className={"MoreBtn"}><FaPlus/>&nbsp;더보기</div>
                             </Col>
                         </Row>
                         <Row>

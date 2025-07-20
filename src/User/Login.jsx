@@ -27,7 +27,7 @@ const Login = ({setIsProfile}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if(studentId === "") {
-            alert("학번을 입력해주세요.");
+            alert("아이디을 입력해주세요.");
             studentIdRef.current.focus();
             return;
         }
@@ -54,7 +54,7 @@ const Login = ({setIsProfile}) => {
             }
             navigate("/");
         }else{
-            alert("학번 또는 비밀번호가 맞지 않습니다!!");
+            alert("아이디 또는 비밀번호가 맞지 않습니다!!");
         }
     };
 
