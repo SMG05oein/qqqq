@@ -1,10 +1,32 @@
-import React from 'react';
-import {Col, Container, Image, Row} from "react-bootstrap";
+import React, {useState} from 'react';
+import {Button, Col, Container, Image, Row, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./HomePage.style.css"
 import {FaCreditCard, FaPlus, FaWonSign} from "react-icons/fa";
 
 const HomePage = () => {
+    const data = [
+        { type: "지출", amount: "1000원", date: "2025-01-03" },
+        { type: "충전", amount: "1000원", date: "2025-01-03" },
+        { type: "지출", amount: "1000원", date: "2025-01-03" },
+        { type: "지출", amount: "1000원", date: "2025-01-03" },
+        { type: "충전", amount: "1000원", date: "2025-01-03" },
+        { type: "지출", amount: "1000원", date: "2025-01-03" },
+        { type: "지출", amount: "1000원", date: "2025-01-03" },
+    ];
+
+    const [visibleCount, setVisibleCount] = useState(3);
+
+    const showMore = () => {
+        setVisibleCount(prev => Math.min(prev + 3, data.length));
+    };
+    const showAll = () => {
+        setVisibleCount(data.length);
+    };
+    const resetView = () => {
+        setVisibleCount(3);
+    };
+
     return (
         <div className="HomePage">
             <Container>
@@ -48,14 +70,35 @@ const HomePage = () => {
                             <Col>이용내역</Col>
                         </Row>
                         <Row className={"NotFlex"}>
-                            <Col><Link to={"/"}>이용내역</Link></Col>
-                            <Col><Link to={"/"}>이용내역</Link></Col>
-                            <Col><Link to={"/"}>이용내역</Link></Col>
-                            <Col><Link to={"/"}>이용내역</Link></Col>
-                            <Col><Link to={"/"}>충전</Link></Col>
-                            <Col><Link to={"/"}>충전</Link></Col>
-                            <Col><Link to={"/"}>충전</Link></Col>
-                            <Col><Link to={"/"}>충전</Link></Col>
+                            <Table className={"NoMargin"} variant={""} striped bordered hover >
+                                <thead className="thead-light">
+                                    <tr className="text-center">
+                                        <th>구분</th>
+                                        <th>지불 금액</th>
+                                        <th>사용날짜</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-center">
+                                {data.slice(0, visibleCount).map((item, idx) => (
+                                    <tr key={idx}>
+                                        <td>{item.type}</td>
+                                        <td>{item.amount}</td>
+                                        <td>{item.date}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </Table>
+                            <div className="d-flex justify-content-center gap-3 mt-2">
+                                {visibleCount < data.length && (
+                                    <Button variant="outline-primary" onClick={showMore}>더보기</Button>
+                                )}
+                                {visibleCount < data.length && (
+                                    <Button variant="outline-success" onClick={showAll}>전체보기</Button>
+                                )}
+                                {visibleCount > 3 && (
+                                    <Button variant="outline-danger" onClick={resetView}>닫기</Button>
+                                )}
+                            </div>
                         </Row>
                     </div>
                 </Row>
