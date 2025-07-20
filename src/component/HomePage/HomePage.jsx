@@ -1,11 +1,12 @@
 import React from 'react';
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Image, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./HomePage.style.css"
+import {FaCreditCard, FaWonSign} from "react-icons/fa";
 
 const HomePage = () => {
     return (
-        <div className="HomePage justify-content-center">
+        <div className="HomePage">
             <Container>
                 <Row>
                     <div className={"Banner"}>
@@ -15,13 +16,23 @@ const HomePage = () => {
                 </Row>
                 {/*관리*/}
                 <Row className={"NotFlex"}>
-                    <div className={"HomeBox"}>
-                        <Row>
-                            <Col>잔액: 1000원</Col>
+                    <div className={"HomeCardBanner"}>
+                        <Row className={""} style={{marginBottom: "10px"}}>
+                            <Col xs={5} className={"d-flex justify-content-center align-content-center"}>
+                                <Image height={'160px'} src={"CheonanLoveCard.png"} alt={"천안사랑카드"}/>
+                            </Col>
+                            <Col xs={7} className={"d-block justify-content-center align-content-center"}>
+                                <div className={"CardInfo"}>
+                                    <div>나의 천안 사랑카드</div>
+                                    <div>잔액: 1000원</div>
+                                    <div>정책지원금: 1000원</div>
+                                </div>
+                                <div className={"MoreBtn"}>+더보기</div>
+                            </Col>
                         </Row>
                         <Row>
-                            <Col><Link to={"/"}>이용내역</Link></Col>
-                            <Col><Link to={"/"}>충전</Link></Col>
+                            <Col className={"d-flex justify-content-center align-content-center"}><Link to={"/"}><FaCreditCard/> 카드관리</Link></Col>
+                            <Col className={"d-flex justify-content-center align-content-center"}><Link to={"/"}><FaWonSign/> 충전</Link></Col>
                         </Row>
                     </div>
                 </Row>

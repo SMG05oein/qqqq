@@ -15,7 +15,7 @@ code {
 
 
 :root{
-  --Cheonan: linear-gradient(to right, #0EB4FC, #0055A4);
+  --CheonanBlue: linear-gradient(to right, #0EB4FC, #0055A4);
   --primary: #0EB4FC;
   --secondary:#FFFFFF;
   --bg: #fafdff;

@@ -1,14 +1,9 @@
 .HomeBox {
-    /*margin-top: 24px;*/
-    padding: 16px;
+    padding: 12px 16px 16px 16px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     font-family: 'Segoe UI', 'Pretendard', sans-serif;
-}
-
-.HomeBox .row {
-    /*margin: 10px 0 10px 0;*/
 }
 
 .HomeBox a {
@@ -33,7 +28,7 @@
 .Banner{
     margin-top: 24px;
     width: 100%;
-    background: var(--Cheonan);
+    background: var(--CheonanBlue);
     color: white;
     padding: 60px 20px;
     text-align: center;
@@ -70,6 +65,35 @@
 .GuideBox:hover {
     background-color: #007bff;
     transform: scale(1.05);
+}
+.HomeCardBanner {
+    background-color: #81c784;
+    border-radius: 10px;
+    /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);*/
+    padding: 12px;
+    font-family: 'Segoe UI', 'Pretendard', sans-serif;
+    margin-bottom: 10px;
+    /*width: 100%;*/
+}
+
+.HomeCardBanner .CardInfo {
+    font-size: 0.88rem;
+    color: #2e7d32; /* 초록색 텍스트 */
+    font-weight: 500;
+    padding: 12px 16px 16px 16px;
+    background-color: #ffffff;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', 'Pretendard', sans-serif;
+}
+
+.MoreBtn{
+    font-size: 0.88rem;
+    background-color: var(--primary);
+    border-radius: 0 0 12px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 425px){

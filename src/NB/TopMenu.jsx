@@ -18,7 +18,7 @@ const TopMenu = () => {
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-left">
                         <Link className={"NoPadding"} to="/"><Image style={{height: '40px'}} src={"CheonanLogo.png"} alt={"천안시 로고"}/></Link>
-                        {login?<font>{user[login.idx-1]?.name}님</font>:null}
+                        {login.isLogin?(<font>{user[login.idx-1]?.name}님</font>):null}
                     </Col>
                     <Col className="d-flex justify-content-end NoPadding">
                         <Link to="#"><IoIosNotificationsOutline size={"25"}/></Link>

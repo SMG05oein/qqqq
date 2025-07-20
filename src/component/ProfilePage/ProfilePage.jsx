@@ -8,7 +8,7 @@ import Loading from "../../Loding/Loading";
 const ProfilePage = ({setIsProfile}) => {
     const { login ,setLogin } = useContext(LoginContext);
     const user = useUser();
-    console.log(user);
+    // console.log(user);
 
     useEffect(()=>{
         setIsProfile(true);
