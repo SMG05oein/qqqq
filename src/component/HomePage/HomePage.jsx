@@ -22,8 +22,8 @@ const HomePage = () => {
                                 <Image height={'160px'} src={"CheonanLoveCard.png"} alt={"천안사랑카드"}/>
                             </Col>
                             <Col xs={7} className={"d-block justify-content-center align-content-center"}>
+                                <div className={"MyCheonanCard"}>나의 천안 사랑카드</div>
                                 <div className={"CardInfo"}>
-                                    <div>나의 천안 사랑카드</div>
                                     <div>잔액: 1000원</div>
                                     <div>정책지원금: 1000원</div>
                                 </div>

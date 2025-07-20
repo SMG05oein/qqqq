@@ -54,7 +54,7 @@ const KakaoMap = () => {
         state.isLoading ? (
             <div><Loading /></div>
         ) : (
-            <div className="KakaoMap" style={{ height: '100%' }}>
+            <div className="KakaoMap" style={{ height: '90%' }}>
                 <Container style={{ height: '100%' }}>
                     <div style={{ marginTop: '50px', height: '100%' }}>
                         <Map

@@ -59,52 +59,56 @@ const Login = ({setIsProfile}) => {
     };
 
     return (
-        <Container className="Login">
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>아이디</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="아이디을 입력하세요"
-                        value={studentId}
-                        onChange={(e) => setStudentId(e.target.value)}
-                        ref={studentIdRef}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>비밀번호</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="비밀번호"
-                        value={passwd}
-                        onChange={(e) => setPasswd(e.target.value)}
-                        ref={passwdRef}
-                    />
-                </Form.Group>
-                소셜로그인
-                <Button variant="warning" type="">
-                    카카오
-                </Button>
-                <Button variant="success" type="">
-                    네이버
-                </Button>
-                <Button variant="secondary" type="">
-                    기타?
-                </Button>
-                <p/>
-                <Button variant="primary" type="submit">
-                    확인
-                </Button>
-                <p/>
-                <Button variant="info" type="button" onClick={()=>navigate('/signUp')}>
-                    회원가입
-                </Button>
-                <p/>
-                <Button variant="dark" type="button" onClick={()=>navigate('/')}>
-                    홈으로
-                </Button>
-            </Form>
-        </Container>
+        // <div className="d-flex align-items-center justify-content-center">
+            <Container className="Login">
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>아이디</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="아이디을 입력하세요"
+                            value={studentId}
+                            onChange={(e) => setStudentId(e.target.value)}
+                            ref={studentIdRef}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>비밀번호</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="비밀번호"
+                            value={passwd}
+                            onChange={(e) => setPasswd(e.target.value)}
+                            ref={passwdRef}
+                        />
+                    </Form.Group>
+                    <div className="socialLogin">
+                        소셜로그인
+                        <Button variant="warning" type="">
+                            카카오
+                        </Button>
+                        <Button variant="success" type="">
+                            네이버
+                        </Button>
+                        <Button variant="secondary" type="">
+                            기타?
+                        </Button>
+                    </div>
+                    <p/>
+                    <Button variant="primary" type="submit">
+                        확인
+                    </Button>
+                    <p/>
+                    <Button variant="info" type="button" onClick={()=>navigate('/signUp')}>
+                        회원가입
+                    </Button>
+                    <p/>
+                    <Button variant="dark" type="button" onClick={()=>navigate('/')}>
+                        홈으로
+                    </Button>
+                </Form>
+            </Container>
+        // </div>
     );
 };
 

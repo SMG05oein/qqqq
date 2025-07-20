@@ -26,7 +26,7 @@ function App() {
                             {login.isLogin ? <ProfilePage setIsProfile={setIsProfile}/>:<Login setIsProfile={setIsProfile}/>}
                         </div>} />
                     <Route path="cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage/></div>} />
-                    <Route path="signUp" element={<div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}><SignUp setIsProfile={setIsProfile}/></div>} />
+                    <Route path="signUp" element={<div className={"CONTENTSP scroll-hidden"}><SignUp setIsProfile={setIsProfile}/></div>} />
                     <Route path="map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap/></div>} />
                 </Route>
 

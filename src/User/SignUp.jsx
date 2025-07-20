@@ -17,10 +17,16 @@ const SignUp = ({setIsProfile}) => {
     const { setLogin } = useContext(LoginContext);
 
     const [studentId, setStudentId] = useState("");
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [passwd, setPasswd] = useState("");
+    const [passwdOk, setPasswdOk] = useState("");
     const [userType, setUserType] = useState('');
     const studentIdRef = useRef(null);
+    const emailRef = useRef(null);
+    const nameRef = useRef(null);
     const passwdRef = useRef(null);
+    const passwdOkRef = useRef(null);
     const navigate = useNavigate();
     const user = useUser();
     let str = "";
@@ -77,9 +83,9 @@ const SignUp = ({setIsProfile}) => {
                     <Form.Control
                         type="text"
                         placeholder="이름을 입력하세요"
-                        value={studentId}
-                        onChange={(e) => setStudentId(e.target.value)}
-                        ref={studentIdRef}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        ref={nameRef}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -87,9 +93,9 @@ const SignUp = ({setIsProfile}) => {
                     <Form.Control
                         type="text"
                         placeholder="이메일을 입력하세요"
-                        value={studentId}
-                        onChange={(e) => setStudentId(e.target.value)}
-                        ref={studentIdRef}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        ref={emailRef}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -107,9 +113,9 @@ const SignUp = ({setIsProfile}) => {
                     <Form.Control
                         type="password"
                         placeholder="비밀번호 확인"
-                        value={passwd}
-                        onChange={(e) => setPasswd(e.target.value)}
-                        ref={passwdRef}
+                        value={passwdOk}
+                        onChange={(e) => setPasswdOk(e.target.value)}
+                        ref={passwdOkRef}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicType">
@@ -120,7 +126,7 @@ const SignUp = ({setIsProfile}) => {
                             label="소비자"
                             name="userType"
                             value="0"
-                            checked={userType === "consumer"}
+                            checked={userType === "0"}
                             onChange={(e) => setUserType(e.target.value)}
                             inline
                         />
@@ -129,7 +135,7 @@ const SignUp = ({setIsProfile}) => {
                             label="판매자"
                             name="userType"
                             value="1"
-                            checked={userType === "seller"}
+                            checked={userType === "1"}
                             onChange={(e) => setUserType(e.target.value)}
                             inline
                         />
