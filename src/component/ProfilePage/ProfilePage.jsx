@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './ProfilePage.style.css';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-import GNB from '../../NB/GNB';
-import TopMenu from '../../NB/TopMenu';
+import {LoginContext} from "../../Hooks/LoginState";
 
 const ProfilePage = ({setIsProfile}) => {
+    const { login ,setLogin } = useContext(LoginContext);
+
     useEffect(()=>{
         setIsProfile(true);
         return () => {
@@ -28,7 +29,16 @@ const ProfilePage = ({setIsProfile}) => {
                         <Row className="NotFlex NoMargin">
                             <h6 className="mt-4">서비스</h6>
                             <Button variant="secondary" className="profile-button">계정 삭제</Button>
-                            <Button variant="secondary" className="profile-button">로그아웃</Button>
+                            <Button variant="secondary" className="profile-button"
+                                    onClick={() => {
+                                        if (window.confirm("로그아웃 하시겠습니까?")) {
+                                            setLogin(false, 0);
+                                            alert("로그아웃 되었습니다");
+                                        }
+                                    }}
+                            >
+                                로그아웃
+                            </Button>
                         </Row>
                     </Col>
                 </Row>

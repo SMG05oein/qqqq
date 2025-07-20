@@ -1,0 +1,22 @@
+.Login{
+    max-width:350px;
+    margin:50px auto;
+    padding:24px;
+    background:#fff;
+    border:none;
+    border-radius:12px;
+    box-shadow:var(--card-shadow);
+}
+.Login .form-control{
+    margin-bottom:15px;
+    padding:10px;
+    font-size:16px;
+}
+.Login .btn{
+    width:100%;
+    font-size:18px;
+    font-weight:600;
+    background:var(--primary);
+    border:none;
+}
+.Login .btn:hover{background:var(--blue);}

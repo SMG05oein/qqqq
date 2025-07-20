@@ -48,7 +48,7 @@ const KakaoMap = () => {
         }
     }, [])
     /**현 위치 기반으로 마커 끝*/
-    console.log(state);
+    // console.log(state);
 
     return (
         state.isLoading ? (
