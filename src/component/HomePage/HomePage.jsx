@@ -41,10 +41,16 @@ const HomePage = () => {
                 <Row className={"NotFlex"}>
                     <div className={"HomeBox"}>
                         <Row>
-                            <Col>잔액: 1000원</Col>
+                            <Col>이용내역</Col>
                         </Row>
-                        <Row>
+                        <Row className={"NotFlex"}>
                             <Col><Link to={"/"}>이용내역</Link></Col>
+                            <Col><Link to={"/"}>이용내역</Link></Col>
+                            <Col><Link to={"/"}>이용내역</Link></Col>
+                            <Col><Link to={"/"}>이용내역</Link></Col>
+                            <Col><Link to={"/"}>충전</Link></Col>
+                            <Col><Link to={"/"}>충전</Link></Col>
+                            <Col><Link to={"/"}>충전</Link></Col>
                             <Col><Link to={"/"}>충전</Link></Col>
                         </Row>
                     </div>

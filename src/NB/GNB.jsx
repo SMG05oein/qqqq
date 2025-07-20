@@ -26,9 +26,9 @@ const Gnb = ({isProfile}) => {
                     <Col className="d-flex justify-content-center align-items-center">
                         <Link to="/"><CiHome/><br/>홈</Link>
                     </Col>
-                    <Col className="d-flex justify-content-center align-items-center">
-                        <Link to="/"><BsColumns /><br/>커뮤니티</Link>
-                    </Col>
+                    {/*<Col className="d-flex justify-content-center align-items-center">*/}
+                    {/*    <Link to="/"><BsColumns /><br/>커뮤니티</Link>*/}
+                    {/*</Col>*/}
                     <Col className="d-flex justify-content-center align-items-center">
                         <Link to="/profile"><IoPersonOutline /><br/>프로필</Link>
                     </Col>

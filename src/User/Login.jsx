@@ -4,6 +4,7 @@ import "./Login.style.css";
 import {useNavigate} from "react-router-dom";
 import {useUser} from "../Hooks/useUser";
 import {LoginContext} from "../Hooks/LoginState";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = ({setIsProfile}) => {
     const { setLogin } = useContext(LoginContext);
@@ -80,11 +81,26 @@ const Login = ({setIsProfile}) => {
                         ref={passwdRef}
                     />
                 </Form.Group>
+                소셜로그인
+                <Button variant="warning" type="">
+                    카카오
+                </Button>
+                <Button variant="success" type="">
+                    네이버
+                </Button>
+                <Button variant="secondary" type="">
+                    기타?
+                </Button>
+                <p/>
                 <Button variant="primary" type="submit">
                     확인
                 </Button>
                 <p/>
-                <Button variant="primary" type="button" onClick={()=>navigate('/')}>
+                <Button variant="info" type="button" onClick={()=>navigate('/signUp')}>
+                    회원가입
+                </Button>
+                <p/>
+                <Button variant="dark" type="button" onClick={()=>navigate('/')}>
                     홈으로
                 </Button>
             </Form>

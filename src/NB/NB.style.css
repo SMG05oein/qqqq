@@ -44,7 +44,7 @@
     /*max-height: 60px;*/
     /*background-color: var(--bg);*/
     box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
-    padding: 0 0 10px 0;
+    padding: 0 !important;
     z-index: 999;
     /*border-radius: 50px 50px 0 0;*/
 }
@@ -72,8 +72,6 @@
     }
 }
 
-
-
 .GNB a:hover {
     background-color: #e6f0ff;
     color: #007bff;
@@ -83,7 +81,7 @@
     background-color: var(--primary);
     text-align: center;
     border-radius: 100px 100px 0 0;
-    padding: 4px 0;
+    /*padding: 4px 0;*/
 }
 
 .Paying {

@@ -9,7 +9,8 @@ import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
 import {useContext, useState} from "react";
 import KakaoMap from "./component/KakaoMap/KakaoMap";
 import {LoginContext, LoginProvider} from "./Hooks/LoginState";
-import Login from "./Login/Login";
+import Login from "./User/Login";
+import SignUp from "./User/SignUp";
 
 function App() {
     const [isProfile, setIsProfile] = useState(false);
@@ -25,6 +26,7 @@ function App() {
                             {login.isLogin ? <ProfilePage setIsProfile={setIsProfile}/>:<Login setIsProfile={setIsProfile}/>}
                         </div>} />
                     <Route path="cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage/></div>} />
+                    <Route path="signUp" element={<div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}><SignUp setIsProfile={setIsProfile}/></div>} />
                     <Route path="map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap/></div>} />
                 </Route>
 

@@ -25,7 +25,7 @@
 
 @media (max-width: 619px) {
     .CONTENTS {
-        height: calc(100vh - 141px);
+        height: calc(100vh - 123px);
     }
     .CONTENTSP {
         height: calc(100vh - 78px);
@@ -34,9 +34,9 @@
 
 @media (max-width: 392px) {
     .CONTENTS {
-        height: calc(100vh - 132px);
+        height: calc(100vh - 114px);
     }
     .CONTENTSP {
-        height: calc(100vh - 102px);
+        height: calc(100vh - 74px);
     }
 }
