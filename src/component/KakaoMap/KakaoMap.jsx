@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Map, MapMarker} from "react-kakao-maps-sdk";
 import {Container} from "react-bootstrap";
 import Loading from "../Loding/Loading";
+import "./KakaoMap.style.css"
 
 const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/overlay/categoryMarker 다양한 이미지 마커
@@ -54,20 +55,40 @@ const KakaoMap = () => {
         state.isLoading ? (
             <div><Loading /></div>
         ) : (
-            <div className="KakaoMap" style={{ height: '90%' }}>
-                <Container style={{ height: '100%' }}>
-                    <div style={{ marginTop: '50px', height: '100%' }}>
+            <div className="KakaoMap">
+                <nav className="navbar navbar-light">
+                    <div className="container-fluid">
+                        <form className="d-flex">
+                            <input className="form-control me-2" type="search" placeholder="검색" aria-label="검색"/>
+                            <button className="btn btn-primary" type="submit">검색</button> {/*모바일 환경에서 검색 버튼을 누를까?*/}
+                        </form>
+                    </div>
+                </nav>
+                <Container className={"NoPadding"} style={{width: '100%' ,height: '100%'}}>
+                    <div className={"KakaoMapBox"}>
+                        <div className={"KaKaoMapOverTools"}>
+                            <button className="btn btn-primary">착한가게</button>
+                            <button className="btn btn-primary">음식점</button>
+                            <button className="btn btn-primary">카페</button>
+                            <button className="btn btn-primary">~</button>
+                            <button className="btn btn-primary">~</button>
+                            <button className="btn btn-primary">~</button>
+                            <button className="btn btn-primary">~</button>
+                            <button className="btn btn-primary">~</button>
+                            <button className="btn btn-primary">~</button>
+                        </div>
                         <Map
                             center={state.center}
-                            style={{ width: '100%', height: '80%' }}
+                            style={{width: '94%', height: '90%', borderRadius: '10px'}}
                             level={3}
                         >
                             {!state.isLoading && (
-                                <MapMarker position={state.center}>
-
-                                </MapMarker>
+                                <MapMarker position={state.center}></MapMarker>
                             )}
                         </Map>
+                        <div className={"KaKaoMapUnderTools"}>
+                            <button className="btn btn-primary">현위치</button>
+                        </div>
                     </div>
                 </Container>
             </div>
