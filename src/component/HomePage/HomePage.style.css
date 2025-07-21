@@ -68,7 +68,12 @@
     padding: 12px;
     font-family: 'Segoe UI', 'Pretendard', sans-serif;
     margin-bottom: 10px;
+
     /*width: 100%;*/
+}
+
+.HomeCardBanner a {
+    text-decoration: none;
 }
 
 .HomeCardBanner .CardInfo {
@@ -125,3 +130,28 @@
     .Banner span{font-size: 14px;}
     .GuideBox{font-size: 11px;}
 }
+
+.CardSlider {
+    max-height: 290px;
+    overflow-y: auto;
+    padding-right: 6px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.CardSlider::-webkit-scrollbar {
+    display: none;
+}
+
+.UsageCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
