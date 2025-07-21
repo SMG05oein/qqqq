@@ -3,14 +3,14 @@ import {Route, Routes} from "react-router-dom";
 import GNB from "./NB/GNB";
 import TopMenu from "./NB/TopMenu";
 import HomePage from "./component/HomePage/HomePage";
-import NotFound from "./404NotFound/NotFound";
+import NotFound from "./component/404NotFound/NotFound";
 import ProfilePage from './component/ProfilePage/ProfilePage';
 import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
 import {useContext, useState} from "react";
 import KakaoMap from "./component/KakaoMap/KakaoMap";
-import {LoginContext, LoginProvider} from "./Hooks/LoginState";
-import Login from "./User/Login";
-import SignUp from "./User/SignUp";
+import {LoginContext, LoginProvider} from "./State/LoginState";
+import Login from "./component/User/Login";
+import SignUp from "./component/User/SignUp";
 
 function App() {
     const [isProfile, setIsProfile] = useState(false);

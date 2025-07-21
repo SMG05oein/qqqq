@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Map, MapMarker} from "react-kakao-maps-sdk";
 import {Container} from "react-bootstrap";
-import Loading from "../../Loding/Loading";
+import Loading from "../Loding/Loading";
 
 const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/overlay/categoryMarker 다양한 이미지 마커

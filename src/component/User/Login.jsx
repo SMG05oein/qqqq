@@ -2,8 +2,8 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Button, Container, Form} from "react-bootstrap";
 import "./Login.style.css";
 import {useNavigate} from "react-router-dom";
-import {useUser} from "../Hooks/useUser";
-import {LoginContext} from "../Hooks/LoginState";
+import {useUser} from "../../Hooks/useUser";
+import {LoginContext} from "../../State/LoginState";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = ({setIsProfile}) => {

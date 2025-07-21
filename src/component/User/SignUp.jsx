@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {useUser} from "../Hooks/useUser";
-import {LoginContext} from "../Hooks/LoginState";
+import {useUser} from "../../Hooks/useUser";
+import {LoginContext} from "../../State/LoginState";
 import "./Login.style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 

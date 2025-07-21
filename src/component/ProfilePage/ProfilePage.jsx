@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react';
 import './ProfilePage.style.css';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-import {LoginContext} from "../../Hooks/LoginState";
+import {LoginContext} from "../../State/LoginState";
 import {useUser} from "../../Hooks/useUser";
-import Loading from "../../Loding/Loading";
+import Loading from "../Loding/Loading";
 
 const ProfilePage = ({setIsProfile}) => {
     const { login ,setLogin } = useContext(LoginContext);
