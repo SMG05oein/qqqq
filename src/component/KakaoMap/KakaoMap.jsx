@@ -1,12 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {Map, MapMarker} from "react-kakao-maps-sdk";
-import {Container} from "react-bootstrap";
+import React, {useEffect, useMemo, useState} from 'react';
+import {Map, MapMarker, CustomOverlayMap} from "react-kakao-maps-sdk";
+import {Container, Row} from "react-bootstrap";
 import Loading from "../Loding/Loading";
 import "./KakaoMap.style.css"
+import {useStore} from "../../Hooks/useStore";
+import useKakaoLoader from "./useKakaoLoader";
+import ReSetttingMapBounds from "./ReSetttingMapBounds.jsx";
+import MoveToMyLocation from "./MoveToMyLocation";
+import {MdLocationPin} from "react-icons/md";
+import MyLocationMarkerVisible from "./MyLocationMarkerVisible";
 
 const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/overlay/categoryMarker 다양한 이미지 마커
-// https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
+//https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
+    const [keyword, setKeyword] = useState("");
+    const store = useStore(keyword);
+    const [seeStore, setSeeStore] = useState(null);
+    const [isVisible, setIsVisible] = useState(true);
     /** 현 위치 기반으로 마커 시작*/
     const [state, setState] = useState({
         center: {
@@ -49,8 +59,30 @@ const KakaoMap = () => {
         }
     }, [])
     /**현 위치 기반으로 마커 끝*/
-    // console.log(state);
 
+    /**지도 범위 재설정 시작*/
+    useKakaoLoader()
+    const [points, setPoints] = useState([])
+    /**지도 범위 재설정 끝*/
+
+    const searchStore = () => {
+        const filtered = store.length > 0 && keyword !== "" ? store : null;
+        // console.log("Fuck:", store); //데이터 잘 오는지 확인용
+        setSeeStore(filtered);
+        /**지도 범위 재설정 시작*/
+        if (filtered) {
+            const markerPoints = filtered.map((item) => ({
+                lat: item.y,
+                lng: item.x,
+            }));
+            setPoints(markerPoints);
+        } else {
+            setPoints([]);
+        }
+        /**지도 범위 재설정 끝*/
+        // seeStore = store.length !== 0 ?(keyword === "" ? null : store) : null;
+        // console.log("!Fuck:", seeStore); //데이터 잘 오는지 확인용
+    };
     return (
         state.isLoading ? (
             <div><Loading /></div>
@@ -58,13 +90,25 @@ const KakaoMap = () => {
             <div className="KakaoMap">
                 <nav className="navbar navbar-light">
                     <div className="container-fluid">
+                        {/*<div className="dropdown">*/}
+                        {/*    <button className="btn btn-secondary dropdown-toggle" type="button"*/}
+                        {/*            data-bs-toggle="dropdown" aria-expanded="false">*/}
+                        {/*        구분*/}
+                        {/*    </button>*/}
+                        {/*    <ul className="dropdown-menu">*/}
+                        {/*        <li><a className="dropdown-item" href="#">가게명</a></li>*/}
+                        {/*        <li><a className="dropdown-item" href="#">카테고리</a></li>*/}
+                        {/*        <li><a className="dropdown-item" href="#">음?</a></li>*/}
+                        {/*    </ul>*/}
+                        {/*</div>*/}
                         <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="검색" aria-label="검색"/>
-                            <button className="btn btn-primary" type="submit">검색</button> {/*모바일 환경에서 검색 버튼을 누를까?*/}
+                            <input className="form-control me-2" type="search" id={"searchKeyword"} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="검색" aria-label="검색"/>
+                            <button className="btn btn-primary" type="button" onClick={searchStore}>검색</button>
+                            {/*모바일 환경에서 검색 버튼을 누를까?*/}
                         </form>
                     </div>
                 </nav>
-                <Container className={"NoPadding"} style={{width: '100%' ,height: '100%'}}>
+                <Container className={"NoPadding"} style={{width: '100%', height: '100%'}}>
                     <div className={"KakaoMapBox"}>
                         <div className={"KaKaoMapOverTools"}>
                             <button className="btn btn-primary">착한가게</button>
@@ -80,16 +124,44 @@ const KakaoMap = () => {
                         <Map
                             center={state.center}
                             style={{width: '94%', height: '90%', borderRadius: '10px'}}
-                            level={3}
+                            level={2}
                         >
-                            {!state.isLoading && (
-                                <MapMarker position={state.center}></MapMarker>
-                            )}
+                            {seeStore === null?
+                                <CustomOverlayMap
+                                    position={state.center}
+                                    yAnchor={1}
+                                >
+                                    {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
+                                </CustomOverlayMap>
+                                :
+                                <>
+                                    <CustomOverlayMap
+                                        position={state.center}
+                                        yAnchor={1}
+                                    >
+                                        {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
+                                    </CustomOverlayMap>
+                                    {seeStore.map((item) => (
+                                        // <div>sss</div>
+                                            <MapMarker key={item.id}
+                                                    position={{lat: item.y, lng: item.x}}
+                                                    removable={true}
+                                                    image={{src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                                                    size:{width:24, height: 35}}}
+                                            >{item.placeName}</MapMarker>
+                                ))}
+                                    <ReSetttingMapBounds points={points} />
+                                </>
+                            }
+                            <div className={"KaKaoMapUnderTools"}>
+                                <MoveToMyLocation state={state}/>
+                                <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
+                            </div>
                         </Map>
-                        <div className={"KaKaoMapUnderTools"}>
-                            <button className="btn btn-primary">현위치</button>
-                        </div>
                     </div>
+                    {/*<Row>*/}
+                    {/*    <div>ss</div>*/}
+                    {/*</Row>*/}
                 </Container>
             </div>
         )

@@ -9,8 +9,8 @@ const HomePage = () => {
     const [seeMoney, setSeeMoney] = useState(true);
     const { login } = useContext(LoginContext);
 
-    console.log("Login ",login);
-    console.log("isLogin ",login?.isLogin);
+    // console.log("Login ",login);
+    // console.log("isLogin ",login?.isLogin);
 
     const data = [
         { type: "지출", amount: "7200원", date: "2025-01-03", place: "천안 신부동 고기집" },
