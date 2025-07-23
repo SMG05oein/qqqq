@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./NB.style.css"
@@ -6,15 +6,26 @@ import {CiHome, CiMap} from "react-icons/ci";
 import {IoPersonOutline} from "react-icons/io5";
 import {GoCreditCard} from "react-icons/go";
 import {BsColumns} from "react-icons/bs";
+import GNBPayingBar from "./GNB/GNBPayingBar";
+import {PayingBarOpenContext} from "../State/PayingBarOpenState";
+import { useLocation } from "react-router-dom";
 
 const Gnb = ({isProfile}) => {
+    const [open, setOpen] = useState(false);
+    const {isOpen, setIsOpen} = useContext(PayingBarOpenContext);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location.pathname]);
+
+    // console.log("sda: " ,isOpen);
     return (
         <div className="NB">
             <Container fluid style={{borderRadius: isProfile ? '0px' : '50px 50px 0 0'}}  className="GNB justify-content-center">
                 {isProfile ? null :
-                    <div style={{cursor:"pointer"}} onClick={()=>{alert("기능 미구현")}} className="PayingBar">
-                        <div className={"Paying"}>결제하기</div>
-                    </div>
+                    <GNBPayingBar isOpen={isOpen} setIsOpen={setIsOpen}/>
                 }
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-center align-items-center">

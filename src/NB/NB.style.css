@@ -1,3 +1,10 @@
+.NB{
+    border-radius: 100px 100px 0 0;
+
+}
+.NB.container-fluid{
+    border-radius: 100px 100px 0 0;
+}
 /*Begin TopMenu style*/
 .topMenuBar {
     position: fixed;
@@ -78,21 +85,56 @@
 }
 
 .PayingBar {
+    /*height: 70vh;*/
     background-color: var(--primary);
     text-align: center;
     border-radius: 100px 100px 0 0;
+    /*box-shadow: 0 10px 0 var(--primary);*/
     /*padding: 4px 0;*/
 }
 
 .Paying {
     display: inline-block;
-    /*background-color: #ffffff;*/
     font-weight: 500;
     font-size: 1rem;
     padding: 8px 18px;
     border-radius: 40px;
     text-decoration: none;
-    /*box-shadow: 0 2px 6px rgba(0,0,0,0.1);*/
-    /*transition: background-color 0.2s ease-in-out;*/
 }
+
+/*.PayingUnderBar{*/
+/*    background-color: var(--primary);*/
+/*    overflow: hidden;*/
+/*    transition: height 0.4s ease;*/
+/*}*/
+
+.PayingWrapper {
+    border-radius: 100px 100px 0 0;
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 10s ease;
+}
+
+.PayingWrapper.open {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+.OnePayingBar {
+    border-radius: 100px 100px 0 0;
+    /*transform: translateY(100px);*/
+    /*opacity: 1;*/
+    /*transition: all 10s ease;*/
+}
+
+.PayingUnderBar {
+    /*background-color: var(--primary);*/
+    background: linear-gradient(to bottom, #0EB4FC, #0055A4);
+}
+.PayingUnderBar.open {
+    height: 55vh;
+}
+
+
 /*End GNB style*/
