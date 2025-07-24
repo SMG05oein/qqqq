@@ -1,11 +1,13 @@
 /*Begin F*/
 .GNBPBBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    /*background-color: #f8f9fa;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;            /* 기존 15px에서 줄임 */
+  min-height: 40vh;         /* 화면 높이 일정 비율 확보 */
+  /* background-color: #f8f9fa; */
 }
+
 
 .GNBPBBox .GNBBox {
     background-color: #5d90ff;
@@ -18,11 +20,25 @@
 
 /*End F*/
 
+
 /*Begin T*/
-#qr-reader {
-  border-radius: 12px;
+.qr-reader {
+  width: 100%;
+  max-width: 95vw;          /* 화면 거의 다 쓰게 */
+  height: auto;
+  aspect-ratio: 1 / 1;      /* 정사각형 유지 */
+  margin: 0 auto;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .qr-reader {
+    max-width: 420px;       /* 태블릿 이상에서는 적당한 고정폭 */
+  }
 }
 
 
