@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import LoginProvider from "./State/LoginState";
+import PayingBarOpenState from "./State/PayingBarOpenState";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient();
@@ -14,9 +15,11 @@ root.render(
     <QueryClientProvider client={queryClient}>
         <React.StrictMode>
             <LoginProvider>
-                <BrowserRouter>
-                    <App/>
-                </BrowserRouter>
+                <PayingBarOpenState>
+                    <BrowserRouter>
+                        <App/>
+                    </BrowserRouter>
+                </PayingBarOpenState>
             </LoginProvider>
         </React.StrictMode>
     </QueryClientProvider>

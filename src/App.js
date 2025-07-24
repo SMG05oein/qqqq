@@ -11,6 +11,8 @@ import KakaoMap from "./component/KakaoMap/KakaoMap";
 import {LoginContext, LoginProvider} from "./State/LoginState";
 import Login from "./component/User/Login";
 import SignUp from "./component/User/SignUp";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     const [isProfile, setIsProfile] = useState(false);
