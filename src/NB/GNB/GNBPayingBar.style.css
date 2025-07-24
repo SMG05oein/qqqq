@@ -19,5 +19,11 @@
 /*End F*/
 
 /*Begin T*/
+#qr-reader {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
 
 /*Begin F*/

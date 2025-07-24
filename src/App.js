@@ -6,13 +6,20 @@ import HomePage from "./component/HomePage/HomePage";
 import NotFound from "./component/404NotFound/NotFound";
 import ProfilePage from './component/ProfilePage/ProfilePage';
 import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
-import {useContext, useState} from "react";
+import {useRef, useEffect,useContext, useState} from "react";
 import KakaoMap from "./component/KakaoMap/KakaoMap";
 import {LoginContext, LoginProvider} from "./State/LoginState";
 import Login from "./component/User/Login";
 import SignUp from "./component/User/SignUp";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+//qr
+import { Html5QrcodeScanner } from "html5-qrcode";
+import { PayingBarOpenContext } from './State/PayingBarOpenState';
+
+
+
 
 function App() {
     const [isProfile, setIsProfile] = useState(false);
