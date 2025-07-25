@@ -20,7 +20,7 @@ const GnbPayingBarLoginT = () => {
         scannerRef.current = new Html5QrcodeScanner("qr-reader", {
         fps: 10,
         qrbox: function(viewfinderWidth, viewfinderHeight) {
-            const minEdge = Math.min(viewfinderWidth, viewfinderHeight) * 0.6;
+            const minEdge = Math.min(viewfinderWidth, viewfinderHeight) * 0.8;
             const size = Math.floor(minEdge);
             return { width: size, height: size };
         },
@@ -32,7 +32,7 @@ const GnbPayingBarLoginT = () => {
       scannerRef.current.render(
         (decodedText) => {
           alert(`스캔 성공: ${decodedText}`);
-          scannerRef.current.clear().catch(() => {});
+          // scannerRef.current.clear().catch(() => {});
         },
         (error) => {
           // 실패한 경우는 무시 (console.log만 해도 OK)
@@ -41,11 +41,11 @@ const GnbPayingBarLoginT = () => {
     }
 
     // 언마운트 시 스캐너 제거
-    return () => {
-      if (scannerRef.current) {
-        scannerRef.current.clear().catch(() => {});
-      }
-    };
+    // return () => {
+    //   if (scannerRef.current) {
+    //     scannerRef.current.clear().catch(() => {});
+    //   }
+    // };
   }, [isOpen]);
 
   return (
