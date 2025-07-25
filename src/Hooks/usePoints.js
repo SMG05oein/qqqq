@@ -6,7 +6,11 @@ export const usePoints = (str) => {
     useEffect(() => {
         const fetchPoint = async () => {
             const currentUrl = window.location.href;
-            const url = `http${currentUrl.includes("localhost")?"":"s"}://54.180.25.62:8080/api/users/me/points/${str}`;
+            // const url = `http://54.180.25.62:8080/api/users/me/points/${str}`;
+            const pullAddress =
+                `/api/users/me/${str}`;
+
+            const url = `/.netlify/functions/proxyGet?pullAddress=${encodeURIComponent(pullAddress)}`;
             // console.log(url);
             try {
                 const response = await fetch(url);

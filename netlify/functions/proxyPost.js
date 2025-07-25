@@ -1,4 +1,4 @@
-export async function proxyPost(event, context) {
+export async function handler(event, context) {
     const response = await fetch('http://54.180.25.62:8080/', {
         method: 'POST',
         headers: {
