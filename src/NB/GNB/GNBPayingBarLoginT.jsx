@@ -52,12 +52,12 @@ const GnbPayingBarLoginT = () => {
     <div style={{ display: `${isOpen ? 'flex' : 'none'}` }} className="GNBPBBox">
       <Container fluid>
         <Row className="mb-3">
-          <Col><h5 style={{ color: 'white' }}>QR 결제 스캔</h5></Col>
+          <Col><h5 className={"d-flex justify-content-center align-content-center"} style={{ color: 'white' }}>QR 결제 스캔</h5></Col>
         </Row>
         <Row>
           <Col>
             <div ref={qrRef}>
-              <div id="qr-reader" className="qr-reader"></div>
+              <div id="qr-reader" style={{}} className="qr-reader"></div>
             </div>
           </Col>
         </Row>

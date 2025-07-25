@@ -26,7 +26,7 @@
   width: 100%;
   max-width: 95vw;          /* 화면 거의 다 쓰게 */
   height: auto;
-  aspect-ratio: 1 / 1;      /* 정사각형 유지 */
+  /*aspect-ratio: 1 / 1;      !* 정사각형 유지 *!*/
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
