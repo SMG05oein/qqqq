@@ -1,9 +1,9 @@
 /*Begin F*/
 .GNBPBBox {
-  display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
-  padding: 10px;            /* 기존 15px에서 줄임 */
+  /*padding: 10px;            !* 기존 15px에서 줄임 *!*/
   /*min-height: 40vh;         !* 화면 높이 일정 비율 확보 *!*/
   /* background-color: #f8f9fa; */
 }
