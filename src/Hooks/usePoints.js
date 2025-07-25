@@ -5,7 +5,8 @@ export const usePoints = (str) => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const url = `http://54.180.25.62:8080/api/users/me/points/${str}`;
+            const currentUrl = window.location.href;
+            const url = `http${currentUrl.includes("localhost")?"":"s"}://54.180.25.62:8080/api/users/me/points/${str}`;
             // console.log(url);
             try {
                 const response = await fetch(url);
