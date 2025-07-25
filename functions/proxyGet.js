@@ -1,14 +1,15 @@
+import path from 'path';
 export async function handler(event) {
+    console.log("✅실제 실행 중인 경로:", path.resolve());
+
     // console.log("proxyGet 실행됨", event.queryStringParameters);
     const query = event.queryStringParameters;
 
-    // const { apiAddress,keyword, centerY, centerX, minY, maxY, minX, maxX } = query;
     const { pullAddress } = query;
 
     // const apiUrl = `http://54.180.25.62:8080${apiAddress}?keyword=${keyword}&centerY=${centerY}&centerX=${centerX}&minY=${minY}&maxY=${maxY}&minX=${minX}&maxX=${maxX}`;
     const apiUrl = `http://54.180.25.62:8080${pullAddress}`;
 
-    // console.log("안녕: ",apiUrl);
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
