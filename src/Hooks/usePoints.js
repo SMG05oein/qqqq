@@ -4,7 +4,7 @@ export const usePoints = (str) => {
     const [point, setPoint] = useState([]);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const fetchPoint = async () => {
             const currentUrl = window.location.href;
             const url = `http${currentUrl.includes("localhost")?"":"s"}://54.180.25.62:8080/api/users/me/points/${str}`;
             // console.log(url);
@@ -17,7 +17,7 @@ export const usePoints = (str) => {
             }
         };
 
-        fetchUser();
+        fetchPoint();
     }, [str]);
 
     return point;

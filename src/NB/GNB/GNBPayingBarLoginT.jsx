@@ -38,7 +38,6 @@ const GnbPayingBarLoginT = () => {
 
       scannerRef.current = html5QrCode;
     }
-    console.log(scannerRef.current);
 
     return () => {
       if (scannerRef.current?.isScanning) {
