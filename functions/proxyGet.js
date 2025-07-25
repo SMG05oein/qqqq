@@ -1,8 +1,7 @@
 import path from 'path';
 export async function handler(event) {
-    console.log("✅실제 실행 중인 경로:", path.resolve());
 
-    // console.log("proxyGet 실행됨", event.queryStringParameters);
+    console.log("proxyGet 실행됨", event.queryStringParameters);
     const query = event.queryStringParameters;
 
     const { pullAddress } = query;
