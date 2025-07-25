@@ -23,8 +23,8 @@
 
 /*Begin T*/
 .qr-reader {
-  width: 100%;
-  max-width: 95vw;          /* 화면 거의 다 쓰게 */
+  /*width: 100%;*/
+  max-width: 30vw;          /* 화면 거의 다 쓰게 */
   height: auto;
   aspect-ratio: 1 / 1;      /* 정사각형 유지 */
   margin: 0 auto;
@@ -35,11 +35,11 @@
   transition: all 0.3s ease-in-out;
 }
 
-@media (min-width: 768px) {
-  .qr-reader {
-    max-width: 420px;       /* 태블릿 이상에서는 적당한 고정폭 */
-  }
-}
+/*@media (min-width: 768px) {*/
+/*  .qr-reader {*/
+/*    max-width: 420px;       !* 태블릿 이상에서는 적당한 고정폭 *!*/
+/*  }*/
+/*}*/
 
 
 /*Begin F*/
