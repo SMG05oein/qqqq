@@ -6,6 +6,7 @@ import {IoReorderThreeOutline} from "react-icons/io5";
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {useUser} from "../Hooks/useUser";
 import {LoginContext} from "../State/LoginState";
+import {BiTestTube} from "react-icons/bi";
 
 const TopMenu = () => {
     const user = useUser();
@@ -21,6 +22,7 @@ const TopMenu = () => {
                         {login.isLogin?(<font>{user[login.idx-1]?.name}님</font>):null}
                     </Col>
                     <Col className="d-flex justify-content-end NoPadding">
+                        <Link to="/test"><BiTestTube size={"25"}/></Link>
                         <Link to="#"><IoIosNotificationsOutline size={"25"}/></Link>
                         <Link to="#"><IoReorderThreeOutline size={"25"} /></Link>
                     </Col>
