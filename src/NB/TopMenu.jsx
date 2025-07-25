@@ -4,12 +4,12 @@ import {Link, Outlet} from "react-router-dom";
 import "./NB.style.css"
 import {IoReorderThreeOutline} from "react-icons/io5";
 import {IoIosNotificationsOutline} from "react-icons/io";
-import {useUser} from "../Hooks/useUser";
+import {useTestUser} from "../Hooks/useTestUser";
 import {LoginContext} from "../State/LoginState";
 import {BiTestTube} from "react-icons/bi";
 
 const TopMenu = () => {
-    const user = useUser();
+    const user = useTestUser();
     const { login } = useContext(LoginContext);
     // console.log(login);
     // console.log(user[login.idx-1]);

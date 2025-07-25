@@ -2,12 +2,12 @@ import React, {useContext, useEffect} from 'react';
 import './ProfilePage.style.css';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import {LoginContext} from "../../State/LoginState";
-import {useUser} from "../../Hooks/useUser";
+import {useTestUser} from "../../Hooks/useTestUser";
 import Loading from "../Loding/Loading";
 
 const ProfilePage = ({setIsProfile}) => {
     const { login ,setLogin } = useContext(LoginContext);
-    const user = useUser();
+    const user = useTestUser();
     // console.log(user);
 
     useEffect(()=>{

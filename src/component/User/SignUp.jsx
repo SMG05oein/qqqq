@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {useUser} from "../../Hooks/useUser";
+import {useTestUser} from "../../Hooks/useTestUser";
 import {LoginContext} from "../../State/LoginState";
 import "./Login.style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,7 +28,7 @@ const SignUp = ({setIsProfile}) => {
     const passwdRef = useRef(null);
     const passwdOkRef = useRef(null);
     const navigate = useNavigate();
-    const user = useUser();
+    const user = useTestUser();
     let str = "";
 
     const handleSubmit = (event) => {
