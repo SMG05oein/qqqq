@@ -15,9 +15,10 @@ const GnbPayingBar = ({setIsOpen, isOpen}) => {
             </div>
             <div className={`PayingUnderBar d-flex justify-content-center align-content-center ${isOpen ? 'open' : ''}`} style={{display:`${isOpen ? 'block' : 'none'}`}}>
                 {login.idx===0 || login.idx===undefined?
-                    <GNBPayingBarLoginF isOpen={isOpen}/>
+                    <GNBPayingBarLoginT isOpen={isOpen}/>
                     :
-                    <GNBPayingBarLoginT isOpen={isOpen}/>}
+                    <GNBPayingBarLoginF isOpen={isOpen}/>
+                }
             </div>
         </div>
 );
