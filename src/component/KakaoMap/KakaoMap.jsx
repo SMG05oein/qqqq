@@ -154,7 +154,7 @@ const KakaoMap = () => {
                                 </>
                             }
                             <div className={"KaKaoMapUnderTools"}>
-                                <MoveToMyLocation state={state}/>
+                                <MoveToMyLocation state={state} setIsVisible={setIsVisible}/>
                                 <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
                             </div>
                         </Map>
