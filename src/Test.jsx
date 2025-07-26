@@ -8,8 +8,8 @@ import {Map, MapMarker, Polyline} from "react-kakao-maps-sdk";
 const Test = () => {
     const [str, setStr] = useState("");
     const WhatIsThis = ["balance", "transactions", "cancel", "charge", "pay"];
-    const WhoIsThis = ["/me", "/", ""];
-    const points = usePoints(str);
+    const WhoIsThis = ["/me", "/1", ""];
+    // const points = usePoints(str);
     const user = useUser(str);
     // const load = useSearchLoad();
     const TestShift = (num) => {
@@ -30,9 +30,9 @@ const Test = () => {
     };
 
     useEffect(() => {
-        console.log("points:", points);
+        // console.log("points:", points);
         console.log("user:", user);
-    }, [points, user]);
+    }, [/*points,*/ user]);
 
 
 

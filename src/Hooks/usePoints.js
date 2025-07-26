@@ -5,7 +5,6 @@ export const usePoints = (str) => {
 
     useEffect(() => {
         const fetchPoint = async () => {
-            const currentUrl = window.location.href;
             // const url = `http://54.180.25.62:8080/api/users/me/points/${str}`;
             const pullAddress =
                 `/api/users/me/${str}`;

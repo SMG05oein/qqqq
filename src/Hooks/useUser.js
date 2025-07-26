@@ -8,7 +8,7 @@ export const useUser = (str) => {
     useEffect(() => {
         const fetchUser = async () => {
             const pullAddress =
-                `/api/users${str}`;
+                `/api/users/me/${str}`;
 
             const url = `/.netlify/functions/proxyGet?pullAddress=${encodeURIComponent(pullAddress)}`;
 
