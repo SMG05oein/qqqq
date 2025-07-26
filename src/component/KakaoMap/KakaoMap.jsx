@@ -15,6 +15,7 @@ const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
     const [keyword, setKeyword] = useState("");
     const store = useStore(keyword);
+    console.log(store? store : null);
     const [seeStore, setSeeStore] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     /** 현 위치 기반으로 마커 시작*/
@@ -90,17 +91,6 @@ const KakaoMap = () => {
             <div className="KakaoMap">
                 <nav className="navbar navbar-light">
                     <div className="container-fluid">
-                        {/*<div className="dropdown">*/}
-                        {/*    <button className="btn btn-secondary dropdown-toggle" type="button"*/}
-                        {/*            data-bs-toggle="dropdown" aria-expanded="false">*/}
-                        {/*        구분*/}
-                        {/*    </button>*/}
-                        {/*    <ul className="dropdown-menu">*/}
-                        {/*        <li><a className="dropdown-item" href="#">가게명</a></li>*/}
-                        {/*        <li><a className="dropdown-item" href="#">카테고리</a></li>*/}
-                        {/*        <li><a className="dropdown-item" href="#">음?</a></li>*/}
-                        {/*    </ul>*/}
-                        {/*</div>*/}
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" id={"searchKeyword"} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="검색" aria-label="검색"/>
                             <button className="btn btn-primary" type="button" onClick={searchStore}>검색</button>
@@ -148,7 +138,7 @@ const KakaoMap = () => {
                                                     removable={true}
                                                     image={{src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
                                                     size:{width:24, height: 35}}}
-                                            >{item.placeName}</MapMarker>
+                                            ></MapMarker>
                                 ))}
                                     <ReSetttingMapBounds points={points} />
                                 </>
