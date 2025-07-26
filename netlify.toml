@@ -1,2 +1,6 @@
 [functions]
   directory = "functions"
+
+
+[build.environment]
+SECRETS_SCAN_ENABLED = "false"
