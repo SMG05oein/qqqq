@@ -135,7 +135,7 @@ const HomePage = () => {
                                                     <div className={"SeeMoney"}>
                                                         <div>잔액</div>
                                                         <div>
-                                                            {seeMoney ? `${Number(1000000000000000000000000000000).toLocaleString()}원` : '숨김'}
+                                                            {seeMoney ? `${Number(100000).toLocaleString()}원` : '숨김'}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -143,10 +143,19 @@ const HomePage = () => {
                                             <div className={"MoreBtn"} onClick={()=>{setSeeMoney(!seeMoney)}}><FaPlus/>&nbsp;잔액 보기</div>
                                         </Col>
                                     </Row>
-                                    <Row>
-                                        <Col className={"d-flex justify-content-center align-content-center"}><Link to={"/"}><FaCreditCard/> 카드관리</Link></Col>
-                                        <Col className={"d-flex justify-content-center align-content-center"}><Link to={"/"}><FaWonSign/> 충전</Link></Col>
-                                    </Row>
+                                    <Row className="g-0 p-0 m-0">
+                                        <Col className="p-0">
+                                            <div className="rounded-box left-rounded w-100">
+                                            <Link to="/card" className="d-block text-center w-100"><FaCreditCard /> 카드관리</Link>
+                                            </div>
+                                        </Col>
+                                        <Col className="p-0">
+                                            <div className="rounded-box right-rounded w-100">
+                                            <Link to="/charge" className="d-block text-center w-100"><FaWonSign /> 충전</Link>
+                                            </div>
+                                        </Col>
+                                        </Row>
+
                                 </div>
                             </Row>
 
