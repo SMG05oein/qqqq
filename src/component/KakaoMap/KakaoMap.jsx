@@ -144,6 +144,7 @@ const KakaoMap = () => {
                                     <MoveToMyLocation state={state} setIsVisible={setIsVisible}/>
                                     <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
                                     {seeStore === null ? null : <ReSetttingMapBounds points={points} /> }
+
                                 </div>
                             </Map>
                         </div>

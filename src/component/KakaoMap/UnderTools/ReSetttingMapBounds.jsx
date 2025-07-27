@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo} from 'react';
 import {useMap} from "react-kakao-maps-sdk";
+import {RiResetRightLine} from "react-icons/ri";
 /* global kakao */
 
 const ReSetttingMapBounds = ({points}) => {
@@ -28,7 +29,7 @@ const ReSetttingMapBounds = ({points}) => {
                 }
                 map.setBounds(bounds)
             }}>
-                지도 범위 재설정 하기
+                지도 범위&nbsp;<RiResetRightLine />
             </button>
         </div>
     )
