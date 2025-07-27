@@ -102,6 +102,37 @@
     text-decoration: none;
 }
 
+.gnb-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+    height: 100%;
+}
+
+.gnb-link svg {
+    font-size: 20px;
+    margin-bottom: 2px;
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.gnb-link.active {
+    color: #0055A4;
+    font-weight: 700;
+}
+
+.gnb-link.active svg {
+    color: #0055A4;
+}
+
+
 /*.PayingUnderBar{*/
 /*    background-color: var(--primary);*/
 /*    overflow: hidden;*/
