@@ -12,11 +12,11 @@ const GnbPayingBarLoginF = () => {
             <div className="GNBBox">
                 <Container fluid>
                     <Row className="text-center mb-2">
-                        <Col>아직 로그인되지 않았습니다</Col>
+                        <Col style={{ fontWeight: 'bold' }}>아직 로그인되지 않았습니다</Col>
                     </Row>
                     <Row className="text-center">
-                        <Col><Link to={"/profile"} style={{color:'white'}} className={"btn btn-outline-dark"}>로그인</Link></Col>
-                        <Col><Link to={"/signUp"} style={{color:'white'}} className={"btn btn-outline-dark"}>회원가입</Link></Col>
+                        <Col><Link to={"/profile"} style={{color:'black',fontWeight: 'bold'}} className={"btn btn-outline-dark"}>로그인</Link></Col>
+                        <Col><Link to={"/signUp"} style={{color:'black',fontWeight: 'bold'}} className={"btn btn-outline-dark"}>회원가입</Link></Col>
                     </Row>
                 </Container>
             </div>
