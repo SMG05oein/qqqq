@@ -18,7 +18,10 @@ const TopMenu = () => {
             <Container fluid  className="topMenuBar justify-content-center NoPadding">
                 <Row style={{margin: "10px 0px 10px 0px"}}>
                     <Col className="d-flex justify-content-left">
-                        <Link className={"NoPadding"} to="/"><Image style={{height: '40px'}} src={"CheonanLogo.png"} alt={"천안시 로고"}/></Link>
+                        <Link className={"NoPadding"} to="/"><div className='logo-pill'><Image className={"logo-img"} src={"CheonanLogo.png"} alt={"천안시 로고"}/>
+                        <span className="logo-text"> | 디소상</span>
+                        </div>
+                        </Link>
                         {login.isLogin?(<font>{user[login.idx-1]?.name}님</font>):null}
                     </Col>
                     <Col className="d-flex justify-content-end NoPadding">
