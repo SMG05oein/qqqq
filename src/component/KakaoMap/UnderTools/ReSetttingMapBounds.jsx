@@ -20,11 +20,17 @@ const ReSetttingMapBounds = ({points}) => {
     }, [bounds]);
 
     return (
-        <p>
-            <button className={"btn btn-dark"} style={{marginTop:'20px'}} onClick={() => map.setBounds(bounds)}>
+        <div>
+            <button className={"btn btn-primary"} onClick={() => {
+                if(points.length === 0) {
+                    alert("검색된 장소가 없습니다!");
+                    return;
+                }
+                map.setBounds(bounds)
+            }}>
                 지도 범위 재설정 하기
             </button>
-        </p>
+        </div>
     )
 };
 
