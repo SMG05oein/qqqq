@@ -7,21 +7,8 @@ const StoreMarkerPin = ({item}) => {
     const [tempStr, setTempStr] = useState(null);
     const map = useMap()
 
-    // useEffect(() => {
-    //     // moveCenterStore(marker);
-    //
-    // }, [isInfoWindow]);
-
-    useEffect(() => {
-        // if (tempStr) {
-        //     console.log("tempStr: ", tempStr.getPosition());
-        // }
-        moveCenterStore(tempStr);
-    }, [isInfoWindow]);
-
-
     const moveCenterStore = (marker) => {
-        map.panTo(marker.getPosition())
+        map.panTo(marker?.getPosition())
     }
 
 
@@ -34,9 +21,6 @@ const StoreMarkerPin = ({item}) => {
                        image={{src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
                            size:{width:24, height: 35}}}
                        onClick={(marker) => {
-                           setTempStr(marker);
-                           // console.log(marker);
-                           // console.log(tempStr);
                            moveCenterStore(marker)
                            setIsInfoWindow(!isInfoWindow)
                        }}
