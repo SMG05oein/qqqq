@@ -58,11 +58,17 @@
     transition: all 0.2s ease-in-out;
 }
 
-/* .topMenuBar a:hover {
-    color: #007bff;
-    background-color: #f2f2f2;
-    border-radius: 6px;
-} */
+
+/*----유저네임 꾸미기----*/
+.user-name {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-left: 8px;
+  text-align: center;
+}
+
+
 /*End TopMenu style*/
 
 /*-----------------------*/
