@@ -9,13 +9,14 @@ import ReSetttingMapBounds from "./UnderTools/ReSetttingMapBounds.jsx";
 import MoveToMyLocation from "./UnderTools/MoveToMyLocation";
 import {MdLocationPin} from "react-icons/md";
 import MyLocationMarkerVisible from "./UnderTools/MyLocationMarkerVisible";
+import StoreMarkerPin from "./storeMarkerPin/StoreMarkerPin";
 
 const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/overlay/categoryMarker 다양한 이미지 마커
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
     const [keyword, setKeyword] = useState("");
-    const store = useStore(keyword);
-    console.log(store? store : null);
+    const [searchKeyword, setSearchKeyword] = useState("");
+    const store = useStore(searchKeyword);
     const [seeStore, setSeeStore] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     /** 현 위치 기반으로 마커 시작*/
@@ -27,6 +28,10 @@ const KakaoMap = () => {
         errMsg: null,
         isLoading: true,
     })
+
+    useEffect(()=>{
+        searchStore();
+    }, [store]);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -68,7 +73,6 @@ const KakaoMap = () => {
 
     const searchStore = () => {
         const filtered = store.length > 0 && keyword !== "" ? store : null;
-        // console.log("Fuck:", store); //데이터 잘 오는지 확인용
         setSeeStore(filtered);
         /**지도 범위 재설정 시작*/
         if (filtered) {
@@ -80,10 +84,12 @@ const KakaoMap = () => {
         } else {
             setPoints([]);
         }
+
         /**지도 범위 재설정 끝*/
         // seeStore = store.length !== 0 ?(keyword === "" ? null : store) : null;
         // console.log("!Fuck:", seeStore); //데이터 잘 오는지 확인용
     };
+
     return (
         state.isLoading ? (
             <div><Loading /></div>
@@ -93,7 +99,7 @@ const KakaoMap = () => {
                     <div className="container-fluid">
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" id={"searchKeyword"} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="검색" aria-label="검색"/>
-                            <button className="btn btn-primary" type="button" onClick={searchStore}>검색</button>
+                            <button className="btn btn-primary" type="button" id={"searchBtn"} onClick={searchStore}>검색</button>
                             {/*모바일 환경에서 검색 버튼을 누를까?*/}
                         </form>
                     </div>
@@ -102,8 +108,8 @@ const KakaoMap = () => {
                     <div className={"KakaoMapBox"}>
                         <div className={"KaKaoMapOverTools"}>
                             <button className="btn btn-primary">착한가게</button>
-                            <button className="btn btn-primary">음식점</button>
-                            <button className="btn btn-primary">카페</button>
+                            <button className="btn btn-primary" onClick={()=>{setKeyword("음식점"); setSearchKeyword("음식점")}}>음식점</button>
+                            <button className="btn btn-primary" onClick={()=>{setKeyword("카페"); setSearchKeyword("카페")}}>카페</button>
                             <button className="btn btn-primary">~</button>
                             <button className="btn btn-primary">~</button>
                             <button className="btn btn-primary">~</button>
@@ -114,31 +120,19 @@ const KakaoMap = () => {
                         <Map
                             center={state.center}
                             style={{width: '94%', height: '90%', borderRadius: '10px'}}
-                            level={2}
+                            level={2} draggable={true}
                         >
                             {seeStore === null?
-                                <CustomOverlayMap
-                                    position={state.center}
-                                    yAnchor={1}
-                                >
+                                <CustomOverlayMap position={state.center} yAnchor={1}>
                                     {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
                                 </CustomOverlayMap>
                                 :
                                 <>
-                                    <CustomOverlayMap
-                                        position={state.center}
-                                        yAnchor={1}
-                                    >
+                                    <CustomOverlayMap position={state.center} yAnchor={1}>
                                         {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
                                     </CustomOverlayMap>
-                                    {seeStore.map((item) => (
-                                        // <div>sss</div>
-                                            <MapMarker key={item.id}
-                                                    position={{lat: item.y, lng: item.x}}
-                                                    removable={true}
-                                                    image={{src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                                                    size:{width:24, height: 35}}}
-                                            ></MapMarker>
+                                    {seeStore?.map((item) => (
+                                        <StoreMarkerPin item={item} key={item.id} />
                                 ))}
                                     <ReSetttingMapBounds points={points} />
                                 </>
@@ -149,9 +143,6 @@ const KakaoMap = () => {
                             </div>
                         </Map>
                     </div>
-                    {/*<Row>*/}
-                    {/*    <div>ss</div>*/}
-                    {/*</Row>*/}
                 </Container>
             </div>
         )
