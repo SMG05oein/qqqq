@@ -1,5 +1,6 @@
 import React from 'react';
 import {useMap} from "react-kakao-maps-sdk";
+import {BiCurrentLocation} from "react-icons/bi";
 /* global kakao */
 
 const MoveToMyLocation = ({state, setIsVisible}) => {
@@ -13,7 +14,7 @@ const MoveToMyLocation = ({state, setIsVisible}) => {
                         setIsVisible(true);
                         map.panTo(moveLatLon);
                     }}
-            >현위치</button>
+            ><BiCurrentLocation /></button>
         </div>
     );
 };
