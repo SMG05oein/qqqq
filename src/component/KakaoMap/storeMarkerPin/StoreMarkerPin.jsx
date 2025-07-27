@@ -21,7 +21,7 @@ const StoreMarkerPin = ({item}) => {
                        removable={true}
                        clickable={true}
                        image={{src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                           size:{width:24, height: 35}}}
+                           size:{width:isInfoWindow?24:20, height: isInfoWindow?35:30}}}
                        onClick={(marker) =>
                            moveCenterStore(marker)
                        }
