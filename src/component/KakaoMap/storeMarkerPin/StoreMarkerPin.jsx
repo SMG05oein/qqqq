@@ -4,11 +4,13 @@ import {MapMarker, useMap} from "react-kakao-maps-sdk";
 
 const StoreMarkerPin = ({item}) => {
     const [isInfoWindow, setIsInfoWindow] = useState(false);
-    const [tempStr, setTempStr] = useState(null);
     const map = useMap()
 
     const moveCenterStore = (marker) => {
+        setIsInfoWindow(prev => !prev);
+        setTimeout(() => {
         map.panTo(marker?.getPosition())
+        }, 0)
     }
 
 
@@ -20,10 +22,9 @@ const StoreMarkerPin = ({item}) => {
                        clickable={true}
                        image={{src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
                            size:{width:24, height: 35}}}
-                       onClick={(marker) => {
+                       onClick={(marker) =>
                            moveCenterStore(marker)
-                           setIsInfoWindow(!isInfoWindow)
-                       }}
+                       }
             >{isInfoWindow ? item.placeName : null}</MapMarker>
         </div>
     );

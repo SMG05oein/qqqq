@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useMap} from "react-kakao-maps-sdk";
 /* global kakao */
 
@@ -12,6 +12,12 @@ const ReSetttingMapBounds = ({points}) => {
         })
         return bounds
     }, [points])
+
+    useEffect(() => {
+        if (points.length > 0) {
+            map.setBounds(bounds);
+        }
+    }, [bounds]);
 
     return (
         <p>
