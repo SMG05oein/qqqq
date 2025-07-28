@@ -98,134 +98,145 @@ const HomePage = () => {
   const resetView = () => setVisibleCount(3);
 
   return (
-    <div className="HomePage">
-      <Container>
-        <Row>
-          <div className={"Banner"}>
-            <Col xs={8}><span>사용이 처음이신가요?</span></Col>
-            <Col xs={4}><div onClick={() => alert("가이드 웹사이트로 이동")} className={"GuideBox"}>가이드 <br />보러가기</div></Col>
+  <div className="HomePage">
+    <Container>
+
+      {/* 배너 영역 */}
+      <Row>
+        <div className="Banner">
+          <Col xs={8}>
+            <span>사용이 처음이신가요?</span>
+          </Col>
+          <Col xs={4}>
+            <div onClick={() => alert("가이드 웹사이트로 이동")} className="GuideBox">
+              가이드 <br />보러가기
+            </div>
+          </Col>
+        </div>
+      </Row>
+
+      {/* 로그인 여부 분기 */}
+      {!login?.isLogin ? (
+        <Row className="NotFlex">
+          <div className="HomeBox">
+            <Row>
+              <Col>
+                <div className="fs-4 text-center">아직 로그인 전입니다</div>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="text-center">
+                <div>계정이 있으신가요? </div>
+                <Link to="/profile">로그인</Link>
+              </Col>
+              <Col className="text-center">
+                <div>계정이 없으신가요? </div>
+                <Link to="/signUp">회원가입</Link>
+              </Col>
+            </Row>
           </div>
         </Row>
-
-        {!login?.isLogin ? (
-          <Row className={"NotFlex"}>
-            <div className={"HomeBox"}>
-              <Row><Col><div className={"fs-4 text-center"}>아직 로그인 전입니다</div></Col></Row>
-              <Row>
-                <Col className="text-center"><div>계정이 있으신가요? </div><Link to={"/profile"}>로그인</Link></Col>
-                <Col className="text-center"><div>계정이 없으신가요? </div><Link to={"/signUp"}>회원가입</Link></Col>
+      ) : (
+        <>
+          {/* 카드 정보 박스 */}
+          <Row className="NotFlex">
+            <div className="HomeCardBanner">
+              <Row className="align-items-center">
+                <Col xs={5} className="text-center">
+                  <Image height="140px" src="CheonanLoveCard.png" alt="천안사랑카드" />
+                </Col>
+                <Col xs={7}>
+                  <div className="MyCheonanCard">나의 천안 사랑카드</div>
+                  <div className="CardInfo">
+                    <div className="Money">
+                      {seeMoney
+                        ? balance !== null
+                          ? `${Number(balance).toLocaleString()}원`
+                          : "불러오는 중..."
+                        : "숨김"}
+                    </div>
+                    <div className="MoreBtn" onClick={() => setSeeMoney(!seeMoney)}>
+                      <FaPlus /> 잔액 보기
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              <Row className="g-0">
+                <Col className="p-0">
+                  <div className="rounded-box left-rounded">
+                    <Link to="/card" className="text-center w-100">💳 카드관리</Link>
+                  </div>
+                </Col>
+                <Col className="p-0">
+                  <div className="rounded-box right-rounded">
+                    <button onClick={handlePayment} className="bg-transparent border-0 w-100">💰 충전</button>
+                  </div>
+                </Col>
               </Row>
             </div>
           </Row>
-        ) : (
-          <>
-            {/* 카드 상단 */}
-            <Row className={"NotFlex"}>
-              <div className={"HomeCardBanner"}>
-                <Row style={{ marginBottom: "10px" }}>
-                  <Col xs={5} className="d-flex justify-content-center align-content-center">
-                    <Image height={'160px'} src={"CheonanLoveCard.png"} alt={"천안사랑카드"} />
-                  </Col>
-                  <Col xs={7}>
-                    <div className={"MyCheonanCard"}>나의 천안 사랑카드</div>
-                    <div className={"CardInfo"}>
-                      <div className={"Money"}>
-                        <div className={"SeeMoney"}>
-                          <div>잔액</div>
-                          <div>{seeMoney ? (balance !== null ? `${Number(balance).toLocaleString()}원` : '불러오는 중...') : '숨김'}</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={"MoreBtn"} onClick={() => setSeeMoney(!seeMoney)}><FaPlus />&nbsp;잔액 보기</div>
-                  </Col>
-                </Row>
-                <Row className="g-0 p-0 m-0">
-                  <Col className="p-0">
-                    <div className="rounded-box left-rounded w-100">
-                      <Link to="/card" className="d-block text-center w-100 py-2 fw-bold">
-                        <FaCreditCard /> 카드관리
-                      </Link>
-                    </div>
-                  </Col>
-                  <Col className="p-0">
-                    <div className="rounded-box right-rounded w-100">
-                      <button onClick={handlePayment} className="d-block text-center w-100 py-2 fw-bold border-0 bg-transparent">
-                        <FaWonSign /> 충전
-                      </button>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Row>
 
-            {/* 이용내역 표 */}
-            <Row className={"NotFlex"}>
-              <div className={"HomeBox"}>
-                <Row><Col><div className={"fs-5"}>이용내역</div></Col></Row>
-                <Row>
-                  <Table className={"NoMargin"} striped bordered hover>
-                    <thead className="thead-light">
-                      <tr className="text-center">
-                        <th>구분</th>
-                        <th>지불 금액</th>
-                        <th>장소</th>
-                        <th>사용날짜</th>
-                        <th>취소</th>
+          {/* 이용내역 표 형식 */}
+          <Row className="NotFlex">
+            <div className="HomeBox">
+              <Row>
+                <Col>
+                  <div className="fs-5">이용내역</div>
+                </Col>
+              </Row>
+              <Row>
+                <Table className="NoMargin" striped bordered hover>
+                  <thead className="thead-light">
+                    <tr className="text-center">
+                      <th>구분</th>
+                      <th>지불 금액</th>
+                      <th>장소</th>
+                      <th>사용날짜</th>
+                      <th>취소</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-center">
+                    {transactions.slice(0, visibleCount).map((item, idx) => (
+                      <tr key={idx}>
+                        <td>{item.type}</td>
+                        <td>{Number(item.amount).toLocaleString()}원</td>
+                        <td>{item.place}</td>
+                        <td>{item.date}</td>
+                        <td>
+                          {item.type === "지출" && (
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() => handleCancel(item.ptId)}
+                            >
+                              취소
+                            </Button>
+                          )}
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody className="text-center">
-                      {transactions.slice(0, visibleCount).map((item, idx) => (
-                        <tr key={idx}>
-                          <td>{item.type}</td>
-                          <td>{Number(item.amount).toLocaleString()}원</td>
-                          <td>{item.place}</td>
-                          <td>{item.date}</td>
-                          <td>
-                            {item.type === "지출" && (
-                              <Button variant="danger" size="sm" onClick={() => handleCancel(item.ptId)}>취소</Button>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                  <div className="d-flex justify-content-center gap-3 mt-2">
-                    {visibleCount < transactions.length && <Button variant="outline-primary" onClick={showMore}>더보기</Button>}
-                    {visibleCount < transactions.length && <Button variant="outline-success" onClick={showAll}>전체보기</Button>}
-                    {visibleCount > 3 && <Button variant="outline-danger" onClick={resetView}>닫기</Button>}
-                  </div>
-                </Row>
-              </div>
-            </Row>
-
-            {/* 카드 형식 내역 */}
-            <Row className={"NotFlex"}>
-              <div className={"HomeBox"}>
-                <Row style={{ marginBottom: "20px" }}>
-                  <Col><div className={"fs-5"}>이용내역</div></Col>
-                </Row>
-                <Row>
-                  <div className="CardSlider">
-                    {transactions.map((item, idx) => (
-                      <div className="UsageCard text-center" key={idx}>
-                        <h5>구분: {item.type}</h5>
-                        <div>금액: {Number(item.amount).toLocaleString()}원</div>
-                        <div>장소: {item.place}</div>
-                        <div>날짜: {item.date}</div>
-                        {item.type === "지출" && (
-                          <Button variant="outline-danger" size="sm" className="mt-2" onClick={() => handleCancel(item.ptId)}>취소</Button>
-                        )}
-                      </div>
                     ))}
-                  </div>
-                </Row>
-              </div>
-            </Row>
-          </>
-        )}
-      </Container>
-    </div>
-  );
+                  </tbody>
+                </Table>
+                <div className="d-flex justify-content-center gap-3 mt-2">
+                  {visibleCount < transactions.length && (
+                    <>
+                      <Button variant="outline-primary" onClick={showMore}>더보기</Button>
+                      <Button variant="outline-success" onClick={showAll}>전체보기</Button>
+                    </>
+                  )}
+                  {visibleCount > 3 && (
+                    <Button variant="outline-danger" onClick={resetView}>닫기</Button>
+                  )}
+                </div>
+              </Row>
+            </div>
+          </Row>
+        </>
+      )}
+    </Container>
+  </div>
+);
+
 };
 
 export default HomePage;
