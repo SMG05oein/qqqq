@@ -54,7 +54,7 @@ const Gnb = ({isProfile}) => {
                     </Col>
                     <Col className="d-flex justify-content-center align-items-center">
                         <Link to="/profile" className={`gnb-link ${isCurrent('/profile') ? 'active' : ''}`}>
-                            {isCurrent('/profile') ? <IoPerson/> : <IoPersonOutline/>}<br/>프로필
+                            {isCurrent('/profile') ? <IoPerson/> : <IoPersonOutline/>}<br/>프로필?
                         </Link>
                     </Col>
                 </Row>
