@@ -17,7 +17,8 @@ const SeeStore2 = ({store, setStoreClick, setNavigate, setTemp, temp, storeClick
             <div className="storeName d-flex justify-content-between align-items-center">
                 <div>이름: {store.placeName}</div>
                 <button className={"btn btn-primary"} onClick={() => {
-                    setKaLngLat({lat: store.y, lng: store.x});setNavigate(true);
+                    setKaLngLat({lat: store.y, lng: store.x});setNavigate(p=>!p);
+                    // window.location.href="https://map.kakao.com/?sName=강남역&eName=서울역"
                 }
                 }>길찾기</button>
             </div>
