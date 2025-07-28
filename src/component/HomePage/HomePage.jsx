@@ -1,38 +1,93 @@
+//HomePage.jsx
 import React, {useContext, useState} from 'react';
 import {Button, Col, Container, Image, Row, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./HomePage.style.css"
 import {FaCreditCard, FaPlus, FaWonSign} from "react-icons/fa";
 import {LoginContext} from "../../State/LoginState";
-import GNBPayingBarLoginT from '../../NB/GNB/GNBPayingBarLoginT';
+import axios from 'axios';
+
 const TOSS_CLIENT_KEY = process.env.REACT_APP_TOSS_CLIENT_KEY;
 
 const HomePage = () => {
     const [seeMoney, setSeeMoney] = useState(true);
     const { login } = useContext(LoginContext);
 
+
+    const handlePayment = () => {
+        if (!window.TossPayments) {
+            alert("TossPayments SDK가 로드되지 않았습니다.");
+            return;
+        }
+
+        const tossPayments = window.TossPayments(process.env.REACT_APP_TOSS_CLIENT_KEY);
+
+        tossPayments.requestPayment('카드', {
+            amount: 5000,
+            orderId: `order_${Date.now()}`,
+            orderName: '포인트 충전',
+            customerName: login?.id || '비로그인',
+            successUrl: `${window.location.origin}/charge`,
+            failUrl: `${window.location.origin}/payment-fail`,
+            onSuccess: (res) => {
+            const { paymentKey, orderId, amount } = res;
+            const userId = login?.id;
+
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/confirm-payment`, {
+                paymentKey,
+                orderId,
+                amount,
+                userId,
+            })
+            .then(() => {
+                alert("✅ 포인트 충전 성공!");
+                window.location.href = '/'; // 또는 navigate('/')
+            })
+            .catch(err => {
+                console.error("❌ 백엔드 전송 실패", err);
+                alert("⚠️ 서버에 결제 정보 전달 실패!");
+            });
+            }
+        });
+        };
+    
+
     // console.log("Login ",login);
     // console.log("isLogin ",login?.isLogin);
 
       //포인트충전용 토스페이먼츠
       
-      const handlePayment = () => {
-        const tossPayments = window.TossPayments(TOSS_CLIENT_KEY);
+    //   const handlePayment = () => {
+    //     const tossPayments = window.TossPayments(TOSS_CLIENT_KEY);
     
-        tossPayments.requestPayment('카드', {
-            amount: 5000,
-            orderId: `order_${Date.now()}`,
-            orderName: '포인트 충전',
-            customerName: '고객명',
-            successUrl: `${window.location.origin}/payment-success`,
-            failUrl: `${window.location.origin}/payment-fail`,
-        });
+    //     tossPayments.requestPayment('카드', {
+    //         amount: 5000,
+    //         orderId: `order_${Date.now()}`,
+    //         orderName: '포인트 충전',
+    //         customerName: '고객명',
+    //         successUrl: `${window.location.origin}/payment-success`,
+    //         failUrl: `${window.location.origin}/payment-fail`,
+    //     });
+
+    // 🔁 HomePage.jsx 상단에 다음 추가:
+    // const handlePayment = () => {
+    // const tossPayments = window.TossPayments(process.env.REACT_APP_TOSS_CLIENT_KEY);
+    // tossPayments.requestPayment('카드', {
+    //     amount: 5000,
+    //     orderId: `order_${Date.now()}`,
+    //     orderName: '포인트 충전',
+    //     customerName: login?.id || '비로그인',
+    //     successUrl: `${window.location.origin}/payment-success`,
+    //     failUrl: `${window.location.origin}/payment-fail`
+    // });
+    // };
+
 
     
-      return (
-        <button onClick={handlePayment}>충전하기</button>
-      );
-    };
+    //   return (
+    //     <button onClick={handlePayment}>충전하기</button>
+    //   );
+    // };
 
     const data = [
         { type: "지출", amount: "7200원", date: "2025-01-03", place: "천안 신부동 고기집" },

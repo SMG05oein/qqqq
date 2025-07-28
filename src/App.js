@@ -1,3 +1,4 @@
+//app.js
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import GNB from "./NB/GNB";
@@ -16,6 +17,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PaymentSuccess from './payments/PaymentSuccess';
 import PaymentFail from './payments/PaymentFail';
 import TossPaymentPage from './payments/TossPaymentPage';
+import TossPaymentCharge from './payments/TossPaymentCharge';
+
 
 
 
@@ -48,9 +51,12 @@ function App() {
                 <Route path="/test" element={<Test/>}/>
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />
-                <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-fail" element={<PaymentFail />} />
+                {/* <Route path="//charge" element={<PaymentSuccess />} />
+                
                 <Route path="/charge" element={<TossPaymentPage />} />
+                <Route path="/charge" element={<TossPaymentCharge />} /> */}
+                <Route path="/charge" element={<TossPaymentCharge />} />
             </Routes>
         </div>
     );
