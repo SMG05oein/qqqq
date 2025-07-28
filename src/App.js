@@ -69,6 +69,7 @@ function MainApp() {
         {/* 기타 단일 경로들 */}
         <Route path="/test" element={<Test />} />
         <Route path="/payment-fail" element={<PaymentFail />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/charge" element={<TossPaymentCharge />} />
         <Route path="/pay" element={<QrPayPage />} />
 
