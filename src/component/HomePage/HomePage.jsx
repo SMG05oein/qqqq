@@ -6,6 +6,13 @@ import { FaCreditCard, FaPlus, FaWonSign } from "react-icons/fa";
 import { LoginContext } from "../../State/LoginState";
 import axios from 'axios';
 
+// ✅ 프론트엔드에서 고유 주문 ID를 생성하는 함수 (테스트 코드 스타일)
+const generateOrderId = () => {
+  const timestamp = new Date().getTime();
+  const randomString = Math.random().toString(36).substring(2, 10);
+  return `charge_${timestamp}_${randomString}`;
+};
+
 
 const TOSS_CLIENT_KEY = process.env.REACT_APP_TOSS_CLIENT_KEY;
 
@@ -78,22 +85,77 @@ const HomePage = () => {
     });
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!window.TossPayments) {
       alert("TossPayments SDK가 로드되지 않았습니다.");
       return;
     }
 
-    const tossPayments = window.TossPayments(TOSS_CLIENT_KEY);
+    // 로그인 상태 확인
+    if (!login?.isLogin) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
 
-    tossPayments.requestPayment('카드', {
-      amount: 5000,
-      orderId: `order_${Date.now()}`,
-      orderName: '포인트 충전',
-      customerName: login?.id || '비로그인',
-      successUrl: `${window.location.origin}/charge`,
-      failUrl: `${window.location.origin}/payment-fail`,
-    });
+    try {
+      const amount = 5000;
+      // ✅ 테스트 코드 스타일: 클라이언트에서 orderId를 먼저 생성
+      const orderId = generateOrderId();
+      const accessToken = login?.token || localStorage.getItem("accessToken");
+
+      console.log("결제 준비 시작...");
+      console.log("생성된 orderId:", orderId);
+      console.log("토큰:", accessToken);
+
+      // ✅ 테스트 코드 스타일: 생성한 orderId와 amount를 서버로 전송
+      const response = await axios.post(
+        "/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments/toss/prepare",
+        {
+          orderId: orderId,
+          amount: Number(amount)
+        },
+        { 
+          headers: { 
+            "Authorization": `Bearer ${accessToken}`, 
+            "Content-Type": "application/json" 
+          } 
+        }
+      );
+
+      console.log("결제 준비 응답:", response.data);
+      const { amount: responseAmount, customerName } = response.data;
+
+      // ✅ 테스트 코드 스타일: 토스페이먼츠 결제창 호출
+      const tossPayments = window.TossPayments(TOSS_CLIENT_KEY);
+      
+      await tossPayments.requestPayment('카드', {
+        amount: Number(responseAmount),
+        orderId: orderId, // ✅ 클라이언트에서 생성한 orderId 사용
+        orderName: "포인트 충전",
+        customerName: customerName || "테스트 사용자",
+        successUrl: `${window.location.origin}/payment-success`, // ✅ 프론트엔드 성공 페이지로 변경
+        failUrl: `${window.location.origin}/payment-fail`,
+      });
+
+    } catch (error) {
+      console.error("결제 준비 실패:", error);
+      console.error("에러 상태:", error.response?.status);
+      console.error("에러 데이터:", error.response?.data);
+      
+      if (error.response?.status === 401) {
+        alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "/profile";
+      } else if (error.response?.status === 403) {
+        alert("권한이 없습니다. 다시 로그인해주세요.");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "/profile";
+      } else {
+        alert(`결제 준비 중 오류가 발생했습니다: ${error.response?.data?.message || error.message}`);
+      }
+    }
   };
 
   const showMore = () => setVisibleCount(prev => Math.min(prev + 3, transactions.length));
