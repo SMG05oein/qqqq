@@ -82,16 +82,6 @@ const Login = ({setIsProfile}) => {
                         <Button variant="info" type="button" onClick={()=>navigate('/signUp')}>
                         회원가입
                         </Button>
-                        소셜로그인
-                        <Button variant="warning" type="">
-                            카카오
-                        </Button>
-                        <Button variant="success" type="">
-                            네이버
-                        </Button>
-                        <Button variant="secondary" type="">
-                            기타?
-                        </Button>
                     </div>
                     <p/>
                     <p/>
