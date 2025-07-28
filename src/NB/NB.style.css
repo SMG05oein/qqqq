@@ -77,13 +77,13 @@
 
 /*Begin GNB style*/
 .GNB {
-    position: fixed;
+    position: static;
     bottom: 0;
     width: 100%;
     background-color: white; /* ✅ 추가 */
     box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
     padding: 0 !important;
-    z-index: 999;
+    z-index: 0;
 }
 
 

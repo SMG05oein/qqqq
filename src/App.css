@@ -23,6 +23,23 @@
     box-sizing: border-box;
 }
 
+.AppWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.CONTENTS,
+.CONTENTSP {
+  flex: 1;
+  padding-bottom: 130px; /* ✅ GNB 높이보다 여유 있게 확보 */
+  overflow-y: auto;
+}
+
+
+
+
+
 @media (max-width: 619px) {
     .CONTENTS {
         height: calc(100vh - 123px);
