@@ -18,12 +18,9 @@ const GnbPayingBarLoginT = () => {
       const config = {
         fps: 10,
         qrbox: function (viewfinderWidth, viewfinderHeight) {
-          // ✅ 더 크게: viewfinder의 90%까지
-          const sideLength = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.9);
-          return {
-            width: sideLength,
-            height: sideLength
-          };
+          // ✅ 확실한 정사각형 크기 (뷰 영역의 90% 크기)
+          const size = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.9);
+          return { width: size, height: size };
         }
       };
 
@@ -69,7 +66,7 @@ const GnbPayingBarLoginT = () => {
         <Row>
           <Col className="d-flex justify-content-center">
             <div ref={qrRef}>
-              {/* ✅ 인라인 스타일로 크기 명시 보장 */}
+              {/* ✅ .qr-reader는 크게 보여지도록 설정 */}
               <div
                 id="qr-reader"
                 className="qr-reader"
