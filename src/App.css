@@ -15,7 +15,7 @@
     padding: 20px 8px 0 8px;
     overflow-y: auto;
     box-sizing: border-box;
-    padding-bottom: 80px;
+    padding-bottom: 120px;
 }
 .CONTENTSP {
     height: calc(100vh - 54px);
@@ -27,6 +27,7 @@
 @media (max-width: 619px) {
     .CONTENTS {
         height: calc(100vh - 123px);
+        padding-bottom: 120px;
     }
     .CONTENTSP {
         height: calc(100vh - 78px);
@@ -36,6 +37,7 @@
 @media (max-width: 392px) {
     .CONTENTS {
         height: calc(100vh - 114px);
+        padding-bottom: 120px;
     }
     .CONTENTSP {
         height: calc(100vh - 74px);
