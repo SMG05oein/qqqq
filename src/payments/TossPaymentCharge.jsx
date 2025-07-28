@@ -28,7 +28,7 @@ const TossPaymentCharge = () => {
 
     // ✅ 백엔드 결제 검증 API 호출
     axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/users/me/payments/toss/prepare`,
+      `${process.env.REACT_APP_BACKEND_URL}api/users/me/payments/toss/prepare`,
       {
         paymentKey,
         orderId,
