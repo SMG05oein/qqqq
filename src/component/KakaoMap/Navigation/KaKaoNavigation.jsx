@@ -4,7 +4,7 @@ import {useSearchLoad} from "../../../Hooks/useSearchLoad";
 import {KakaoMapLngLatContext} from "../../../State/KaKaoMapLngLat";
 
 
-const KaKaoNavigation = ({state_center}) => {
+const KaKaoNavigation = ({state_center, isNavigate}) => {
     const {KaLngLat, setKaLngLat} = useContext(KakaoMapLngLatContext);
 
 
@@ -13,7 +13,7 @@ const KaKaoNavigation = ({state_center}) => {
 
     return (
         <div>
-            {routeCoords?.length > 1 && (
+            {routeCoords?.length > 0 && isNavigate === true ? (
                 <Polyline
                     path={routeCoords}
                     strokeWeight={5}
@@ -21,7 +21,7 @@ const KaKaoNavigation = ({state_center}) => {
                     strokeOpacity={0.8}
                     strokeStyle={"solid"}
                 />
-            )}
+            ) : null}
         </div>
     );
 };

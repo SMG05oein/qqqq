@@ -3,16 +3,15 @@ import {Col} from "react-bootstrap";
 import "./SeeStore.style.css"
 import {BsCaretUpFill, BsFillCaretDownFill} from "react-icons/bs";
 import {KakaoMapLngLatContext} from "../../../State/KaKaoMapLngLat";
+import SeeStore2 from "./SeeStore2";
 
-const SeeStore = ({seeStore, setStoreClick}) => {
+const SeeStore = ({storeClick ,seeStore, setStoreClick, setNavigate, setTemp, temp}) => {
     const [showStoreList, setShowStoreList] = useState(false);
     const {KaLngLat, setKaLngLat} = useContext(KakaoMapLngLatContext);
 
-    console.log(KaLngLat);
-
     const fff = (store) => {
-        console.log(store);
-        setStoreClick(prev=>({id: store.id, bool: !prev.bool }));
+        // console.log(store);
+        setStoreClick(prev=>({id: store.id, bool: !prev.bool, temp: !prev.temp}));
     };
 
     return (
@@ -25,19 +24,8 @@ const SeeStore = ({seeStore, setStoreClick}) => {
                     {showStoreList ? (
                         seeStore?.length > 0 ? (
                             seeStore.map((store) => (
-                                <div className="storeItem" key={store.id} onClick={(prev)=>{fff(store, prev)}}>
-                                    <div className="storeName d-flex justify-content-between align-items-center">
-
-                                        <div>이름: {store.placeName}</div>
-                                        <button className={"btn btn-primary"} onClick={
-                                            () => setKaLngLat({lat: store.y, lng: store.x})
-                                        }>길찾기</button>
-                                    </div>
-                                    <div className="storeCategory d-flex align-items-center justify-content-between">
-                                        <div>분류: {store.category ? store.category : "없음"}</div>
-                                        <div>전화번호: {store.phone ? store.phone : "없음"}</div>
-                                    </div>
-                                    <div className="storeAdress">주소: {store.addressName ? store.addressName : "없음"}</div>
+                                <div className={""} key={store.id}>
+                                    <SeeStore2 storeClick={storeClick} temp={temp} setTemp={setTemp} store={store} setStoreClick={setStoreClick} setNavigate={setNavigate}/>
                                 </div>
                             ))
                         ) : (
@@ -48,6 +36,18 @@ const SeeStore = ({seeStore, setStoreClick}) => {
             </div>
         </div>
     );
+    // <div className="storeName d-flex justify-content-between align-items-center">
+    //     <div>이름: {store.placeName}</div>
+    //     <button className={"btn btn-primary"} onClick={() => {
+    //         setKaLngLat({lat: store.y, lng: store.x});setNavigate(true);
+    //     }
+    //     }>길찾기</button>
+    // </div>
+    // <div className="storeCategory d-flex align-items-center justify-content-between">
+    //     <div>분류: {store.category ? store.category : "없음"}</div>
+    //     <div>전화번호: {store.phone ? store.phone : "없음"}</div>
+    // </div>
+    // <div className="storeAdress">주소: {store.addressName ? store.addressName : "없음"}</div>
 };
 
 export default SeeStore;
