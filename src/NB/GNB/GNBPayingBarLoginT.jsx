@@ -4,45 +4,41 @@ import { PayingBarOpenContext } from '../../State/PayingBarOpenState';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const GnbPayingBarLoginT = () => {
-
-
-  
   const { isOpen } = useContext(PayingBarOpenContext);
   const qrRef = useRef(null);
   const scannerRef = useRef(null);
   const lastScannedTextRef = useRef("");
 
-  // 스캔된 QR 텍스트 상태 저장용
   const [scannedText, setScannedText] = useState("");
-
 
   useEffect(() => {
     if (isOpen && qrRef.current) {
       const html5QrCode = new Html5Qrcode("qr-reader");
 
+      const config = {
+        fps: 10,
+        qrbox: function (viewfinderWidth, viewfinderHeight) {
+          // ✅ 더 크게: viewfinder의 90%까지
+          const sideLength = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.9);
+          return {
+            width: sideLength,
+            height: sideLength
+          };
+        }
+      };
+
       html5QrCode.start(
-          { facingMode: "environment" }, // 후면 카메라
-          {
-            fps: 10,
-            qrbox: function(viewfinderWidth, viewfinderHeight) {
-              const sideLength = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.8);
-              return {
-                width: sideLength,
-                height: sideLength
-              };
-            }
-          },
-          (decodedText) => {
-            // 중복 QR 처리 방지 (옵션)
-            if (decodedText !== lastScannedTextRef.current) {
-              lastScannedTextRef.current = decodedText;
-              setScannedText(decodedText); // ✅ 링크 저장
-            }
-          },
-          (errorMessage) => {
-            // 인식 실패 로그 (선택 사항)
-            console.log("QR 인식 실패:", errorMessage);
+        { facingMode: "environment" },
+        config,
+        (decodedText) => {
+          if (decodedText !== lastScannedTextRef.current) {
+            lastScannedTextRef.current = decodedText;
+            setScannedText(decodedText);
           }
+        },
+        (errorMessage) => {
+          console.log("QR 인식 실패:", errorMessage);
+        }
       );
 
       scannerRef.current = html5QrCode;
@@ -59,7 +55,7 @@ const GnbPayingBarLoginT = () => {
     };
   }, [isOpen]);
 
-    return (
+  return (
     <div style={{ display: isOpen ? 'flex' : 'none' }} className="GNBPBBox">
       <Container fluid>
         <Row className="mb-3">
@@ -71,14 +67,25 @@ const GnbPayingBarLoginT = () => {
         </Row>
 
         <Row>
-          <Col>
+          <Col className="d-flex justify-content-center">
             <div ref={qrRef}>
-              <div id="qr-reader" className="qr-reader"></div>
+              {/* ✅ 인라인 스타일로 크기 명시 보장 */}
+              <div
+                id="qr-reader"
+                className="qr-reader"
+                style={{
+                  width: '90vw',
+                  height: '90vw',
+                  maxWidth: '400px',
+                  maxHeight: '400px',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                }}
+              ></div>
             </div>
           </Col>
         </Row>
 
-        {/* ✅ QR 스캔 성공 시에만 표시되는 영역 */}
         {scannedText && (
           <Row className="mt-3">
             <Col className="text-center">
