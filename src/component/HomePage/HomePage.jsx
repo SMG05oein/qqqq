@@ -1,10 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Button, Col, Container, Image, Row, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./HomePage.style.css"
 import { FaCreditCard, FaPlus, FaWonSign } from "react-icons/fa";
 import { LoginContext } from "../../State/LoginState";
 import axios from 'axios';
+
 
 const TOSS_CLIENT_KEY = process.env.REACT_APP_TOSS_CLIENT_KEY;
 
@@ -14,6 +15,8 @@ const HomePage = () => {
   const [transactions, setTransactions] = useState([]);
   const { login } = useContext(LoginContext);
   const [visibleCount, setVisibleCount] = useState(3);
+  const location = useLocation(); // ✅ useEffect 위쪽에 선언
+
 
   useEffect(() => {
     if (login?.isLogin && login?.token) {
