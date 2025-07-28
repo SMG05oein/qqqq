@@ -18,12 +18,13 @@
 }
 
 .Login .form-control {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   padding: 14px 16px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .Login .form-control:focus {
@@ -39,6 +40,7 @@
   padding: 14px;
   border-radius: 12px;
   transition: background-color 0.2s, transform 0.1s;
+  box-sizing: border-box;
 }
 
 .Login .btn:hover {
@@ -88,4 +90,33 @@
   text-align: center;
   font-size: 14px;
   color: #888;
+}
+
+/* ✅ 반응형 스타일 (모바일 화면) */
+@media (max-width: 480px) {
+  .Login {
+    margin: 40px 16px;
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  .Login h2 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .Login .form-control {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .Login .btn {
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .socialLogin span {
+    font-size: 13px;
+  }
 }
