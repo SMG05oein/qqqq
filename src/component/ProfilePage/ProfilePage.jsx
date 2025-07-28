@@ -4,10 +4,15 @@ import { Container, Button, Image } from 'react-bootstrap';
 import { LoginContext } from '../../State/LoginState';
 import { useTestUser } from '../../Hooks/useTestUser';
 import Loading from '../Loding/Loading';
+import {useUser} from "../../Hooks/useUser";
 
 const ProfilePage = ({ setIsProfile }) => {
+    const user = useUser();
+
+    console.log(user.user);
+    const uuser = user.user;
     const { login, setLogin } = useContext(LoginContext);
-    const user = useTestUser();
+    // const user = useTestUser();
 
     useEffect(() => {
         setIsProfile(true);
@@ -21,7 +26,7 @@ const ProfilePage = ({ setIsProfile }) => {
             <Container className="profile-container">
                 <div className="profile-card-toss">
                     <Image src="/profile.png" roundedCircle className="profile-image-toss" />
-                    <h5 className="profile-name-toss">{user[login.idx - 1]?.name} 님</h5>
+                    <h5 className="profile-name-toss">{uuser?.name} 님</h5>
 
                     <div className="section-label">계정찾기</div>
                     <Button variant="light" className="profile-button-toss">아이디 찾기</Button>

@@ -5,6 +5,7 @@ import "./HomePage.style.css"
 import { FaCreditCard, FaPlus, FaWonSign } from "react-icons/fa";
 import { LoginContext } from "../../State/LoginState";
 import axios from 'axios';
+import {useUser} from "../../Hooks/useUser";
 
 // ✅ 프론트엔드에서 고유 주문 ID를 생성하는 함수 (테스트 코드 스타일)
 const generateOrderId = () => {
@@ -23,8 +24,10 @@ const HomePage = () => {
   const { login } = useContext(LoginContext);
   const [visibleCount, setVisibleCount] = useState(3);
   const location = useLocation(); // ✅ useEffect 위쪽에 선언
+  const user = useUser();
 
-
+  console.log(user.user);
+  const uuser = user.user;
   useEffect(() => {
     if (login?.isLogin && login?.token) {
       // 잔액 조회

@@ -7,9 +7,14 @@ import {IoIosNotificationsOutline} from "react-icons/io";
 import {useTestUser} from "../Hooks/useTestUser";
 import {LoginContext} from "../State/LoginState";
 import {BiTestTube} from "react-icons/bi";
+import {useUser} from "../Hooks/useUser";
 
 const TopMenu = () => {
-    const user = useTestUser();
+    const user = useUser();
+
+    console.log(user.user);
+    const uuser = user.user;
+    // const user = useTestUser();
     const { login } = useContext(LoginContext);
     // console.log(login);
     // console.log(user[login.idx-1]);
@@ -23,7 +28,7 @@ const TopMenu = () => {
                         </div>
                         </Link>
                         {login.isLogin ? (
-                        <span className="user-name">{user[login.idx - 1]?.name} 님</span>
+                        <span className="user-name">{uuser?.name} 님</span>
                         ) : null}
                     </Col>
                     <Col className="d-flex justify-content-end NoPadding">
