@@ -86,7 +86,7 @@ const GnbPayingBarLoginT = () => {
         {scannedText && (
           <Row className="mt-3">
             <Col className="text-center">
-              <div style={{ color: 'white', marginBottom: '10px' }}>스캔 성공!</div>
+              <div style={{ color: 'white', marginBottom: '3px' }}>스캔 성공!</div>
               <button
                 className="btn btn-primary"
                 onClick={() => window.location.href = scannedText}
