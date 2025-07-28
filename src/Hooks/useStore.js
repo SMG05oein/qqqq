@@ -4,9 +4,11 @@ export const useStore = (key, coordinates) => {
 
 
     const [store, setStore] = useState([]);
+    const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
     useEffect(() => {
         const fetchStore = async () => {
+            setIsLoading(true);
             key = encodeURIComponent(key);
             const currentUrl = window.location.href;
             let pullAddress = "";
@@ -35,11 +37,13 @@ export const useStore = (key, coordinates) => {
                 setStore(data);
             } catch (error) {
                 console.error("Fetch 실패:", error);
+            } finally {
+                setIsLoading(false); // 요청 완료 시 로딩 false
             }
         };
 
         fetchStore();
     }, [key]);
 
-    return store;
+    return {store, isLoading};
 };

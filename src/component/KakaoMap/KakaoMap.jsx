@@ -19,7 +19,7 @@ const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
     const [keyword, setKeyword] = useState("");
     const {mapLngLat, setMapLngLat}= useContext(MapLngLatContext);
-    const store = useStore(keyword, mapLngLat);
+    const {store, isLoading} = useStore(keyword, mapLngLat);
     const [seeStore, setSeeStore] = useState(null); // 상점 리스트
     const [isVisible, setIsVisible] = useState(true); // 현위치 마커
     const [storeClick, setStoreClick] = useState({ id: 0, bool: false });
@@ -98,7 +98,6 @@ const KakaoMap = () => {
         };
     }, [mapReady]);
 
-
     const searchStore = () => {
         // console.log("음 퍽킹 쒯: ",store); //와 진짜 하 진짜 진짜 진짜
         const filtered = store.length > 0 && keyword !== "" ? store : null;
@@ -157,33 +156,36 @@ const KakaoMap = () => {
                             <Map
                                 center={state.center}
                                 style={{width: '94%', height: '90%', borderRadius: '10px'}}
-                                level={6} draggable={true}
+                                level={4} draggable={true}
                                 onCreate={(map) => {
                                     mapRef.current = map;
                                     setMapReady(true);
                                 }}
                                 ref={mapRef}
                             >
-                                {seeStore === null?
-                                    <CustomOverlayMap position={state.center} yAnchor={1}>
-                                        {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
-                                    </CustomOverlayMap>
-                                    :
-                                    <>
-                                        <CustomOverlayMap position={state.center} yAnchor={1}>
-                                            {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
-                                        </CustomOverlayMap>
-                                        {seeStore?.map((item) => (
-                                            <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
-                                    ))}
-                                    </>
-                                }
-                                <div className={"KaKaoMapUnderTools"}>
-                                    <MoveToMyLocation state={state} setIsVisible={setIsVisible}/>
-                                    <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
-                                    {seeStore === null ? null : <ReSetttingMapBounds points={points} /> }
+                                <>
+                                    {isLoading ? (
+                                        <div><Loading /></div>
+                                    ) : (
+                                        <>
+                                            <CustomOverlayMap position={state.center} yAnchor={1}>
+                                                {isVisible && <MdLocationPin style={{ fontSize: "32px", color: "red" }} />}
+                                            </CustomOverlayMap>
 
-                                </div>
+                                            {seeStore &&
+                                                seeStore.map((item) => (
+                                                    <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
+                                                ))
+                                            }
+
+                                            <div className="KaKaoMapUnderTools">
+                                                <MoveToMyLocation state={state} setIsVisible={setIsVisible} />
+                                                <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
+                                                {seeStore && <ReSetttingMapBounds points={points} />}
+                                            </div>
+                                        </>
+                                    )}
+                                </>
                             </Map>
                         </div>
                     </Row>
