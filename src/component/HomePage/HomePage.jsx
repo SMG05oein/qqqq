@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import "./HomePage.style.css"
 import {FaCreditCard, FaPlus, FaWonSign} from "react-icons/fa";
 import {LoginContext} from "../../State/LoginState";
+import GNBPayingBarLoginT from '../../NB/GNB/GNBPayingBarLoginT';
+
 
 const HomePage = () => {
     const [seeMoney, setSeeMoney] = useState(true);
@@ -11,6 +13,25 @@ const HomePage = () => {
 
     // console.log("Login ",login);
     // console.log("isLogin ",login?.isLogin);
+
+      //포인트충전용 토스페이먼츠
+      
+      const handlePayment = () => {
+        const tossPayments = window.TossPayments('test_ck_Gv6LjeKD8aY4P56QX1yN8wYxAdXy');
+    
+        tossPayments.requestPayment('카드', {
+          amount: 5000,
+          orderId: 'order_' + new Date().getTime(),
+          orderName: '천안사랑카드 충전',
+          customerName: '이우용',
+          successUrl: 'http://localhost:3000/success',
+          failUrl: 'http://localhost:3000/fail'
+        });
+    
+      return (
+        <button onClick={handlePayment}>충전하기</button>
+      );
+    };
 
     const data = [
         { type: "지출", amount: "7200원", date: "2025-01-03", place: "천안 신부동 고기집" },
@@ -149,13 +170,14 @@ const HomePage = () => {
                                             <Link to="/card" className="d-block text-center w-100"><FaCreditCard /> 카드관리</Link>
                                             </div>
                                         </Col>
-                                        <Col className="p-0">
-                                            <div className="rounded-box right-rounded w-100">
-                                            <Link to="/charge" className="d-block text-center w-100"><FaWonSign /> 충전</Link>
-                                            </div>
-                                        </Col>
+                                        <button
+                                        onClick={handlePayment}
+                                        className="d-block text-center w-100 border-0 bg-transparent"
+                                        style={{ padding: "10px" }}
+                                        >
+                                        <FaWonSign /> 충전
+                                        </button>
                                         </Row>
-
                                 </div>
                             </Row>
 

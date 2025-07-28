@@ -4,6 +4,9 @@ import { PayingBarOpenContext } from '../../State/PayingBarOpenState';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const GnbPayingBarLoginT = () => {
+
+
+  
   const { isOpen } = useContext(PayingBarOpenContext);
   const qrRef = useRef(null);
   const scannerRef = useRef(null);
@@ -11,6 +14,7 @@ const GnbPayingBarLoginT = () => {
 
   // 스캔된 QR 텍스트 상태 저장용
   const [scannedText, setScannedText] = useState("");
+
 
   useEffect(() => {
     if (isOpen && qrRef.current) {
