@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useTestUser} from "../../Hooks/useTestUser";
 import {LoginContext} from "../../State/LoginState";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {loginRequest} from "../../Hooks/useLogin";
 
 const Login = ({setIsProfile}) => {
     const { setLogin } = useContext(LoginContext);
@@ -24,7 +25,7 @@ const Login = ({setIsProfile}) => {
     const user = useTestUser();
     let str = "";
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if(studentId === "") {
             alert("아이디을 입력해주세요.");
@@ -36,25 +37,16 @@ const Login = ({setIsProfile}) => {
             passwdRef.current.focus();
             return;
         }
-        let check = false;
-        for(let i = 0; i < user.length; i++){
-            if(user[i].id != studentId || user[i].pw != passwd){
-                check = false;
-            }else{
-                check = true;
-                str = user[i].id
-                break;
-            }
-        }
-        if(check){
+
+        try {
+            const { accessToken, refreshToken } = await loginRequest(studentId, passwd);
             alert("로그인 성공!");
-            if (/^test[1-5]$/.test(str)) {
-                const number = parseInt(str.slice(4));
-                setLogin({isLogin: true, idx: number});
-            }
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+            setLogin({ isLogin: true, idx: 0 });
             navigate("/");
-        }else{
-            alert("아이디 또는 비밀번호가 맞지 않습니다!!");
+        } catch (error) {
+            alert("아이디 또는 비밀번호가 맞지 않습니다!");
         }
     };
 
