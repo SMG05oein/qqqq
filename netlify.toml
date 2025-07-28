@@ -1,6 +1,11 @@
-[functions]
-  directory = "functions"
+[build]
+  publish = "build"
+  command = "npm run build"
 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [build.environment]
-SECRETS_SCAN_ENABLED = "false"
+  NODE_VERSION = "18"
