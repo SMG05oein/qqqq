@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const loginRequest  = async (loginId, password) => {
     try {
-        const response = await axios.post("http://54.180.25.62:8080/api/users/login", {
+        const response = await axios.post("/.netlify/functions/proxyPost?pullAddress=/api/users/login", {
             loginId: loginId,
             password: password
         }, {
