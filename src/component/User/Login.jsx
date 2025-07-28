@@ -43,7 +43,7 @@ const Login = ({setIsProfile}) => {
             alert("로그인 성공!");
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
-            setLogin({ isLogin: true, idx: 0 });
+            setLogin({ isLogin: true, idx: -1 });
             navigate("/");
         } catch (error) {
             alert("아이디 또는 비밀번호가 맞지 않습니다!");
