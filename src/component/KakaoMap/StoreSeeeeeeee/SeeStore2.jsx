@@ -6,7 +6,7 @@ const SeeStore2 = ({store, setStoreClick, setNavigate, setTemp, temp, storeClick
 
     const fff = (store) => {
         // console.log(store);
-        setTemp(p => !p);
+        // setTemp(p => !p);
         setStoreClick(prev=>({
             id: store.id,
             bool: !prev.bool

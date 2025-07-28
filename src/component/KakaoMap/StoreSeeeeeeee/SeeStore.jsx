@@ -10,6 +10,8 @@ const SeeStore = ({storeClick ,seeStore, setStoreClick, setNavigate, setTemp, te
     const {KaLngLat, setKaLngLat} = useContext(KakaoMapLngLatContext);
 
     const fff = (store) => {
+        setTemp(p => !p);
+
         // console.log(store);
         setStoreClick(prev=>({id: store.id, bool: !prev.bool, temp: !prev.temp}));
     };
@@ -24,7 +26,7 @@ const SeeStore = ({storeClick ,seeStore, setStoreClick, setNavigate, setTemp, te
                     {showStoreList ? (
                         seeStore?.length > 0 ? (
                             seeStore.map((store) => (
-                                <div className={""} key={store.id}>
+                                <div className={"asd"} key={store.id} onClick={()=>{fff(store)}}>
                                     <SeeStore2 storeClick={storeClick} temp={temp} setTemp={setTemp} store={store} setStoreClick={setStoreClick} setNavigate={setNavigate}/>
                                 </div>
                             ))
