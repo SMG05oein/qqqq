@@ -1,8 +1,8 @@
-// netlify/functions/proxyPost.js
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ error: "Method Not Allowed" }),
     };
   }
@@ -12,6 +12,7 @@ export async function handler(event) {
   if (!pullAddress) {
     return {
       statusCode: 400,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ error: "pullAddress 파라미터가 필요합니다." }),
     };
   }
@@ -28,26 +29,25 @@ export async function handler(event) {
       body: event.body,
     });
 
-    const text = await response.text();
-    let data;
+    const contentType = response.headers.get("content-type") || "";
+    const isJson = contentType.includes("application/json");
 
-    try {
-      data = JSON.parse(text);
-    } catch (error) {
-      console.warn("JSON 파싱 실패:", error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "JSON 파싱 실패", rawBody: text }),
-      };
+    let responseBody;
+    if (isJson) {
+      responseBody = await response.json();
+    } else {
+      responseBody = await response.text();
     }
 
     return {
-      statusCode: response.status,
-      body: JSON.stringify(data),
+      statusCode: response.status, // ✅ 상태코드 그대로 유지
+      headers: { "Content-Type": "application/json" }, // ✅ 강제 명시
+      body: JSON.stringify(responseBody),
     };
   } catch (err) {
     return {
       statusCode: 500,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ error: "API 호출 실패", details: err.message }),
     };
   }

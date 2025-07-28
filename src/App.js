@@ -1,15 +1,15 @@
-//app.js
+// App.js
 import './App.css';
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import GNB from "./NB/GNB";
 import TopMenu from "./NB/TopMenu";
 import HomePage from "./component/HomePage/HomePage";
 import NotFound from "./component/404NotFound/NotFound";
 import ProfilePage from './component/ProfilePage/ProfilePage';
 import CheonanCardPage from './component/CheonanCardPage/CheonanCardPage';
-import {useRef, useEffect,useContext, useState} from "react";
+import { useContext, useState } from "react";
 import KakaoMap from "./component/KakaoMap/KakaoMap";
-import {LoginContext, LoginProvider} from "./State/LoginState";
+import { LoginContext, LoginProvider } from "./State/LoginState";
 import Login from "./component/User/Login";
 import SignUp from "./component/User/SignUp";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -20,11 +20,6 @@ import TossPaymentPage from './payments/TossPaymentPage';
 import TossPaymentCharge from './payments/TossPaymentCharge';
 import QrPayPage from './component/qrpay/QrPayPage';
 
-
-
-
-
-//qr
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { PayingBarOpenContext } from './State/PayingBarOpenState';
 import Test from "./Test";
@@ -49,18 +44,36 @@ function MainApp() {
           <Route index element={<div className={"CONTENTS scroll-hidden"}><HomePage /></div>} />
           <Route path="/profile" element={
             <div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}>
-              {login.isLogin ? <ProfilePage setIsProfile={setIsProfile} /> : <Login setIsProfile={setIsProfile} />}
+              {login.isLogin
+                ? <ProfilePage setIsProfile={setIsProfile} />
+                : <Login setIsProfile={setIsProfile} />}
             </div>} />
           <Route path="/cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage /></div>} />
-          <Route path="/signUp" element={<div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}><SignUp setIsProfile={setIsProfile} /></div>} />
+          <Route path="/signUp" element={
+            <div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}>
+              <SignUp setIsProfile={setIsProfile} />
+            </div>} />
           <Route path="/map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap /></div>} />
         </Route>
 
+        {/* ✅ 로그인 페이지 경로 추가 */}
+        <Route
+          path="/login"
+          element={
+            <div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}>
+              <Login setIsProfile={setIsProfile} />
+            </div>
+          }
+        />
+
+        {/* 기타 단일 경로들 */}
         <Route path="/test" element={<Test />} />
         <Route path="/payment-fail" element={<PaymentFail />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/charge" element={<TossPaymentCharge />} />
         <Route path="/pay" element={<QrPayPage />} />
+
+        {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
