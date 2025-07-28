@@ -26,7 +26,6 @@ const HomePage = () => {
             customerName: '고객명',
             successUrl: `${window.location.origin}/payment-success`,
             failUrl: `${window.location.origin}/payment-fail`,
-            flowMode: 'DIRECT' // 타입을 DIRECT 또는 DEFAULT 지정 가능
         });
 
     
