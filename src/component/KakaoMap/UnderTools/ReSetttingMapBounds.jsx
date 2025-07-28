@@ -14,11 +14,12 @@ const ReSetttingMapBounds = ({points}) => {
         return bounds
     }, [points])
 
-    useEffect(() => {
-        if (points.length > 0) {
-            map.setBounds(bounds);
-        }
-    }, [bounds]);
+    // 이거 활성화하면 검색하면 바로 리로드
+    // useEffect(() => {
+    //     if (points.length > 0) {
+    //         map.setBounds(bounds);
+    //     }
+    // }, [bounds]);
 
     return (
         <div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useStore = (key) => {
+export const useStore = (key, coordinates) => {
 
 
     const [store, setStore] = useState([]);
@@ -9,12 +9,24 @@ export const useStore = (key) => {
         const fetchStore = async () => {
             key = encodeURIComponent(key);
             const currentUrl = window.location.href;
+            let pullAddress = "";
 
+            // console.log("store: ",coordinates);
+            // console.log(minX, minY, maxX, maxY);
             // const url = `http://localhost:8080/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=36.845258941966016&maxY=36.8530782657718&minX=127.14723334692333&maxX=127.16278946667573`;
             // const url = `http://54.180.25.62:8080/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=36.845258941966016&maxY=36.8530782657718&minX=127.14723334692333&maxX=127.16278946667573`;
-            const pullAddress =
-                `/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=36.845258941966016&maxY=36.8530782657718&minX=127.14723334692333&maxX=127.16278946667573`;
-
+            if(coordinates.length === 0){
+                pullAddress =
+                    `/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=36.845258941966016&maxY=36.8530782657718&minX=127.14723334692333&maxX=127.16278946667573`;
+            }
+            else {
+                    const minX = coordinates[0].La;
+                    const minY = coordinates[0].Ma;
+                    const maxX = coordinates[1].La;
+                    const maxY = coordinates[1].Ma;
+                pullAddress =
+                    `/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=${minY}&maxY=${maxY}&minX=${minX}&maxX=${maxX}`;
+            }
             const url = `/.netlify/functions/proxyGet?pullAddress=${encodeURIComponent(pullAddress)}`;
 
             try {

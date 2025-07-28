@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import {Map, MapMarker, CustomOverlayMap} from "react-kakao-maps-sdk";
 import {Col, Container, Row} from "react-bootstrap";
 import Loading from "../Loding/Loading";
@@ -11,15 +11,21 @@ import {MdLocationPin} from "react-icons/md";
 import MyLocationMarkerVisible from "./UnderTools/MyLocationMarkerVisible";
 import StoreMarkerPin from "./storeMarkerPin/StoreMarkerPin";
 import SeeStore from "./StoreSeeeeeeee/SeeStore";
+import {MapLngLatContext} from "../../State/MapLngLat";
+/* global kakao */
 
 const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/overlay/categoryMarker 다양한 이미지 마커
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
     const [keyword, setKeyword] = useState("");
-    const store = useStore(keyword);
+    const {mapLngLat, setMapLngLat}= useContext(MapLngLatContext);
+    const store = useStore(keyword, mapLngLat);
     const [seeStore, setSeeStore] = useState(null); // 상점 리스트
     const [isVisible, setIsVisible] = useState(true); // 현위치 마커
     const [storeClick, setStoreClick] = useState({ id: 0, bool: false });
+    const mapRef = useRef(null);
+    const [temp, setTemp] = useState(true);
+    const [mapReady, setMapReady] = useState(false);
 
     /** 현 위치 기반으로 마커 시작*/
     const [state, setState] = useState({
@@ -73,10 +79,48 @@ const KakaoMap = () => {
     const [points, setPoints] = useState([])
     /**지도 범위 재설정 끝*/
 
+    // useEffect(()=>{
+    //     const map = mapRef.current;
+    //     let tempLngLat = null;
+    //     if (map) {
+    //         const bounds = map.getBounds();
+    //         const swLatLng = bounds.getSouthWest();
+    //         const neLatLng = bounds.getNorthEast();
+    //         tempLngLat = [swLatLng, neLatLng];
+    //         setMapLngLat(tempLngLat)
+    //         // console.log("지도 경계 좌표:", mapLngLat);
+    //         // console.log("지도 경계 좌표:", coordinates);
+    //     } else {
+    //         // console.log("Map 객체가 아직 초기화되지 않았어요!");
+    //     }
+    //     setTemp(!temp);
+    // }, [temp]);
+
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map) return;
+        // console.log("움직");
+        const handleIdle = () => {
+            const bounds = map.getBounds();
+            const swLatLng = bounds.getSouthWest();
+            const neLatLng = bounds.getNorthEast();
+            const tempLngLat = [swLatLng, neLatLng];
+            setMapLngLat(tempLngLat);
+        };
+
+        kakao.maps.event.addListener(map, 'idle', handleIdle);
+
+        return () => {
+            kakao.maps.event.removeListener(map, 'idle', handleIdle);
+        };
+    }, [mapReady]);
+
+
     const searchStore = () => {
         // console.log("음 퍽킹 쒯: ",store); //와 진짜 하 진짜 진짜 진짜
         const filtered = store.length > 0 && keyword !== "" ? store : null;
         setSeeStore(filtered);
+
         /**지도 범위 재설정 시작*/
         if (filtered) {
             const markerPoints = filtered.map((item) => ({
@@ -87,6 +131,8 @@ const KakaoMap = () => {
         } else {
             setPoints([]);
         }
+
+        // if(seeStore === null){alert("검색 결과 없음")} else{alert("검색 완료!")}
         /**지도 범위 재설정 끝*/
         // console.log("Fuck:", store); //데이터 잘 오는지 확인용
         // console.log("Fuck:", seeStore); //데이터 잘 오는지 확인용
@@ -111,10 +157,10 @@ const KakaoMap = () => {
                     <Row className={"NotFlex NoMargin"} style={{width: '100%', height: '100%'}}>
                         <div className={"KakaoMapBox"}>
                             <div className={"KaKaoMapOverTools"}>
-                                <button className="btn btn-primary">착한가게</button>
+                                <button className="btn btn-primary" onClick={()=>{setKeyword("착한가게");}}>착한가게</button>
                                 <button className="btn btn-primary" onClick={()=>{setKeyword("음식점");}}>음식점</button>
                                 <button className="btn btn-primary" onClick={()=>{setKeyword("카페");}}>카페</button>
-                                <button className="btn btn-primary">~</button>
+                                <button className="btn btn-primary" onClick={()=>{setKeyword("중앙시장");}}>중앙시장</button>
                                 <button className="btn btn-primary">~</button>
                                 <button className="btn btn-primary">~</button>
                                 <button className="btn btn-primary">~</button>
@@ -125,6 +171,10 @@ const KakaoMap = () => {
                                 center={state.center}
                                 style={{width: '94%', height: '90%', borderRadius: '10px'}}
                                 level={2} draggable={true}
+                                onCreate={(map) => {
+                                    mapRef.current = map;
+                                    setMapReady(true);
+                                }}
                             >
                                 {seeStore === null?
                                     <CustomOverlayMap position={state.center} yAnchor={1}>

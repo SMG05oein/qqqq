@@ -7,6 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import LoginProvider from "./State/LoginState";
 import PayingBarOpenState from "./State/PayingBarOpenState";
+import MapLngLat from "./State/MapLngLat";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient();
@@ -16,9 +17,11 @@ root.render(
         <React.StrictMode>
             <LoginProvider>
                 <PayingBarOpenState>
-                    <BrowserRouter>
-                        <App/>
-                    </BrowserRouter>
+                    <MapLngLat>
+                        <BrowserRouter>
+                            <App/>
+                        </BrowserRouter>
+                    </MapLngLat>
                 </PayingBarOpenState>
             </LoginProvider>
         </React.StrictMode>
