@@ -1,7 +1,5 @@
 // netlify/functions/proxyPost.js
 export async function handler(event) {
-  console.log("proxyPost 실행됨");
-
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -10,6 +8,14 @@ export async function handler(event) {
   }
 
   const { pullAddress } = event.queryStringParameters || {};
+
+  if (!pullAddress) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "pullAddress 파라미터가 필요합니다." }),
+    };
+  }
+
   const apiUrl = `http://54.180.25.62:8080${pullAddress}`;
 
   try {
@@ -17,8 +23,7 @@ export async function handler(event) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "*/*",
-        "Authorization": event.headers.authorization || "", // ✅ 토큰 전달
+        "Authorization": event.headers.authorization || "",
       },
       body: event.body,
     });
@@ -31,11 +36,8 @@ export async function handler(event) {
     } catch (error) {
       console.warn("JSON 파싱 실패:", error);
       return {
-        statusCode: response.status,
-        body: JSON.stringify({
-          error: "JSON 파싱 실패",
-          rawBody: text,
-        }),
+        statusCode: 500,
+        body: JSON.stringify({ error: "JSON 파싱 실패", rawBody: text }),
       };
     }
 
@@ -43,11 +45,10 @@ export async function handler(event) {
       statusCode: response.status,
       body: JSON.stringify(data),
     };
-  } catch (error) {
-    console.error("proxyPost 에러:", error);
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "POST 요청 실패", details: error.message }),
+      body: JSON.stringify({ error: "API 호출 실패", details: err.message }),
     };
   }
 }
