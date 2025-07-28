@@ -20,13 +20,15 @@ const HomePage = () => {
         const tossPayments = window.TossPayments('test_ck_Gv6LjeKD8aY4P56QX1yN8wYxAdXy');
     
         tossPayments.requestPayment('카드', {
-          amount: 5000,
-          orderId: 'order_' + new Date().getTime(),
-          orderName: '천안사랑카드 충전',
-          customerName: '이우용',
-          successUrl: 'http://localhost:3000/success',
-          failUrl: 'http://localhost:3000/fail'
+            amount: 5000,
+            orderId: `order_${Date.now()}`,
+            orderName: '포인트 충전',
+            customerName: '고객명',
+            successUrl: `${window.location.origin}/payment-success`,
+            failUrl: `${window.location.origin}/payment-fail`,
+            flowMode: 'DIRECT' // 타입을 DIRECT 또는 DEFAULT 지정 가능
         });
+
     
       return (
         <button onClick={handlePayment}>충전하기</button>
