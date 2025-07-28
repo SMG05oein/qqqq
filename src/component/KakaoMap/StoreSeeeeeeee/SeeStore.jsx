@@ -7,7 +7,7 @@ const SeeStore = ({seeStore, setStoreClick}) => {
     const [showStoreList, setShowStoreList] = useState(false);
 
     const fff = (store) => {
-        // console.log(store.id);
+        console.log(store);
         setStoreClick(prev=>({id: store.id, bool: !prev.bool }));
     };
 

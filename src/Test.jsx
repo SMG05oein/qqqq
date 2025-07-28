@@ -29,15 +29,15 @@ const Test = () => {
         setStr(localStr);
     };
 
-    useEffect(() => {
-        // console.log("points:", points);
-        console.log("user:", user);
-    }, [/*points,*/ user]);
+    // useEffect(() => {
+    //     // console.log("points:", points);
+    //     console.log("user:", user);
+    // }, [/*points,*/ user]);
 
 
 
     const origin = { lat: 36.833705, lng: 127.14896 };
-    const destination = { lat: 36.845306, lng: 127.155351 };
+    const destination = { lat: 36.845306, lng: 127.1553351 };
 
     const routeCoords = useSearchLoad(origin, destination);
 

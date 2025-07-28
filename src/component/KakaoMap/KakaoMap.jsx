@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
-import {Map, MapMarker, CustomOverlayMap} from "react-kakao-maps-sdk";
+import {Map, MapMarker, CustomOverlayMap, Polyline} from "react-kakao-maps-sdk";
 import {Col, Container, Row} from "react-bootstrap";
 import Loading from "../Loding/Loading";
 import "./KakaoMap.style.css"
@@ -12,6 +12,8 @@ import MyLocationMarkerVisible from "./UnderTools/MyLocationMarkerVisible";
 import StoreMarkerPin from "./storeMarkerPin/StoreMarkerPin";
 import SeeStore from "./StoreSeeeeeeee/SeeStore";
 import {MapLngLatContext} from "../../State/MapLngLat";
+import {useSearchLoad} from "../../Hooks/useSearchLoad";
+import KaKaoNavigation from "./Navigation/KaKaoNavigation";
 /* global kakao */
 
 const KakaoMap = () => {
@@ -87,7 +89,8 @@ const KakaoMap = () => {
             const bounds = map.getBounds();
             const swLatLng = bounds.getSouthWest();
             const neLatLng = bounds.getNorthEast();
-            const tempLngLat = [swLatLng, neLatLng];
+            const center = map.getCenter()
+            const tempLngLat = [swLatLng, neLatLng, center];
             setMapLngLat(tempLngLat);
         };
 
@@ -119,6 +122,7 @@ const KakaoMap = () => {
         // console.log("Fuck:", store); //데이터 잘 오는지 확인용
         // console.log("Fuck:", seeStore); //데이터 잘 오는지 확인용
     };
+
     return (
         state.isLoading ? (
             <div><Loading /></div>
@@ -130,7 +134,7 @@ const KakaoMap = () => {
                             <input className="form-control me-2" type="search" id={"searchKeyword"} value={keyword}
                                 onChange={(e) => {setKeyword(e.target.value);}}
                                 placeholder="검색" aria-label="검색"/>
-                            <button className="btn btn-primary" type="button" id={"searchBtn"} onClick={searchStore}>검색</button>
+                            {/*<button className="btn btn-primary" type="button" id={"searchBtn"} onClick={searchStore}>검색</button>*/}
                             {/*모바일 환경에서 검색 버튼을 누를까?*/}
                         </form>
                     </div>
@@ -163,29 +167,29 @@ const KakaoMap = () => {
                                 }}
                                 ref={mapRef}
                             >
-                                <>
-                                    {isLoading ? (
-                                        <div><Loading /></div>
-                                    ) : (
-                                        <>
-                                            <CustomOverlayMap position={state.center} yAnchor={1}>
-                                                {isVisible && <MdLocationPin style={{ fontSize: "32px", color: "red" }} />}
-                                            </CustomOverlayMap>
+                                {isLoading ? (
+                                    <div><Loading /></div>
+                                ) : (
+                                    <>
+                                        <CustomOverlayMap position={state.center} yAnchor={1}>
+                                            {isVisible && <MdLocationPin style={{ fontSize: "32px", color: "red" }} />}
+                                        </CustomOverlayMap>
 
-                                            {seeStore &&
-                                                seeStore.map((item) => (
-                                                    <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
-                                                ))
-                                            }
+                                        {seeStore &&
+                                            seeStore.map((item) => (
+                                                <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
+                                            ))
+                                        }
 
-                                            <div className="KaKaoMapUnderTools">
-                                                <MoveToMyLocation state={state} setIsVisible={setIsVisible} />
-                                                <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
-                                                {seeStore && <ReSetttingMapBounds points={points} />}
-                                            </div>
-                                        </>
-                                    )}
-                                </>
+                                        {/*<KaKaoNavigation state_center={state.center} />*/}
+
+                                        <div className="KaKaoMapUnderTools">
+                                            <MoveToMyLocation state={state} setIsVisible={setIsVisible} />
+                                            <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
+                                            {seeStore && <ReSetttingMapBounds points={points} />}
+                                        </div>
+                                    </>
+                                )}
                             </Map>
                         </div>
                     </Row>
