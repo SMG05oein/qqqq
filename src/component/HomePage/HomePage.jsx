@@ -1,5 +1,5 @@
 //HomePage.jsx
-import React, {useContext, useState} from 'react';
+import React, {useEffect ,useContext, useState} from 'react';
 import {Button, Col, Container, Image, Row, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./HomePage.style.css"
@@ -11,7 +11,28 @@ const TOSS_CLIENT_KEY = process.env.REACT_APP_TOSS_CLIENT_KEY;
 
 const HomePage = () => {
     const [seeMoney, setSeeMoney] = useState(true);
+    const [balance, setBalance] = useState(null);
     const { login } = useContext(LoginContext);
+
+
+    console.log(login.token)
+    useEffect(() => {
+        if (login?.isLogin && login?.token) {
+            axios.get(`/.netlify/functions/proxyGet?pullAddress=/api/users/me/balance`, {
+                headers: {
+                    Authorization: `Bearer ${login?.token || localStorage.getItem("accessToken")}`,
+                }
+            })
+            .then(res => {
+                setBalance(res.data.balance);
+            })
+            .catch(err => {
+                console.error("잔액 불러오기 실패:", err);
+                setBalance(null);
+            });
+        }
+    }, [login]);
+
 
 
     const handlePayment = () => {
@@ -212,7 +233,7 @@ const HomePage = () => {
                                                     <div className={"SeeMoney"}>
                                                         <div>잔액</div>
                                                         <div>
-                                                            {seeMoney ? `${Number(100000).toLocaleString()}원` : '숨김'}
+                                                            {seeMoney? (balance !== null ? `${Number(balance).toLocaleString()}원` : '불러오는 중...')  : '숨김'}
                                                         </div>
                                                     </div>
                                                 </div>
