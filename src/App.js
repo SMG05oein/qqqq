@@ -18,6 +18,7 @@ import PaymentSuccess from './payments/PaymentSuccess';
 import PaymentFail from './payments/PaymentFail';
 import TossPaymentPage from './payments/TossPaymentPage';
 import TossPaymentCharge from './payments/TossPaymentCharge';
+import QrPayPage from './components/qrpay/QrPayPage';
 
 
 
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/charge" element={<TossPaymentPage />} />
                 <Route path="/charge" element={<TossPaymentCharge />} /> */}
                 <Route path="/charge" element={<TossPaymentCharge />} />
+                <Route path="/pay" element={<QrPayPage />} />
             </Routes>
         </div>
     );
