@@ -19,7 +19,7 @@ const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
     const [keyword, setKeyword] = useState("");
     const {mapLngLat, setMapLngLat}= useContext(MapLngLatContext);
-    const {store, isLoading} = useStore(keyword, mapLngLat);
+    const store = useStore(keyword, mapLngLat);
     const [seeStore, setSeeStore] = useState(null); // 상점 리스트
     const [isVisible, setIsVisible] = useState(true); // 현위치 마커
     const [storeClick, setStoreClick] = useState({ id: 0, bool: false });
@@ -136,8 +136,6 @@ const KakaoMap = () => {
                         </form>
                     </div>
                 </nav>
-                {isLoading ? (<div><Loading /></div>) :
-                    (
                 <Container className={"NoPadding"} style={{width: '100%', height: '100%'}}>
                     <Row className={"NotFlex NoMargin"} style={{width: '100%', height: '100%'}}>
                         <div className={"KakaoMapBox"}>
@@ -194,7 +192,6 @@ const KakaoMap = () => {
                     </Row>
 
                 </Container>
-                    )}
             </div>
         )
     );
