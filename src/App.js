@@ -13,6 +13,9 @@ import Login from "./component/User/Login";
 import SignUp from "./component/User/SignUp";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PaymentSuccess from './payments/PaymentSuccess';
+import PaymentFail from './payments/PaymentFail';
+
 
 //qr
 import { Html5QrcodeScanner } from "html5-qrcode";

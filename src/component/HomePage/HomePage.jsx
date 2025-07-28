@@ -5,7 +5,7 @@ import "./HomePage.style.css"
 import {FaCreditCard, FaPlus, FaWonSign} from "react-icons/fa";
 import {LoginContext} from "../../State/LoginState";
 import GNBPayingBarLoginT from '../../NB/GNB/GNBPayingBarLoginT';
-
+const TOSS_CLIENT_KEY = process.env.REACT_APP_TOSS_CLIENT_KEY;
 
 const HomePage = () => {
     const [seeMoney, setSeeMoney] = useState(true);
@@ -17,7 +17,7 @@ const HomePage = () => {
       //포인트충전용 토스페이먼츠
       
       const handlePayment = () => {
-        const tossPayments = window.TossPayments('test_ck_Gv6LjeKD8aY4P56QX1yN8wYxAdXy');
+        const tossPayments = window.TossPayments(TOSS_CLIENT_KEY);
     
         tossPayments.requestPayment('카드', {
             amount: 5000,

@@ -1,7 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
-import { LoginContext } from '../../context/LoginContext'; // 경로는 실제 파일 구조에 따라 수정
+//import { LoginContext } from '../../context/LoginContext'; // 경로는 실제 파일 구조에 따라 수정
+import { BACKEND_URL } from '../config';
+import { LoginContext } from '../State/LoginState';
+
+
 
 const PaymentSuccess = () => {
   const [params] = useSearchParams();
