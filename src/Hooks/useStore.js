@@ -5,7 +5,7 @@ export const useStore = (key, coordinates) => {
 
     const [store, setStore] = useState([]);
     const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
-
+    console.log("음음 나는 뭐랄까:",coordinates);
     useEffect(() => {
         const fetchStore = async () => {
             setIsLoading(true);
@@ -22,12 +22,14 @@ export const useStore = (key, coordinates) => {
                     `/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=36.845258941966016&maxY=36.8530782657718&minX=127.14723334692333&maxX=127.16278946667573`;
             }
             else {
-                    const minX = coordinates[0].La;
-                    const minY = coordinates[0].Ma;
-                    const maxX = coordinates[1].La;
-                    const maxY = coordinates[1].Ma;
+                const centerX = coordinates[2].La;
+                const centerY = coordinates[2].Ma;
+                const minX = coordinates[0].La;
+                const minY = coordinates[0].Ma;
+                const maxX = coordinates[1].La;
+                const maxY = coordinates[1].Ma;
                 pullAddress =
-                    `/store/map/search?keyword=${key}&centerY=36.84950309992622&centerX=127.15437257867464&minY=${minY}&maxY=${maxY}&minX=${minX}&maxX=${maxX}`;
+                    `/store/map/search?keyword=${key}&centerY=${centerY}&centerX=${centerX}&minY=${minY}&maxY=${maxY}&minX=${minX}&maxX=${maxX}`;
             }
             const url = `/.netlify/functions/proxyGet?pullAddress=${encodeURIComponent(pullAddress)}`;
 
