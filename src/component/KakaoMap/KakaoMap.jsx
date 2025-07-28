@@ -19,7 +19,7 @@ const KakaoMap = () => {
 //https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic 키워드로 장소 검색
     const [keyword, setKeyword] = useState("");
     const {mapLngLat, setMapLngLat}= useContext(MapLngLatContext);
-    const store = useStore(keyword, mapLngLat);
+    const {store, isLoading} = useStore(keyword, mapLngLat);
     const [seeStore, setSeeStore] = useState(null); // 상점 리스트
     const [isVisible, setIsVisible] = useState(true); // 현위치 마커
     const [storeClick, setStoreClick] = useState({ id: 0, bool: false });
@@ -79,23 +79,6 @@ const KakaoMap = () => {
     const [points, setPoints] = useState([])
     /**지도 범위 재설정 끝*/
 
-    // useEffect(()=>{
-    //     const map = mapRef.current;
-    //     let tempLngLat = null;
-    //     if (map) {
-    //         const bounds = map.getBounds();
-    //         const swLatLng = bounds.getSouthWest();
-    //         const neLatLng = bounds.getNorthEast();
-    //         tempLngLat = [swLatLng, neLatLng];
-    //         setMapLngLat(tempLngLat)
-    //         // console.log("지도 경계 좌표:", mapLngLat);
-    //         // console.log("지도 경계 좌표:", coordinates);
-    //     } else {
-    //         // console.log("Map 객체가 아직 초기화되지 않았어요!");
-    //     }
-    //     setTemp(!temp);
-    // }, [temp]);
-
     useEffect(() => {
         const map = mapRef.current;
         if (!map) return;
@@ -153,6 +136,8 @@ const KakaoMap = () => {
                         </form>
                     </div>
                 </nav>
+                {isLoading ? (<div><Loading /></div>) :
+                    (
                 <Container className={"NoPadding"} style={{width: '100%', height: '100%'}}>
                     <Row className={"NotFlex NoMargin"} style={{width: '100%', height: '100%'}}>
                         <div className={"KakaoMapBox"}>
@@ -161,20 +146,25 @@ const KakaoMap = () => {
                                 <button className="btn btn-primary" onClick={()=>{setKeyword("음식점");}}>음식점</button>
                                 <button className="btn btn-primary" onClick={()=>{setKeyword("카페");}}>카페</button>
                                 <button className="btn btn-primary" onClick={()=>{setKeyword("중앙시장");}}>중앙시장</button>
-                                <button className="btn btn-primary">~</button>
-                                <button className="btn btn-primary">~</button>
-                                <button className="btn btn-primary">~</button>
-                                <button className="btn btn-primary">~</button>
-                                <button className="btn btn-primary">~</button>
+                                {["서비스", "문화/레저", "의류/잡화", "교육", "노래방", "미용", "차량", "생활", "유통", "전자/가전", "음식점", "기타", "식품", "건축", "의료", "숙박"].map((category) => (
+                                        <button
+                                            key={category}
+                                            className="btn btn-primary"
+                                            onClick={() => { setKeyword(category); }}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))}
                             </div>
                             <Map
                                 center={state.center}
                                 style={{width: '94%', height: '90%', borderRadius: '10px'}}
-                                level={2} draggable={true}
+                                level={6} draggable={true}
                                 onCreate={(map) => {
                                     mapRef.current = map;
                                     setMapReady(true);
                                 }}
+                                ref={mapRef}
                             >
                                 {seeStore === null?
                                     <CustomOverlayMap position={state.center} yAnchor={1}>
@@ -204,6 +194,7 @@ const KakaoMap = () => {
                     </Row>
 
                 </Container>
+                    )}
             </div>
         )
     );
