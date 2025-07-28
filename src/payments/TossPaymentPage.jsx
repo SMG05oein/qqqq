@@ -8,24 +8,20 @@ const TossPaymentPage = () => {
 
   const handlePayment = async () => {
     try {
-      // 1) 서버에서 주문 정보(orderId 등) 준비
-      const prepareUrl =
-        '/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments/toss/prepare';
-
-      const { data: prep } = await axios.post(
-        prepareUrl,
-        JSON.stringify({ amount: 5000 }),
+      // ✅ 1단계: 결제 준비 API 호출
+      const prepareRes = await axios.post(
+        '/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments/toss/prepare',
+        { amount: 10000 },
         {
           headers: {
             Authorization: `Bearer ${login?.token || localStorage.getItem('accessToken')}`,
-            'Content-Type': 'application/json',
           },
         }
       );
 
-      const { orderId, orderName, amount, customerName } = prep;
+      const { orderId, orderName, amount, customerName } = prepareRes.data;
 
-      // 2) 토스페이먼츠 위젯 호출
+      // ✅ 2단계: Toss 위젯 결제 요청
       const tossPayments = window.TossPayments(process.env.REACT_APP_TOSS_CLIENT_KEY);
 
       tossPayments.requestPayment('카드', {
@@ -33,21 +29,19 @@ const TossPaymentPage = () => {
         orderId,
         orderName,
         customerName,
-        // 성공·실패 리다이렉트
-        successUrl: `${window.location.origin}/charge?orderId=${orderId}&amount=${amount}`,
+        successUrl: `${window.location.origin}/charge?paymentKey=__PAYMENT_KEY__&orderId=${orderId}&amount=${amount}`,
         failUrl: `${window.location.origin}/payment-fail`,
       });
-    } catch (err) {
-      console.error('❌ 결제 준비 실패', err);
-      alert('⚠️ 결제 준비 중 오류가 발생했습니다.');
+    } catch (error) {
+      console.error('결제 준비 실패:', error.response?.data || error.message);
+      alert('결제 준비에 실패했습니다.');
     }
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: 50 }}>
-      <button className="btn btn-primary" onClick={handlePayment}>
-        💳 5,000원 충전하기
-      </button>
+    <div style={{ padding: '40px', textAlign: 'center' }}>
+      <h3>포인트 결제</h3>
+      <button onClick={handlePayment}>10,000원 충전하기</button>
     </div>
   );
 };
