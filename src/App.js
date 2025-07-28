@@ -15,6 +15,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PaymentSuccess from './payments/PaymentSuccess';
 import PaymentFail from './payments/PaymentFail';
+import TossPaymentPage from './payments/TossPaymentPage';
+
+
 
 
 //qr
@@ -47,6 +50,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-fail" element={<PaymentFail />} />
+                <Route path="/charge" element={<TossPaymentPage />} />
             </Routes>
         </div>
     );

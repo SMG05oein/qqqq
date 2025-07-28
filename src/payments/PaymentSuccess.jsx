@@ -1,25 +1,23 @@
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-//import { LoginContext } from '../../context/LoginContext'; // 경로는 실제 파일 구조에 따라 수정
 import { BACKEND_URL } from '../config';
 import { LoginContext } from '../State/LoginState';
 
-
-
 const PaymentSuccess = () => {
   const [params] = useSearchParams();
+  const [sent, setSent] = useState(false);
+
   const paymentKey = params.get("paymentKey");
   const orderId = params.get("orderId");
   const amount = params.get("amount");
 
-  const { login } = useContext(LoginContext); // 로그인 정보 불러오기
-  const userId = login?.id; // 로그인된 사용자 ID 추출 (예: "wooyong123")
-
-  const BASE_URL = process.env.REACT_APP_API_BACKEND_URL;
+  const { login } = useContext(LoginContext);
+  const userId = login?.id;
 
   useEffect(() => {
-    if (paymentKey && orderId && amount && userId) {
+    // 모든 값이 준비됐을 때만 전송
+    if (!sent && paymentKey && orderId && amount && userId) {
       axios.post(`${BACKEND_URL}/confirm-payment`, {
         paymentKey,
         orderId,
@@ -27,13 +25,14 @@ const PaymentSuccess = () => {
         userId
       })
       .then(res => {
-        console.log("✅ 결제정보 백엔드 전송 완료:", res.data);
+        console.log("✅ 결제 정보 전송 완료:", res.data);
+        setSent(true);
       })
       .catch(err => {
-        console.error("❌ 결제정보 전송 실패:", err);
+        console.error("❌ 전송 실패:", err);
       });
     }
-  }, [paymentKey, orderId, amount, userId]);
+  }, [paymentKey, orderId, amount, userId, sent]);
 
   return (
     <div style={{ textAlign: 'center', marginTop: '40px' }}>
