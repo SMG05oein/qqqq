@@ -1,11 +1,13 @@
 .NB{
     border-radius: 100px 100px 0 0;
-
+    background-color: white;
 }
 .NB.container-fluid{
     border-radius: 100px 100px 0 0;
+    background-color: white;
 }
 /*Begin TopMenu style*/
+
 /* 천안시 로고를 원형 박스 안에 깔끔하게 표시 */
 .logo-pill {
   display: flex;
@@ -78,13 +80,12 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    /*max-height: 60px;*/
-    background-color: white; /* ✅ 명시적으로 설정 */
+    background-color: white; /* ✅ 추가 */
     box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
     padding: 0 !important;
     z-index: 999;
-    /*border-radius: 50px 50px 0 0;*/
 }
+
 
 
 .GNB a {
