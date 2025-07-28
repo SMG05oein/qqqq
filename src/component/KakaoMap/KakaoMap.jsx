@@ -15,6 +15,7 @@ import {MapLngLatContext} from "../../State/MapLngLat";
 import {useSearchLoad} from "../../Hooks/useSearchLoad";
 import KaKaoNavigation from "./Navigation/KaKaoNavigation";
 import {KakaoMapLngLatContext} from "../../State/KaKaoMapLngLat";
+import NoSeeNavigate from "./UnderTools/NoSeeNavigate";
 /* global kakao */
 
 const KakaoMap = () => {
@@ -25,12 +26,16 @@ const KakaoMap = () => {
     const {store, isLoading} = useStore(keyword, mapLngLat);
     const [seeStore, setSeeStore] = useState(null); // 상점 리스트
     const [isVisible, setIsVisible] = useState(true); // 현위치 마커
-    const [storeClick, setStoreClick] = useState({ id: 0, bool: false });
+    const [storeClick, setStoreClick] = useState({ id: 0, bool: false, temp: false, triggeredByList: 0 });
     const mapRef = useRef(null);
-    const [temp, setTemp] = useState(true);
-    const [mapReady, setMapReady] = useState(false);
-    const {KaLngLat, setKaLngLat} = useContext(KakaoMapLngLatContext);
+    const [mapReady, setMapReady] = useState(false); // 음 예아
+    const {KaLngLat, setKaLngLat} = useContext(KakaoMapLngLatContext); //길찾기할 때 씀
+    const [temp, setTemp] = useState(false); //임시
+    const [isNavigate, setNavigate] = useState(false);
 
+    useEffect(()=>{
+        console.log("temp: ",temp);
+    },[temp])
     /**현위치 리로드 시작*/
     const reloadLocation = () => {
         if (navigator.geolocation) {
@@ -136,6 +141,12 @@ const KakaoMap = () => {
         };
     }, [mapReady]);
 
+    const toggleKeyword = (target) => {
+        setKeyword("");
+        setTimeout(()=>setKeyword(target), 0);
+        setNavigate(false);
+    };
+
     const searchStore = () => {
         // console.log("음 퍽킹 쒯: ",store); //와 진짜 하 진짜 진짜 진짜
         const filtered = store.length > 0 && keyword !== "" ? store : null;
@@ -178,18 +189,12 @@ const KakaoMap = () => {
                     <Row className={"NotFlex NoMargin"} style={{width: '100%', height: '100%'}}>
                         <div className={"KakaoMapBox"}>
                             <div className={"KaKaoMapOverTools"}>
-                                <button className="btn btn-primary" onClick={()=>{setKeyword("착한가게");}}>착한가게</button>
-                                <button className="btn btn-primary" onClick={()=>{setKeyword("음식점");}}>음식점</button>
-                                <button className="btn btn-primary" onClick={()=>{setKeyword("카페");}}>카페</button>
-                                <button className="btn btn-primary" onClick={()=>{setKeyword("중앙시장");}}>중앙시장</button>
-                                {["서비스", "문화/레저", "의류/잡화", "교육", "노래방", "미용", "차량", "생활", "유통", "전자/가전", "음식점", "기타", "식품", "건축", "의료", "숙박"].map((category) => (
-                                        <button
-                                            key={category}
-                                            className="btn btn-primary"
-                                            onClick={() => { setKeyword(category); }}
-                                        >
-                                            {category}
-                                        </button>
+                                {["착한가게", "음식점", "카페", "중앙시장",
+                                    "서비스", "문화/레저", "의류/잡화", "교육", "노래방",
+                                    "미용", "차량", "생활", "유통", "전자/가전",
+                                    "기타", "식품", "건축", "의료", "숙박"]
+                                    .map((category) => (
+                                        <button className="btn btn-primary" onClick={() => toggleKeyword(category)}>{category}</button>
                                     ))}
                             </div>
                             <Map
@@ -212,16 +217,17 @@ const KakaoMap = () => {
 
                                         {seeStore &&
                                             seeStore.map((item) => (
-                                                <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
+                                                <StoreMarkerPin setTemp={setTemp} setStoreClick={setStoreClick} storeClick={storeClick} item={item} key={item.id} />
                                             ))
                                         }
 
-                                        <KaKaoNavigation state_center={state.center}/>
+                                        <KaKaoNavigation state_center={state.center} isNavigate={isNavigate}/>
 
                                         <div className="KaKaoMapUnderTools">
                                             <MoveToMyLocation reloadLocation={reloadLocation} state={state} setIsVisible={setIsVisible} />
                                             <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
                                             {seeStore && <ReSetttingMapBounds points={points} />}
+                                            {isNavigate && <NoSeeNavigate setNavigate={setNavigate}/>}
                                         </div>
                                     </>
                                 )}
@@ -229,7 +235,7 @@ const KakaoMap = () => {
                         </div>
                     </Row>
                     <Row className={""}>
-                        <SeeStore setStoreClick={setStoreClick} seeStore={seeStore}/>
+                        <SeeStore temp={temp} setTemp={setTemp} storeClick={storeClick} setStoreClick={setStoreClick} seeStore={seeStore} setNavigate={setNavigate}/>
                     </Row>
 
                 </Container>
