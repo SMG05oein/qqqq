@@ -29,9 +29,14 @@ const TossPaymentCharge = () => {
       return;
     }
 
-    // ✅ Toss 결제 승인 처리
+    // ✅ Toss 결제 승인 처리 (테스트 코드 스타일)
     const approvePayment = async () => {
       try {
+        console.log('결제 승인 시작...');
+        console.log('paymentKey:', paymentKey);
+        console.log('orderId:', orderId);
+        console.log('amount:', amount);
+
         const res = await axios.post(
           `/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments/toss/success`,
           {
@@ -48,9 +53,11 @@ const TossPaymentCharge = () => {
         );
 
         console.log('결제 승인 성공:', res.data);
-        navigate('/payment-success');
+        alert('포인트 충전이 완료되었습니다!');
+        navigate('/'); // 홈으로 이동
       } catch (err) {
         console.error('결제 승인 실패:', err.response?.data || err);
+        alert('결제 승인 중 오류가 발생했습니다.');
         navigate('/payment-fail');
       }
     };
