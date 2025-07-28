@@ -179,58 +179,59 @@ const HomePage = () => {
           {/* 이용내역 표 형식 */}
           <Row className="NotFlex">
             <div className="HomeBox">
-              <Row>
-                <Col>
-                  <div className="fs-5">이용내역</div>
-                </Col>
-              </Row>
-              <Row>
-                <Table className="NoMargin" striped bordered hover>
-                  <thead className="thead-light">
-                    <tr className="text-center">
-                      <th>구분</th>
-                      <th>지불 금액</th>
-                      <th>장소</th>
-                      <th>사용날짜</th>
-                      <th>취소</th>
+                <Row>
+                <Col><div className="fs-5">이용내역</div></Col>
+                </Row>
+                <Row>
+                <Table className="ModernTable">
+                    <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>지불 금액</th>
+                        <th>장소</th>
+                        <th>사용날짜</th>
+                        <th>취소</th>
                     </tr>
-                  </thead>
-                  <tbody className="text-center">
+                    </thead>
+                    <tbody>
                     {transactions.slice(0, visibleCount).map((item, idx) => (
-                      <tr key={idx}>
+                        <tr key={idx}>
                         <td>{item.type}</td>
                         <td>{Number(item.amount).toLocaleString()}원</td>
                         <td>{item.place}</td>
                         <td>{item.date}</td>
                         <td>
-                          {item.type === "지출" && (
+                            {item.type === "지출" && (
                             <Button
-                              variant="danger"
-                              size="sm"
-                              onClick={() => handleCancel(item.ptId)}
+                                variant="outline-danger"
+                                size="sm"
+                                className="CancelBtn"
+                                onClick={() => handleCancel(item.ptId)}
                             >
-                              취소
+                                취소
                             </Button>
-                          )}
+                            )}
                         </td>
-                      </tr>
+                        </tr>
                     ))}
-                  </tbody>
+                    </tbody>
                 </Table>
+
                 <div className="d-flex justify-content-center gap-3 mt-2">
-                  {visibleCount < transactions.length && (
+                    {visibleCount < transactions.length && (
                     <>
-                      <Button variant="outline-primary" onClick={showMore}>더보기</Button>
-                      <Button variant="outline-success" onClick={showAll}>전체보기</Button>
+                        <Button variant="outline-primary" onClick={showMore}>더보기</Button>
+                        <Button variant="outline-success" onClick={showAll}>전체보기</Button>
                     </>
-                  )}
-                  {visibleCount > 3 && (
+                    )}
+                    {visibleCount > 3 && (
                     <Button variant="outline-danger" onClick={resetView}>닫기</Button>
-                  )}
+                    )}
                 </div>
-              </Row>
+                </Row>
             </div>
-          </Row>
+            </Row>
+
         </>
       )}
     </Container>
