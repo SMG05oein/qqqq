@@ -24,11 +24,13 @@ const GnbPayingBarLoginT = () => {
           { facingMode: "environment" }, // 후면 카메라
           {
             fps: 10,
-            qrbox: (w, h) => {
-              const minEdge = Math.min(w, h) * 0.6;
-              const size = Math.floor(minEdge);
-              return { width: size, height: size };
-            },
+            qrbox: function(viewfinderWidth, viewfinderHeight) {
+              const sideLength = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.8);
+              return {
+                width: sideLength,
+                height: sideLength
+              };
+            }
           },
           (decodedText) => {
             // 중복 QR 처리 방지 (옵션)
