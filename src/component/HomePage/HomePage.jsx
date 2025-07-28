@@ -166,19 +166,28 @@ const HomePage = () => {
                                         </Col>
                                     </Row>
                                     <Row className="g-0 p-0 m-0">
-                                        <Col className="p-0">
-                                            <div className="rounded-box left-rounded w-100">
-                                            <Link to="/card" className="d-block text-center w-100"><FaCreditCard /> 카드관리</Link>
-                                            </div>
-                                        </Col>
+                                    {/* 카드관리 */}
+                                    <Col className="p-0">
+                                        <div className="rounded-box left-rounded w-100">
+                                        <Link to="/card" className="d-block text-center w-100 py-2 fw-bold">
+                                            <FaCreditCard /> 카드관리
+                                        </Link>
+                                        </div>
+                                    </Col>
+
+                                    {/* 충전 */}
+                                    <Col className="p-0">
+                                        <div className="rounded-box right-rounded w-100">
                                         <button
-                                        onClick={handlePayment}
-                                        className="d-block text-center w-100 border-0 bg-transparent"
-                                        style={{ padding: "10px" }}
+                                            onClick={handlePayment}
+                                            className="d-block text-center w-100 py-2 fw-bold border-0 bg-transparent"
+                                            style={{ fontSize: "1rem" }}
                                         >
-                                        <FaWonSign /> 충전
+                                            <FaWonSign /> 충전
                                         </button>
-                                        </Row>
+                                        </div>
+                                    </Col>
+                                    </Row>
                                 </div>
                             </Row>
 
