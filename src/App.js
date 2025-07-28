@@ -42,6 +42,8 @@ function App() {
                 <Route path="/test" element={<Test/>}/>
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
+                <Route path="/payment-fail" element={<PaymentFail />} />
             </Routes>
         </div>
     );
