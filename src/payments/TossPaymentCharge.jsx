@@ -21,9 +21,11 @@ const TossPaymentCharge = () => {
       navigate('/payment-fail');
       return;
     }
+    const a = `${process.env.REACT_APP_BACKEND_URL}api/users/me/payments/toss/prepare`
+    console.log(a);
 
     // ✅ 백엔드로 결제 검증 요청
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/confirm-payment`, {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users/me/payments/toss/prepare`, {
       paymentKey,
       orderId,
       amount,

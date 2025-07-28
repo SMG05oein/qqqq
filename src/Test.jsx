@@ -42,7 +42,7 @@ const Test = () => {
     const routeCoords = useSearchLoad(origin, destination);
 
 
-    // console.log("daaaddadasda: ",routeCoords);
+    console.log("daaaddadasda: ",routeCoords);
     // console.log("load:", load);
     return (
         <div>
