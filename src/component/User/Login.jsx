@@ -75,6 +75,13 @@ const Login = ({setIsProfile}) => {
                         />
                     </Form.Group>
                     <div className="socialLogin">
+                        일반회원
+                        <Button variant="primary" type="submit">
+                        일반 로그인
+                        </Button>
+                        <Button variant="info" type="button" onClick={()=>navigate('/signUp')}>
+                        회원가입
+                        </Button>
                         소셜로그인
                         <Button variant="warning" type="">
                             카카오
@@ -87,13 +94,8 @@ const Login = ({setIsProfile}) => {
                         </Button>
                     </div>
                     <p/>
-                    <Button variant="primary" type="submit">
-                        확인
-                    </Button>
                     <p/>
-                    <Button variant="info" type="button" onClick={()=>navigate('/signUp')}>
-                        회원가입
-                    </Button>
+                    
                     <p/>
                     <Button variant="dark" type="button" onClick={()=>navigate('/')}>
                         홈으로
