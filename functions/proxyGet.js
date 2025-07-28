@@ -6,7 +6,7 @@ export async function handler(event) {
   const { pullAddress, ...restParams } = event.queryStringParameters || {};
 
   const searchParams = new URLSearchParams(restParams).toString();
-  const apiUrl = `http://54.180.25.62:8080${pullAddress}?${searchParams}`;
+  const apiUrl = `http://54.180.25.62:8080${pullAddress}`;
   console.log("📡 백엔드 호출 URL:", apiUrl);
 
   try {
