@@ -14,6 +14,7 @@ import SeeStore from "./StoreSeeeeeeee/SeeStore";
 import {MapLngLatContext} from "../../State/MapLngLat";
 import {useSearchLoad} from "../../Hooks/useSearchLoad";
 import KaKaoNavigation from "./Navigation/KaKaoNavigation";
+import {KakaoMapLngLatContext} from "../../State/KaKaoMapLngLat";
 /* global kakao */
 
 const KakaoMap = () => {
@@ -28,6 +29,40 @@ const KakaoMap = () => {
     const mapRef = useRef(null);
     const [temp, setTemp] = useState(true);
     const [mapReady, setMapReady] = useState(false);
+    const {KaLngLat, setKaLngLat} = useContext(KakaoMapLngLatContext);
+
+    /**현위치 리로드 시작*/
+    const reloadLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const newCenter = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    };
+
+                    setState((prev) => ({
+                        ...prev,
+                        center: newCenter,
+                    }));
+
+                    mapRef.current?.panTo(new kakao.maps.LatLng(newCenter.lat, newCenter.lng));
+
+                    const bounds = mapRef.current.getBounds();
+                    const swLatLng = bounds.getSouthWest();
+                    const neLatLng = bounds.getNorthEast();
+                    const center = mapRef.current.getCenter();
+                    setMapLngLat([swLatLng, neLatLng, center]);
+
+                    setIsVisible(true);
+                },
+                (err) => {
+                    console.error("위치 다시 가져오기 실패:", err);
+                }
+            );
+        }
+    };
+    /**현위치 리로드 끝*/
 
     /** 현 위치 기반으로 마커 시작*/
     const [state, setState] = useState({
@@ -181,10 +216,10 @@ const KakaoMap = () => {
                                             ))
                                         }
 
-                                        {/*<KaKaoNavigation state_center={state.center} />*/}
+                                        <KaKaoNavigation state_center={state.center}/>
 
                                         <div className="KaKaoMapUnderTools">
-                                            <MoveToMyLocation state={state} setIsVisible={setIsVisible} />
+                                            <MoveToMyLocation reloadLocation={reloadLocation} state={state} setIsVisible={setIsVisible} />
                                             <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
                                             {seeStore && <ReSetttingMapBounds points={points} />}
                                         </div>

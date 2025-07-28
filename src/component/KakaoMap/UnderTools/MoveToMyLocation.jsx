@@ -3,7 +3,7 @@ import {useMap} from "react-kakao-maps-sdk";
 import {BiCurrentLocation} from "react-icons/bi";
 /* global kakao */
 
-const MoveToMyLocation = ({state, setIsVisible}) => {
+const MoveToMyLocation = ({state, setIsVisible, reloadLocation}) => {
     const map = useMap();
 
     return (
@@ -13,6 +13,7 @@ const MoveToMyLocation = ({state, setIsVisible}) => {
                         const moveLatLon = new kakao.maps.LatLng(state.center.lat, state.center.lng);
                         setIsVisible(true);
                         map.panTo(moveLatLon);
+                        reloadLocation()
                     }}
             ><BiCurrentLocation /></button>
         </div>
