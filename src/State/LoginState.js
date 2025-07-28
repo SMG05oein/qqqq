@@ -8,9 +8,9 @@ export const LoginProvider = ({ children }) => {
     const savedId = localStorage.getItem("userId");
 
     const [login, setLogin] = useState({
-        isLogin: !!savedToken,       // 토큰이 있으면 로그인 상태 true
-        id: savedId || null,         // 저장된 사용자 ID
-        token: savedToken || null    // 저장된 토큰
+        isLogin: !!savedToken,
+        idx: savedId ? Number(savedId) : null,
+        token: savedToken || null
     });
 
     return (
