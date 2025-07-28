@@ -53,7 +53,7 @@ function MainApp() {
           <Route path="/cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage /></div>} />
           <Route path="/signUp" element={<div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}><SignUp setIsProfile={setIsProfile} /></div>} />
           <Route path="/map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap /></div>} />
-        </Route>
+        </Route>s
 
         {/* 기타 라우트 */}
         <Route path="/test" element={<Test />} />
