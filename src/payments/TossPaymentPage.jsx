@@ -1,3 +1,4 @@
+// src/payments/TossPaymentPage.jsx
 import React, { useContext } from 'react';
 import axios from 'axios';
 import { LoginContext } from '../State/LoginState';
@@ -7,45 +8,45 @@ const TossPaymentPage = () => {
 
   const handlePayment = async () => {
     try {
-      // ✅ 1. 결제 준비 요청 → 백엔드에서 orderId 발급
-      const prepareRes = await axios.post(
-        '/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments/toss/prepare',
-        { amount: 5000 },
+      // 1) 서버에서 주문 정보(orderId 등) 준비
+      const prepareUrl =
+        '/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments/toss/prepare';
+
+      const { data: prep } = await axios.post(
+        prepareUrl,
+        JSON.stringify({ amount: 5000 }),
         {
           headers: {
-            Authorization: `Bearer ${login?.token || localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${login?.token || localStorage.getItem('accessToken')}`,
+            'Content-Type': 'application/json',
           },
         }
       );
 
-      const { orderId } = prepareRes.data;
+      const { orderId, orderName, amount, customerName } = prep;
 
-      if (!orderId) {
-        alert("orderId 생성 실패");
-        return;
-      }
-
-      // ✅ 2. Toss 결제창 호출
+      // 2) 토스페이먼츠 위젯 호출
       const tossPayments = window.TossPayments(process.env.REACT_APP_TOSS_CLIENT_KEY);
+
       tossPayments.requestPayment('카드', {
-        amount: 5000,
+        amount,
         orderId,
-        orderName: '포인트 충전',
-        customerName: login?.id || '비로그인',
-        successUrl: `${window.location.origin}/charge?paymentKey={paymentKey}&orderId=${orderId}&amount=5000`,
+        orderName,
+        customerName,
+        // 성공·실패 리다이렉트
+        successUrl: `${window.location.origin}/charge?orderId=${orderId}&amount=${amount}`,
         failUrl: `${window.location.origin}/payment-fail`,
       });
     } catch (err) {
-      console.error("❌ 결제 준비 또는 호출 실패:", err);
-      alert("결제 준비 중 오류가 발생했습니다.");
+      console.error('❌ 결제 준비 실패', err);
+      alert('⚠️ 결제 준비 중 오류가 발생했습니다.');
     }
   };
 
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h2>포인트 충전</h2>
-      <button onClick={handlePayment} style={{ padding: '1rem 2rem', fontSize: '1.2rem' }}>
-        ₩5,000 결제하기
+    <div style={{ textAlign: 'center', marginTop: 50 }}>
+      <button className="btn btn-primary" onClick={handlePayment}>
+        💳 5,000원 충전하기
       </button>
     </div>
   );

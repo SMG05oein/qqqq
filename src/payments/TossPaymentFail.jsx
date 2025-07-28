@@ -1,13 +1,17 @@
-// ✅ default export로 수정
+// src/payments/PaymentFail.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const TossPaymentFail = () => {
+const PaymentFail = () => {
+  const nav = useNavigate();
   return (
-    <div>
-      <h2>결제 실패</h2>
-      <p>결제에 실패했습니다. 다시 시도해주세요.</p>
+    <div style={{ textAlign: 'center', marginTop: 50 }}>
+      <h2>❌ 결제에 실패했습니다.</h2>
+      <button className="btn btn-secondary" onClick={() => nav(-1)}>
+        다시 시도하기
+      </button>
     </div>
   );
 };
 
-export default TossPaymentFail;
+export default PaymentFail;
