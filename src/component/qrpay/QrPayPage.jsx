@@ -26,7 +26,7 @@ const QrPayPage = () => {
 
   try {
     const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}api/users/me/payments`,
+        `/.netlify/functions/proxyPost?pullAddress=api/users/me/payments`,
         payload,
         {
             headers: {
