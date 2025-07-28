@@ -1,3 +1,4 @@
+// src/components/qrpay/QrPayPage.jsx
 import React, { useState, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
@@ -13,34 +14,37 @@ const QrPayPage = () => {
   const storeId = searchParams.get('storeId'); // 예: 11223
 
   const handleSubmit = async () => {
-  const payload = {
-    storeQrId: `PAYSTORE_${storeId}`,
-    amount: parseInt(amount),
-  };
-
-  console.log('🔍 요청 보낼 데이터:', payload);
-  console.log('🔐 토큰:', login?.token);
-  console.log("🟡 로그인 상태:", login);
-    console.log("🟡 토큰:", login.token || localStorage.getItem("accessToken"));
-
-
-  try {
-    const response = await axios.post(
-        `/.netlify/functions/proxyPost?pullAddress=api/users/me/payments`,
-        payload,
-        {
-            headers: {
-            Authorization: `Bearer ${login?.token}`,
-            },
-        }
-        );
-        setResult(`✅ 결제 성공: ${response.data.message}`);
-    } catch (err) {
-        console.error('❌ 결제 실패:', err.response?.data || err.message);
-        setResult(`❌ 결제 실패: 서버 내부 오류가 발생했습니다.`);
-    }
+    const payload = {
+      storeQrId: `PAYSTORE_${storeId}`,
+      amount: parseInt(amount),
     };
 
+    console.log('🔍 요청 보낼 데이터:', payload);
+    console.log('🔐 토큰:', login?.token);
+    console.log("🟡 로그인 상태:", login);
+    console.log("🟡 토큰:", login.token || localStorage.getItem("accessToken"));
+
+    try {
+      setLoading(true);
+
+      const response = await axios.post(
+        `/.netlify/functions/proxyPost?pullAddress=/api/users/me/payments`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${login?.token || localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+
+      setResult(`✅ 결제 성공: ${response.data.message}`);
+    } catch (err) {
+      console.error('❌ 결제 실패:', err.response?.data || err.message);
+      setResult(`❌ 결제 실패: 서버 내부 오류가 발생했습니다.`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={{ padding: 30, maxWidth: 400, margin: '0 auto', fontFamily: 'sans-serif' }}>
