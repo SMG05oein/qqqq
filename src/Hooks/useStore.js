@@ -5,7 +5,7 @@ export const useStore = (key, coordinates) => {
 
     const [store, setStore] = useState([]);
     const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
-    console.log("음음 나는 뭐랄까:",coordinates);
+    // console.log("음음 나는 뭐랄까:",coordinates);
     useEffect(() => {
         const fetchStore = async () => {
             setIsLoading(true);

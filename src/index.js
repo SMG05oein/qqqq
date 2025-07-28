@@ -8,6 +8,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import LoginProvider from "./State/LoginState";
 import PayingBarOpenState from "./State/PayingBarOpenState";
 import MapLngLat from "./State/MapLngLat";
+import KaKaoMapProvider from "./State/KaKaoMapLngLat";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient();
@@ -18,9 +19,11 @@ root.render(
             <LoginProvider>
                 <PayingBarOpenState>
                     <MapLngLat>
-                        <BrowserRouter>
-                            <App/>
-                        </BrowserRouter>
+                        <KaKaoMapProvider>
+                            <BrowserRouter>
+                                <App/>
+                            </BrowserRouter>
+                        </KaKaoMapProvider>
                     </MapLngLat>
                 </PayingBarOpenState>
             </LoginProvider>
