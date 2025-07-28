@@ -38,7 +38,8 @@
 .qr-reader {
   width: 100%;
   max-width: 100%;          /* ✅ 부모 너비를 절대 넘지 않게 제한 */
-  height: auto;             /* 높이 고정 대신 비율 기반으로 */
+  height: 100%;             /* 높이 고정 대신 비율 기반으로 */
+  max-height: 100%;
   aspect-ratio: 1 / 1;      /* 정사각형 유지 */
   margin: 0 auto;
   border-radius: 20px;
