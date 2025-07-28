@@ -98,7 +98,6 @@ const KakaoMap = () => {
         };
     }, [mapReady]);
 
-
     const searchStore = () => {
         // console.log("음 퍽킹 쒯: ",store); //와 진짜 하 진짜 진짜 진짜
         const filtered = store.length > 0 && keyword !== "" ? store : null;
@@ -136,8 +135,6 @@ const KakaoMap = () => {
                         </form>
                     </div>
                 </nav>
-                {isLoading ? (<div><Loading /></div>) :
-                    (
                 <Container className={"NoPadding"} style={{width: '100%', height: '100%'}}>
                     <Row className={"NotFlex NoMargin"} style={{width: '100%', height: '100%'}}>
                         <div className={"KakaoMapBox"}>
@@ -159,33 +156,36 @@ const KakaoMap = () => {
                             <Map
                                 center={state.center}
                                 style={{width: '94%', height: '90%', borderRadius: '10px'}}
-                                level={6} draggable={true}
+                                level={4} draggable={true}
                                 onCreate={(map) => {
                                     mapRef.current = map;
                                     setMapReady(true);
                                 }}
                                 ref={mapRef}
                             >
-                                {seeStore === null?
-                                    <CustomOverlayMap position={state.center} yAnchor={1}>
-                                        {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
-                                    </CustomOverlayMap>
-                                    :
-                                    <>
-                                        <CustomOverlayMap position={state.center} yAnchor={1}>
-                                            {isVisible?<MdLocationPin style={{ fontSize: "32px", color: "red" }} />:null}
-                                        </CustomOverlayMap>
-                                        {seeStore?.map((item) => (
-                                            <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
-                                    ))}
-                                    </>
-                                }
-                                <div className={"KaKaoMapUnderTools"}>
-                                    <MoveToMyLocation state={state} setIsVisible={setIsVisible}/>
-                                    <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
-                                    {seeStore === null ? null : <ReSetttingMapBounds points={points} /> }
+                                <>
+                                    {isLoading ? (
+                                        <div><Loading /></div>
+                                    ) : (
+                                        <>
+                                            <CustomOverlayMap position={state.center} yAnchor={1}>
+                                                {isVisible && <MdLocationPin style={{ fontSize: "32px", color: "red" }} />}
+                                            </CustomOverlayMap>
 
-                                </div>
+                                            {seeStore &&
+                                                seeStore.map((item) => (
+                                                    <StoreMarkerPin storeClick={storeClick} item={item} key={item.id} />
+                                                ))
+                                            }
+
+                                            <div className="KaKaoMapUnderTools">
+                                                <MoveToMyLocation state={state} setIsVisible={setIsVisible} />
+                                                <MyLocationMarkerVisible isVisible={isVisible} setIsVisible={setIsVisible} />
+                                                {seeStore && <ReSetttingMapBounds points={points} />}
+                                            </div>
+                                        </>
+                                    )}
+                                </>
                             </Map>
                         </div>
                     </Row>
@@ -194,7 +194,6 @@ const KakaoMap = () => {
                     </Row>
 
                 </Container>
-                    )}
             </div>
         )
     );
