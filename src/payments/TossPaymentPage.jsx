@@ -27,11 +27,11 @@ const TossPaymentPage = () => {
         const { paymentKey, orderId, amount } = res;
         const userId = login?.id;
 
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/confirm-payment`, {
-          paymentKey,
-          orderId,
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}api/users/me/payments/toss/prepare`, {
+        //   paymentKey,
+        //   orderId,
           amount,
-          userId,
+        //   userId,
         })
         .then(() => {
           alert("✅ 포인트 충전 성공!");

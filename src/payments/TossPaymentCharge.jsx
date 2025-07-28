@@ -1,15 +1,11 @@
-// ✅ Toss 결제 처리: TossPayments 리다이렉트 → /charge?paymentKey=... 로 전달 → 백엔드 검증 → 결과 처리
-
-// TossPaymentCharge.jsx (새로 만들 파일)
-import React, { useEffect, useContext } from 'react';
+// TossPaymentCharge.jsx
+import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LoginContext } from '../State/LoginState';
 
 const TossPaymentCharge = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { login } = useContext(LoginContext);
 
   useEffect(() => {
     const paymentKey = searchParams.get('paymentKey');
@@ -21,16 +17,29 @@ const TossPaymentCharge = () => {
       navigate('/payment-fail');
       return;
     }
-    const a = `${process.env.REACT_APP_BACKEND_URL}api/users/me/payments/toss/prepare`
-    console.log(a);
 
-    // ✅ 백엔드로 결제 검증 요청
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users/me/payments/toss/prepare`, {
-      paymentKey,
-      orderId,
-      amount,
-      userId: login?.id || '비로그인'
-    })
+    // ✅ accessToken 로컬스토리지에서 가져오기
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+      return;
+    }
+
+    // ✅ 백엔드 결제 검증 API 호출
+    axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/users/me/payments/toss/prepare`,
+      {
+        paymentKey,
+        orderId,
+        amount
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    )
     .then(() => {
       alert('✅ 포인트 충전 성공!');
       navigate('/');
@@ -40,7 +49,7 @@ const TossPaymentCharge = () => {
       alert('⚠️ 결제 확인 중 오류 발생');
       navigate('/payment-fail');
     });
-  }, [searchParams, login, navigate]);
+  }, [searchParams, navigate]);
 
   return (
     <div style={{ padding: '40px', textAlign: 'center' }}>
