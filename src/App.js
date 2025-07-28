@@ -29,39 +29,41 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 import { PayingBarOpenContext } from './State/PayingBarOpenState';
 import Test from "./Test";
 
-
-
-
 function App() {
-    const [isProfile, setIsProfile] = useState(false);
-    const { login } = useContext(LoginContext);
-    return (
-        <div>
-            <Routes>
-                {/* 홈 */}
-                <Route path="/" element={<><TopMenu/><GNB isProfile={isProfile} setIsProfile={setIsProfile}/></>}>
-                    <Route index element={<div className={"CONTENTS scroll-hidden"}><HomePage/></div>} />
-                    <Route path="/profile" element={
-                        <div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}>
-                            {login.isLogin ? <ProfilePage setIsProfile={setIsProfile}/>:<Login setIsProfile={setIsProfile}/>}
-                        </div>} />
-                    <Route path="/cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage/></div>} />
-                    <Route path="/signUp" element={<div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}><SignUp setIsProfile={setIsProfile}/></div>} />
-                    <Route path="/map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap/></div>} />
-                </Route>
-                <Route path="/test" element={<Test/>}/>
-                {/* 404 */}
-                <Route path="*" element={<NotFound />} />
-                <Route path="/payment-fail" element={<PaymentFail />} />
-                {/* <Route path="//charge" element={<PaymentSuccess />} />
-                
-                <Route path="/charge" element={<TossPaymentPage />} />
-                <Route path="/charge" element={<TossPaymentCharge />} /> */}
-                <Route path="/charge" element={<TossPaymentCharge />} />
-                <Route path="/pay" element={<QrPayPage />} />
-            </Routes>
-        </div>
-    );
+  return (
+    <LoginProvider>
+      <MainApp />
+    </LoginProvider>
+  );
+}
+
+function MainApp() {
+  const [isProfile, setIsProfile] = useState(false);
+  const { login } = useContext(LoginContext);
+
+  return (
+    <div>
+      <Routes>
+        {/* 홈 */}
+        <Route path="/" element={<><TopMenu /><GNB isProfile={isProfile} setIsProfile={setIsProfile} /></>}>
+          <Route index element={<div className={"CONTENTS scroll-hidden"}><HomePage /></div>} />
+          <Route path="/profile" element={
+            <div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}>
+              {login.isLogin ? <ProfilePage setIsProfile={setIsProfile} /> : <Login setIsProfile={setIsProfile} />}
+            </div>} />
+          <Route path="/cheonancard" element={<div className={"CONTENTS scroll-hidden"}><CheonanCardPage /></div>} />
+          <Route path="/signUp" element={<div className={"CONTENTSP scroll-hidden justify-content-center align-content-center"}><SignUp setIsProfile={setIsProfile} /></div>} />
+          <Route path="/map" element={<div className={"CONTENTS scroll-hidden"}><KakaoMap /></div>} />
+        </Route>
+
+        <Route path="/test" element={<Test />} />
+        <Route path="/payment-fail" element={<PaymentFail />} />
+        <Route path="/charge" element={<TossPaymentCharge />} />
+        <Route path="/pay" element={<QrPayPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

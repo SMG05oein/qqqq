@@ -13,36 +13,34 @@ const QrPayPage = () => {
   const storeId = searchParams.get('storeId'); // 예: 11223
 
   const handleSubmit = async () => {
-    if (!amount || isNaN(amount)) {
-      setResult('❌ 금액을 정확히 입력해주세요.');
-      return;
-    }
-
-    setLoading(true);
-    setResult('');
-
-    try {
-      const response = await axios.post(
-        'http://localhost:8080/api/users/me/payments',
-        {
-          storeQrId: `PAYSTORE_${storeId}`,   // ✅ 명세에 맞게 수정
-          amount: parseInt(amount),           // ✅ 반드시 양수로 전송
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${login?.token}`, // ✅ JWT 인증
-          },
-        }
-      );
-
-      setResult(`✅ 결제 성공: ${response.data.message}`);
-    } catch (err) {
-      const errorMsg = err.response?.data?.message || '서버 오류';
-      setResult(`❌ 결제 실패: ${errorMsg}`);
-    } finally {
-      setLoading(false);
-    }
+  const payload = {
+    storeQrId: `PAYSTORE_${storeId}`,
+    amount: parseInt(amount),
   };
+
+  console.log('🔍 요청 보낼 데이터:', payload);
+  console.log('🔐 토큰:', login?.token);
+  console.log("🟡 로그인 상태:", login);
+    console.log("🟡 토큰:", login.token || localStorage.getItem("accessToken"));
+
+
+  try {
+    const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}api/users/me/payments`,
+        payload,
+        {
+            headers: {
+            Authorization: `Bearer ${login?.token}`,
+            },
+        }
+        );
+        setResult(`✅ 결제 성공: ${response.data.message}`);
+    } catch (err) {
+        console.error('❌ 결제 실패:', err.response?.data || err.message);
+        setResult(`❌ 결제 실패: 서버 내부 오류가 발생했습니다.`);
+    }
+    };
+
 
   return (
     <div style={{ padding: 30, maxWidth: 400, margin: '0 auto', fontFamily: 'sans-serif' }}>
