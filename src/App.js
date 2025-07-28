@@ -18,7 +18,7 @@ import PaymentSuccess from './payments/PaymentSuccess';
 import PaymentFail from './payments/PaymentFail';
 import TossPaymentPage from './payments/TossPaymentPage';
 import TossPaymentCharge from './payments/TossPaymentCharge';
-import QrPayPage from './components/qrpay/QrPayPage';
+import QrPayPage from './component/qrpay/QrPayPage';
 
 
 
